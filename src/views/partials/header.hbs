@@ -1,0 +1,88 @@
+<nav
+  class="my-navbar navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5"
+>
+  <!-- Logo -->
+  <h2 class="m-0 text-primary">
+    <img
+      class="img-fluid me-2"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOSVf75rMkgiAUl8Kcgrl3epxt0Uh_DMzwCsTM7EHpmcCtE1hnV250gyteAlIAW7GA82U&usqp=CAU"
+      alt=""
+      style="width: 90px; height: 90px; "
+    />
+  </h2>
+
+  <!-- Toggle button for mobile -->
+  <button
+    type="button"
+    class="navbar-toggler"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarCollapse"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div
+    class="collapse navbar-collapse"
+    id="navbarCollapse"
+    style="font-size: 18px;"
+  >
+    <ul class="navbar-nav ms-auto my-navbar-nav py-4 py-lg-0">
+      <li class="nav-item"><a href="/" class="nav-link h">HOME</a></li>
+      <li class="nav-item"><a href="/about" class="nav-link h"> ABOUT</a></li>
+      <li class="nav-item"><a href="/news" class="nav-link h"> NEWS</a></li>
+      <li class="nav-item"><a href="/order" class="nav-link h">ORDER</a></li>
+      {{#if User}}
+
+        <li class="nav-link active" class="nav-item h">{{Name}}</li>
+
+        <li class="nav-item"><a
+            href="/logout"
+            class="nav-link h"
+          >LOGOUT</a></li>
+      {{else}}
+        <li class="nav-item dropdown">
+          <a
+            href="#"
+            class="nav-link dropdown-toggle h"
+            id="loginDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >LOGIN</a>
+          <div
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="loginDropdown"
+          >
+            <form action="/login" method="post" class="p-3">
+              <div class="mb-3">
+                <label for="Email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  id="Email"
+                  name="Email"
+                  class="form-control"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="PassWord" class="form-label">Password</label>
+                <input
+                  type="password"
+                  id="PassWord"
+                  name="PassWord"
+                  class="form-control"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Login</button>
+            </form>
+          </div>
+        </li>
+        <li class="nav-item"><a href="/rg" class="nav-link h">REGISTER</a></li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>

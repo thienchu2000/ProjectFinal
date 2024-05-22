@@ -1,0 +1,104 @@
+<div
+  style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 180px ; height:850px"
+>
+  <div style="width: 60%; margin-left: 80px;">
+    <img
+      src="/assets/botCheck.png"
+      alt="..."
+      style="width: 500px; height: auto;"
+      class="img-thumbnail"
+    />
+
+    <div
+      class="form-container"
+      style="width: 300px; margin-left: 90px; margin-right: auto; margin-top: 15px; background-color: black;"
+    >
+      <form id="botForm" action="/botTrending" method="get">
+        <button
+          class="btn btn-outline-secondary"
+          style="background-color: rgb(228, 220, 220)"
+        >CALL BOT TRENDING 🤖</button>
+      </form>
+    </div>
+
+  </div>
+
+  <div style="width: 65%;">
+    <div class="container" style="margin-left: 30px;">
+      <div
+        class="form-container"
+        style="width: 500px;margin-left: 48px; background-color: rgb(52, 50, 50) "
+      >
+        <form id="botForm" action="/botCheck/check" method="post">
+          <label
+            for="smartContract"
+            style="font-size: 30px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color:aliceblue"
+          >SmartContract</label><br />
+          <input
+            type="text"
+            id="smartContract"
+            name="smartContract"
+            style="width: 460px; border-radius:6px "
+          /><br /><br />
+          <button
+            class="btn btn-outline-secondary"
+            style="width: 90px; background-color: rgb(240, 235, 235)"
+          >CALL🤖</button>
+        </form>
+      </div>
+
+      <div
+        class="bot-info-container"
+        id="botInfo"
+        style="width: 600px; margin-top: 20px;"
+      >
+        <h2
+          style="font-size: 30px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"
+        >INFORMATION TOKEN</h2>
+        {{#if result}}
+          {{#each result}}
+            <ul>
+              {{#if this.SmartContract}}
+                <li>SmartContract: {{this.SmartContract}}</li>
+              {{/if}}
+              {{#if this.NameToken}}
+                <li>NameToken: {{this.NameToken}}</li>
+              {{/if}}
+              {{#if this.SymbolToken}}
+                <li>SymbolToken: {{this.SymbolToken}}</li>
+              {{/if}}
+              {{#if this.TotalSupply}}
+                <li>💳 TotalSupply: {{this.TotalSupply}} </li>
+              {{/if}}
+              {{#if this.SumTotalScammer}}
+                <li>SumTotalScammer: {{this.SumTotalScammer}}% 🚨 🚨 🚨</li>
+              {{/if}}
+              {{#if this.NoRenounce}}
+                <li>NoRenounce: {{this.NoRenounce}} 🔴 🔴 🔴</li>
+              {{/if}}
+              {{#if this.FunctionMin}}
+                <li>FunctionMin: {{this.FunctionMin}} HONEYPOT 🔴</li>
+              {{/if}}
+              {{#if this.NoFunctionMin}}
+                <li>NoFunctionMin: {{this.NoFunctionMin}} 🔥 🔥 🔥</li>
+              {{/if}}
+              {{#if this.NoOwnable}}
+                <li>NoOwnable: {{this.NoOwnable}} 🔥 🔥 🔥</li>
+              {{/if}}
+              {{#if this.Ownable}}
+                <li>Ownable: {{this.Ownable}} ⚠️ ⚠️ ⚠️</li>
+              {{/if}}
+              {{#if this.Renounce}}
+                <li>Renounce: {{this.Renounce}} ✅ </li>
+              {{/if}}
+            </ul>
+          {{/each}}
+        {{else}}
+          <ul>
+            <li>No Information Token</li>
+          </ul>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
