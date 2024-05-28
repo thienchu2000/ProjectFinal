@@ -32,7 +32,7 @@ class OrderController {
     console.log(req.body);
 
     const SmartContractAddress = "0xBB1Ae18020520Eb943D26cAe21551d6C9Fb5de62";
-    const transaction = await axios.post(`${process.env.infuraTest}`);
+    // const transaction = await axios.post(`${process.env.infuraTest}`);
 
     //     curl --request POST \
     //     --url https://eth-mainnet.g.alchemy.com/v2/docs-demo \
@@ -49,25 +49,25 @@ class OrderController {
     // }
     // '
 
-    const request = {
-      jsonrpc: "2.0",
-      methods: "eth_getTransactionByHash",
-      params: [SmartContractAddress],
-      id: 1,
-    };
+    // const request = {
+    //   jsonrpc: "2.0",
+    //   methods: "eth_getTransactionByHash",
+    //   params: [SmartContractAddress],
+    //   id: 1,
+    // };
 
-    const response = await axios.post(transaction, request, {
-      headers: "Content-Type: application/json",
-    });
+    // const response = await axios.post(transaction, request, {
+    //   headers: "Content-Type: application/json",
+    // });
 
-    console.log(response);
+    // console.log(response);
 
-    const contract = new web3.eth.Contract(AbiToken.abi, SmartContractAddress);
+    // const contract = new web3.eth.Contract(AbiToken.abi, SmartContractAddress);
 
-    var checkaddress = await contract.methods.totalSupply().call();
-    var name = await contract.methods.name().call();
+    // var checkaddress = await contract.methods.totalSupply().call();
+    // var name = await contract.methods.name().call();
     // var payments = await contract.methods.payments().call();
-    var sym = await contract.methods.symbol().call();
+    // var sym = await contract.methods.symbol().call();
     // var amout;
     // if (payments === undefined || payments === null) {
     //   amout = "1";
