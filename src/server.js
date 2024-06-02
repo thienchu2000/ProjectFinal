@@ -14,14 +14,17 @@ const Crawler = require("crawler");
 const { Web3 } = require("web3");
 const { emit } = require("process");
 const multer = require("multer");
-const EventEmitter = require("eventemitter3");
 
+const handlebars = require("handlebars");
+const EventEmitter = require("events");
+EventEmitter.defaultMaxListeners = 50;
 var EE = new EventEmitter(),
   context = { foo: "bar" };
 
 const app = express();
 const port = 3000;
 const exphbs = create({
+  helpers: require("./utils/helpers"),
   extname: ".hbs",
   runtimeOptions: {
     allowProtoMethodsByDefault: true,
@@ -29,6 +32,9 @@ const exphbs = create({
   },
 });
 
+handlebars.registerHelper("isEqualTrue", function (value, options) {
+  return value === "true" ? options.fn(this) : options.inverse(this);
+});
 dotenv.config();
 
 const httpProvider = new Web3.providers.HttpProvider(process.env.infura);

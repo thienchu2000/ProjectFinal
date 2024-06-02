@@ -1,0 +1,80 @@
+<section
+  class="container"
+  style="border: 3px solid #6c757d; color: #6c757d; font-family: 'Arial', sans-serif;"
+>
+  <h4 class="text-center" style="color: #6c757d; font-weight: bold;">News</h4>
+  <div class="table-responsive">
+    <table class="table table-bordered" style="color: #6c757d;">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">NameNew</th>
+          <th scope="col">Description</th>
+          <th scope="col">Image</th>
+          <th scope="col">CreatedAt</th>
+          <th scope="col">Oder Page News</th>
+          <th scope="col" class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each data}}
+          <tr>
+            <td>{{this.NameNew}} </td>
+            <td>{{this.Description}}</td>
+
+            <td>
+              <img
+                src="../{{this.Image}}"
+                alt="..."
+                height="100"
+                width="120"
+                style="object-fit: cover;"
+              />
+            </td>
+            <td>{{formatDate this.createdAt}}</td>
+            <td>
+              Status:{{this.Status}}
+              <br />
+              <br />
+              <label for="status_Approved_{{this._id}}">Approved</label>
+              <input
+                type="radio"
+                value="Approved"
+                id="status_Approved_{{this._id}}"
+                name="Status_{{this._id}}"
+              />
+              <br />
+              <label for="status_Pending_{{this._id}}">Pending</label>
+              <input
+                type="radio"
+                value="Pending"
+                id="status_Pending_{{this._id}}"
+                name="Status_{{this._id}}"
+              />
+              <br />
+              <label for="status_Reject_{{this._id}}">Reject</label>
+              <input
+                type="radio"
+                value="Reject"
+                id="status_Reject_{{this._id}}"
+                name="Status_{{this._id}}"
+              />
+
+            </td>
+            <td class="align-middle text-center">
+              <div class="d-flex justify-content-center">
+                <button
+                  onclick="updateAr('{{_id}}')"
+                  class="btn btn-primary mx-1"
+                >Edit</button>
+                <button
+                  onclick="deleteNew('{{_id}}')"
+                  class="btn btn-primary mx-1"
+                >Detete</button>
+              </div>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -4,10 +4,24 @@ const axios = require("axios");
 const Bots = require("../models/Bots");
 const BigMetaData = require("../models/BigMetaData");
 const coverData = require("../utils/coverData");
-
+const dotenv = require("dotenv");
+dotenv.config();
 class BotTrendingController {
   async index(req, res, next) {
-    const user = req.user;
+    const check = req.user;
+    const checkRole = check.Role.NameRole;
+    var admin;
+    var manager;
+    if (checkRole === "Admin") {
+      admin = true;
+    } else {
+      admin = false;
+    }
+    if (checkRole === "Manager") {
+      manager = true;
+    } else {
+      manager = false;
+    }
     try {
       const c = new Crawler({
         maxConnections: 10,
@@ -40,7 +54,11 @@ class BotTrendingController {
               clearToken: clearToken,
               botcheck: true,
               User: true,
-              Name: user.UserName,
+              Name: check.UserName,
+              manager: manager,
+              admin: admin,
+              _id: check._id,
+              Image: check.Image,
               back: "https://images.contentstack.io/v3/assets/blt38dd155f8beb7337/blt8ccf223eda890b9e/6221f30d25232e3cccc45b91/Ethereum--1068x527.jpeg",
               imgbot: "assets/BotCall.png",
             });
@@ -57,7 +75,20 @@ class BotTrendingController {
     const api =
       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
     try {
-      const user = req.user;
+      const check = req.user;
+      const checkRole = check.Role.NameRole;
+      var admin;
+      var manager;
+      if (checkRole === "Admin") {
+        admin = true;
+      } else {
+        admin = false;
+      }
+      if (checkRole === "Manager") {
+        manager = true;
+      } else {
+        manager = false;
+      }
       const response = await axios.get(api);
       var doneCall = response.data.map((item) => {
         return {
@@ -145,7 +176,11 @@ class BotTrendingController {
         topPump: result,
         call: true,
         User: true,
-        Name: user.UserName,
+        Name: check.UserName,
+        manager: manager,
+        admin: admin,
+        _id: check._id,
+        Image: check.Image,
         back: "https://images.contentstack.io/v3/assets/blt38dd155f8beb7337/blt8ccf223eda890b9e/6221f30d25232e3cccc45b91/Ethereum--1068x527.jpeg",
         imgbot: "assets/BotCall.png",
       });

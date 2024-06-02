@@ -1,0 +1,35 @@
+<div
+  class="container custom-container"
+  style="  
+  color: #fff;
+  font-family: Arial, sans-serif;"
+>
+  <div class="custom-wrapper">
+    <h1 class="custom-header">Send Email</h1>
+    <form class="custom-form" action="/manager/createEmail" method="POST">
+      <div class="form-group">
+        <label for="emailTitle">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="emailTitle"
+          name="title"
+          placeholder="Enter email title"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="emailContent">Content</label>
+        <textarea
+          class="form-control"
+          id="emailContent"
+          name="content"
+          rows="5"
+          placeholder="Enter email content"
+          required
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary custom-submit-btn">Send Email</button>
+    </form>
+  </div>
+</div>

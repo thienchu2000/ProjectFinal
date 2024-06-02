@@ -11163,3 +11163,30 @@ fieldset:disabled .btn {
     display: none !important;
   }
 }
+
+.custom-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-card-title {
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.custom-card-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+.custom-card-img-top {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  object-fit: cover;
+  height: 200px;
+}
+
+.custom-card-body {
+  padding: 1.25rem;
+}

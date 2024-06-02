@@ -1,5 +1,181 @@
 <nav
   class="my-navbar navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5"
+  style="  border-bottom: 3px solid rgb(3, 3, 3); "
+>
+  <h2 class="m-0 text-primary">
+    <img
+      class="img-fluid me-2"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOSVf75rMkgiAUl8Kcgrl3epxt0Uh_DMzwCsTM7EHpmcCtE1hnV250gyteAlIAW7GA82U&usqp=CAU"
+      alt=""
+      style="width: 90px; height: 90px; "
+    />
+  </h2>
+  {{#if limit}}
+    <div class="gas-container" style=" margin-top: 8px;">
+      <img
+        class="gas-icon"
+        src="/gas.png"
+        alt="Gas"
+        style="width: 23px ; height: 23px"
+      />
+
+      <div
+        class="gas-info-box hidden"
+        style="border: 2px solid rgb(28, 26, 26);"
+      >
+        <table>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Price (Gwei)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Low</td>
+              <td>{{getGas.low.suggestedMaxFeePerGas}}</td>
+            </tr>
+            <tr>
+              <td>Medium</td>
+              <td>{{getGas.medium.suggestedMaxFeePerGas}}</td>
+            </tr>
+            <tr>
+              <td>High</td>
+              <td>{{getGas.high.suggestedMaxFeePerGas}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p>{{limit}}</p>
+  {{/if}}
+  <button
+    type="button"
+    class="navbar-toggler"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarCollapse"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div
+    class="collapse navbar-collapse"
+    id="navbarCollapse"
+    {{! style="font-size: 15px;" }}
+  >
+    <ul class="navbar-nav ms-auto my-navbar-nav py-4 py-lg-0">
+
+      <li class="nav-item"><a href="/" class="nav-link h a">HOME</a></li>
+      <li class="nav-item"><a href="/about" class="nav-link h a"> ABOUT</a></li>
+      <li class="nav-item"><a href="/news" class="nav-link h a"> NEWS</a></li>
+      <li class="nav-item"><a href="/order" class="nav-link h a">ORDER</a></li>
+      {{#if admin}}
+        <li class="nav-item dropdown" id="dropdown">
+          <a class="nav-link h a">ADMIN DASHBOARD</a>
+          <div
+            class="nav-dropdown-custom"
+            style="border: 2px solid rgb(28, 26, 26);"
+          >
+            <a href="/admin/createUser" class="nav-link h">Create User</a>
+            <a href="/admin" class="nav-link h">User management</a>
+
+            <a href="/admin/findNews" class="nav-link h">Find News</a>
+          </div>
+        </li>
+      {{/if}}
+      {{#if manager}}
+        <li class="nav-item dropdown" id="dropdown">
+          <a class="nav-link h a">MANAGER DASHBOARD</a>
+          <div
+            class="nav-dropdown-custom"
+            style="border: 2px solid rgb(28, 26, 26);"
+          >
+            <a href="/manager" class="nav-link h">Create News</a>
+            <a href="/manager/sendEmail" class="nav-link h">Create Email send
+              User
+            </a>
+            <a href="/manager/managerData" class="nav-link h">Find News and
+              Update</a>
+          </div>
+        </li>
+      {{/if}}
+      {{#if User}}
+        <li class="nav-link"><p
+            class="nav-item a"
+            style="color: rgb(25, 225, 225);"
+          >{{Name}}</p></li>
+        <li class="nav-item dropdown" id="dropdown">
+          <a class="nav-link">
+            <img
+              src="/{{Image}}"
+              alt="..."
+              style="height: 70px; width: 70px; border:2px solid rgb(171, 163, 163); border-radius:90000px; "
+            /></a>
+          <div
+            class="nav-dropdown-custom"
+            style="border: 2px solid rgb(28, 26, 26);"
+          >
+            <a href="/findUser" class="nav-link h">Information</a>
+          </div>
+        </li>
+        <li class="nav-item"><a
+            href="/logout"
+            class="nav-link h a"
+          >LOGOUT</a></li>
+      {{else}}
+        <li class="nav-item dropdown">
+          <a
+            href="#"
+            class="nav-link dropdown-toggle h a"
+            id="loginDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >LOGIN</a>
+          <div
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="loginDropdown"
+          >
+            <form action="/login" method="post" class="p-3">
+              <div class="mb-3" style="width: 270px;">
+                <label for="Email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  id="Email"
+                  name="Email"
+                  class="form-control"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="PassWord" class="form-label">Password</label>
+                <input
+                  type="password"
+                  id="PassWord"
+                  name="PassWord"
+                  class="form-control"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Login</button>
+            </form>
+          </div>
+        </li>
+        <li class="nav-item"><a
+            href="/rg"
+            class="nav-link h a"
+          >REGISTER</a></li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>
+
+{{!-- 
+<nav
+  class="my-navbar navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5 navbar-custom"
 >
   <!-- Logo -->
   <h2 class="m-0 text-primary">
@@ -7,7 +183,7 @@
       class="img-fluid me-2"
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOSVf75rMkgiAUl8Kcgrl3epxt0Uh_DMzwCsTM7EHpmcCtE1hnV250gyteAlIAW7GA82U&usqp=CAU"
       alt=""
-      style="width: 90px; height: 90px; "
+      style="width: 90px; height: 90px;"
     />
   </h2>
 
@@ -25,17 +201,84 @@
   <div
     class="collapse navbar-collapse"
     id="navbarCollapse"
-    style="font-size: 18px;"
+    style="font-size: 15px;"
   >
     <ul class="navbar-nav ms-auto my-navbar-nav py-4 py-lg-0">
+      <li class="nav-item">
+        <div class="gas-container" style="position: relative;">
+          <img
+            class="gas-icon"
+            src="/gas.png"
+            alt="Gas"
+            style="width: 23px; height: 23px;"
+          />
+          <div class="gas-info-box">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Price (Gwei)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Low</td>
+                  <td>{{getGas.low.suggestedMaxFeePerGas}}</td>
+                </tr>
+                <tr>
+                  <td>Medium</td>
+                  <td>{{getGas.medium.suggestedMaxFeePerGas}}</td>
+                </tr>
+                <tr>
+                  <td>High</td>
+                  <td>{{getGas.high.suggestedMaxFeePerGas}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item"><p>{{limit}}</p></li>
       <li class="nav-item"><a href="/" class="nav-link h">HOME</a></li>
-      <li class="nav-item"><a href="/about" class="nav-link h"> ABOUT</a></li>
-      <li class="nav-item"><a href="/news" class="nav-link h"> NEWS</a></li>
+      <li class="nav-item"><a href="/about" class="nav-link h">ABOUT</a></li>
+      <li class="nav-item"><a href="/news" class="nav-link h">NEWS</a></li>
       <li class="nav-item"><a href="/order" class="nav-link h">ORDER</a></li>
+      {{#if admin}}
+        <li class="nav-item dropdown" id="dropdown" style="position: relative;">
+          <a class="nav-link h">ADMIN DASHBOARD</a>
+          <div class="nav-dropdown-custom p-2">
+            <a href="/admin/createUser" class="nav-link h">Create User</a>
+            <a href="/admin" class="nav-link h">User management</a>
+            <a href="/admin/findNews" class="nav-link h">Find News</a>
+          </div>
+        </li>
+      {{/if}}
+      {{#if manager}}
+        <li class="nav-item dropdown" id="dropdown" style="position: relative;">
+          <a class="nav-link h">MANAGER DASHBOARD</a>
+          <div class="nav-dropdown-custom p-2">
+            <a href="/manager" class="nav-link h">Create News</a>
+            <a href="/manager/sendEmail" class="nav-link h">Create Email send
+              User</a>
+            <a href="/manager/managerData" class="nav-link h">Find News and
+              Update</a>
+          </div>
+        </li>
+      {{/if}}
       {{#if User}}
-
-        <li class="nav-link active" class="nav-item h">{{Name}}</li>
-
+        <li class="nav-link active nav-item h">{{Name}}</li>
+        <li class="nav-item dropdown" id="dropdown" style="position: relative;">
+          <a class="nav-link h">
+            <img
+              src="/{{Image}}"
+              alt="..."
+              style="height: 70px; width: 70px; border:2px solid rgb(171, 163, 163); border-radius: 50%;"
+            />
+          </a>
+          <div class="nav-dropdown-custom p-2">
+            <a href="/findUser" class="nav-link h">Information</a>
+          </div>
+        </li>
         <li class="nav-item"><a
             href="/logout"
             class="nav-link h"
@@ -85,4 +328,4 @@
       {{/if}}
     </ul>
   </div>
-</nav>
+</nav> --}}

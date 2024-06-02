@@ -1,35 +1,49 @@
 const NewsCrypto = require("../models/NewsCrypto");
+const Role = require("../models/Roles");
+const axios = require("axios");
+const dotenv = require("dotenv");
+dotenv.config();
+const Users = require("../models/Users");
 
 class NewsController {
-  index(req, res, next) {
-    var user = req.user;
-    res.render("news", {
-      User: true,
-      Name: user.UserName,
-    });
-  }
-  create(req, res, next) {
-    var user = req.user;
-    const { NameNew, Description } = req.body;
-    var Image = req.file;
-    const newscrypto = new NewsCrypto({
-      NameNew: NameNew,
-      Description: Description,
-      Image: Image,
-      User: user._id,
-    });
-  }
-  async update(req, res, next) {
-    const id = req.params.id;
-    const { NameNew, Description } = req.body;
-    var Image = req.file;
+  async index(req, res, next) {
     try {
-      NewsCrypto.findByIdAndUpdate(
-        { _id: id },
-        { NameNew: NameNew, Description: Description, Image: Image }
-      );
+      var data = await NewsCrypto.find({});
+      var approved = data
+        .filter((item) => {
+          return item.Status === "Approved";
+        })
+        .map((item) => {
+          return item;
+        });
+      const user = req.user;
+      const checkRole = user.Role.NameRole;
+      var admin;
+      var manager;
+      if (checkRole === "Admin") {
+        admin = true;
+      } else {
+        admin = false;
+      }
+      if (checkRole === "Manager") {
+        manager = true;
+      } else {
+        manager = false;
+      }
+      if (!user) {
+        res.render("news", { data: data });
+      } else {
+        res.render("news", {
+          User: true,
+          Name: user.UserName,
+          manager: manager,
+          admin: admin,
+          Image: user.Image,
+          data: approved,
+        });
+      }
     } catch (err) {
-      res.send("Error updating");
+      console.error(err);
     }
   }
 }

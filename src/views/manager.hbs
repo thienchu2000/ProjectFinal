@@ -1,0 +1,66 @@
+<div class="custom-container" style="background-color: #ffffff; padding: 20px;">
+  <div
+    class="custom-form-container mx-auto"
+    style="width: 70%; max-width: 800px; margin: 0 auto;"
+  >
+    <div class="text-center mb-4">
+      <h1 class="text-center" style="color: black; font-size: 36px;">Create News</h1>
+    </div>
+    <form
+      action="/manager/CreateNews"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <div class="mb-3">
+        <label
+          for="NameNew"
+          class="custom-form-label"
+          style="color: black;"
+        >Name News</label>
+        <input
+          type="text"
+          id="NameNew"
+          name="NameNew"
+          class="custom-form-control"
+          placeholder="Name News"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label
+          for="Description"
+          class="custom-form-label"
+          style="color: black;"
+        >Description</label>
+        <textarea
+          id="Description"
+          name="Description"
+          class="custom-form-control"
+          rows="6"
+          style="width: 100%; color: black;"
+          placeholder="Description"
+          required
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label
+          for="file"
+          class="custom-form-label"
+          style="color: black;"
+        >Image</label>
+        <input
+          type="file"
+          id="file"
+          name="file"
+          class="form-control"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        class="custom-btn-register"
+        style="background-color: black; color: white;"
+      >Create</button>
+    </form>
+  </div>
+</div>

@@ -32,8 +32,11 @@ class OrderController {
     console.log(req.body);
 
     const SmartContractAddress = "0xBB1Ae18020520Eb943D26cAe21551d6C9Fb5de62";
-    // const transaction = await axios.post(`${process.env.infuraTest}`);
-
+    const dattaTRansaction = web3.eth.getTransaction(
+      "0x9B555039084f8feCB75AeF928B7ccd2b15A84575"
+    );
+    console.log(dattaTRansaction);
+    // const trsnsacsionhash = await axios.
     //     curl --request POST \
     //     --url https://eth-mainnet.g.alchemy.com/v2/docs-demo \
     //     --header 'accept: application/json' \
@@ -52,7 +55,7 @@ class OrderController {
     // const request = {
     //   jsonrpc: "2.0",
     //   methods: "eth_getTransactionByHash",
-    //   params: [SmartContractAddress],
+    //   params: [userAddress],
     //   id: 1,
     // };
 

@@ -1,0 +1,132 @@
+{{!-- <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-center" style="color: #8B4513;">Manager
+            Table</h4>
+          <div class="table-responsive">
+            <table
+              class="table table-bordered table-hover"
+              style="color: #8B4513; border: 2px solid #8B4513;"
+            >
+              <thead>
+                <tr>
+                  <th style="width: 30%;">Name News</th>
+                  <th style="width: 40%;">Description</th>
+                  <th style="width: 20%;">Image</th>
+                  <th style="width: 10%;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each data}}
+                  <tr>
+                    <td>
+                      <input
+                        type="text"
+                        id="NameNew"
+                        name="NameNew"
+                        value="{{this.NameNew}}"
+                        class="form-control"
+                      />
+                    </td>
+                    <td>
+                      <textarea
+                        rows="4"
+                        class="form-control"
+                        id="Description"
+                        name="Description"
+                        style="width: 100%;"
+                      >{{this.Description}}</textarea>
+                    </td>
+                    <td>
+                      <img
+                        src="/{{this.Image}}"
+                        alt="Image"
+                        class="img-fluid"
+                        style="max-height: 200px; max-width: 200px;"
+                      />
+                      <div class="mt-2">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          class="form-control-file"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        onclick="updateNew('{{_id}}')"
+                        class="btn btn-primary"
+                      >UpDate</button>
+                    </td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> --}}
+
+<div class="container mt-5">
+  <h1 class="text-center">Update News</h1>
+  <div class="row mt-4">
+    {{#each data}}
+      <div class="col-md-4 mb-4">
+        <div class="card custom-card">
+          <img
+            src="/{{Image}}"
+            class="card-img-top custom-card-img-top"
+            alt="{{NameNew}}"
+          />
+          <div class="card-body custom-card-body">
+            <h5 class="card-title custom-card-title">{{NameNew}}</h5>
+            <p class="card-text custom-card-text">{{Description}}</p>
+            <p>{{formatDate createdAt}}</p>
+            <p class="card-text custom-card-text">Status: {{Status}}</p>
+            <form
+              action="/manager/updateNew/{{_id}}"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="form-group">
+                <label for="NameNew">Name News</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="NameNew"
+                  name="NameNew"
+                  value="{{NameNew}}"
+                />
+              </div>
+              <div class="form-group">
+                <label for="Description">Description</label>
+                <textarea
+                  class="form-control"
+                  id="Description"
+                  name="Description"
+                  rows="3"
+                >{{Description}}</textarea>
+              </div>
+              <div class="form-group">
+                <label for="Image">Image</label>
+                <input
+                  type="file"
+                  class="form-control-file form-control"
+                  id="file"
+                  name="file"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

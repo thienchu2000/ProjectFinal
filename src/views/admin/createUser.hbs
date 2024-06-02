@@ -1,0 +1,77 @@
+<div class="custom-container" style="padding-bottom:200px ; height: 700px">
+  <div class="custom-form-container mx-auto" style="width: 800px; ">
+    <form action="/admin/createUser" method="post" style="color: black;">
+      <div class="mb-3">
+        <label
+          for="UserName"
+          class="custom-form-label"
+          style="color: black;"
+        >Username</label>
+        <input
+          type="text"
+          id="UserName"
+          name="UserName"
+          class="custom-form-control"
+          placeholder="Username"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label
+          for="Email"
+          class="custom-form-label"
+          style="color: black;"
+        >Email</label>
+        <input
+          type="email"
+          id="Email"
+          name="Email"
+          class="custom-form-control"
+          placeholder="Email"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label
+          for="Phone"
+          class="custom-form-label"
+          style="color: black;"
+        >Phone</label>
+        <input
+          type="tel"
+          id="Phone"
+          name="Phone"
+          class="custom-form-control"
+          placeholder="Phone"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label
+          for="Password"
+          class="custom-form-label"
+          style="color: black;"
+        >Password</label>
+        <input
+          type="password"
+          id="PassWord"
+          name="PassWord"
+          class="custom-form-control"
+          placeholder="PassWord"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="Role">Role</label>
+        <Select name="Role" id="Role" required class="form-select form-control">
+          <option value="">--Choose--</option>
+          <option value="6656e2d46f48cf6caf27e5b6">Admin</option>
+          <option value="6656e2ea6f48cf6caf27e5b7">Manager</option>
+          <option value="6656e3036f48cf6caf27e5b8">User</option>
+        </Select>
+      </div>
+
+      <button class="custom-btn-register">Create</button>
+    </form>
+  </div>
+</div>

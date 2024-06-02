@@ -12,16 +12,32 @@ var EE = new EventEmitter(),
   context = { foo: "bar" };
 
 class BotCheckController {
-  index(req, res, next) {
-    const user = req.user;
+  async index(req, res, next) {
+    const check = req.user;
+    const checkRole = check.Role.NameRole;
+    var admin;
+    var manager;
+    if (checkRole === "Admin") {
+      admin = true;
+    } else {
+      admin = false;
+    }
+    if (checkRole === "Manager") {
+      manager = true;
+    } else {
+      manager = false;
+    }
     res.render("botCheck", {
       User: true,
-      Name: user.UserName,
+      Name: check.UserName,
+      _id: check._id,
+      manager: manager,
+      admin: admin,
+      Image: check.Image,
       back: "https://static.vecteezy.com/system/resources/previews/023/995/943/large_2x/ethereum-coin-symbol-with-blue-light-background-network-connection-by-generative-ai-free-photo.jpg",
     });
   }
   async check(req, res, next) {
-    const user = req.user;
     const { smartContract } = req.body;
     var result = [];
     if (smartContract.length < 42 || smartContract.length > 42) {
@@ -31,6 +47,20 @@ class BotCheckController {
       result.push({ SmartContract: smartContract });
     }
     var keyEther = process.env.keyEther;
+    const check = req.user;
+    const checkRole = check.Role.NameRole;
+    var admin;
+    var manager;
+    if (checkRole === "Admin") {
+      admin = true;
+    } else {
+      admin = false;
+    }
+    if (checkRole === "Manager") {
+      manager = true;
+    } else {
+      manager = false;
+    }
     try {
       let apiCheckEther = await axios.get(
         `https://api.etherscan.io/api?module=contract&action=getsourcecode&address=${smartContract}&apikey=${keyEther}`
@@ -192,9 +222,13 @@ class BotCheckController {
       dataSmartContract.save();
       res.render("botCheck", {
         User: true,
-        Name: user.UserName,
-        result: result,
+        Name: check.UserName,
+        _id: check._id,
+        manager: manager,
+        admin: admin,
+        Image: check.Image,
         back: "https://static.vecteezy.com/system/resources/previews/023/995/943/large_2x/ethereum-coin-symbol-with-blue-light-background-network-connection-by-generative-ai-free-photo.jpg",
+        result: result,
       });
     } catch (err) {
       res.send("error");

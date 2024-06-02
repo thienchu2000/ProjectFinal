@@ -1,29 +1,51 @@
-// const jwt = require("jsonwebtoken");
-// const dotenv = require("dotenv");
-// const Users = require("../models/Users");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+const Role = require("../models/Roles");
 
-// async function isUser(req, res, next) {
-//   var cookies = req.cookies["access_token"];
-//   var decoded = jwt.verify(cookies, process.env.jwt);
-//   if (cookies) {
-//     var user = await Users.findOne({ Role: decoded.Role }).equals({
-//       _id: "6623f513e6e58fdc6d35a892",
-//     });
-//     next();
-//   } else {
-//     return res.status(401).send("You do not have permission to log in here");
-//   }
-// }
+function isUser(req, res, next) {
+  var roleId = req.user.Role;
+  Role.findOne({ _id: roleId })
+    .then((data) => {
+      if (data.NameRole === "User") {
+        next();
+      } else {
+        return res.render("error");
+      }
+    })
+    .catch((err) => {
+      return res.send(err);
+    });
+}
 
-// async function isAdmin(req, res, next) {
-//   var cookies = req.cookies["access_token"];
-//   var decoded = jwt.verify(cookies, process.env.jwt);
-//   if (cookies) {
-//     var user = await Users.findOne({ Role: decoded.Role }).equals({
-//       _id: "6623f48de6e58fdc6d35a891",
-//     });
-//     next();
-//   } else {
-//     return res.status(401).send("You do not have permission to log in here");
-//   }
-// }
+function isAdmin(req, res, next) {
+  var roleId = req.user.Role;
+  Role.findOne({ _id: roleId })
+    .then((data) => {
+      if (data.NameRole === "Admin") {
+        next();
+      } else {
+        return res.render("error");
+      }
+    })
+    .catch((err) => {
+      return res.send(err);
+    });
+}
+
+function isManager(req, res, next) {
+  var roleId = req.user.Role;
+  Role.findOne({ _id: roleId })
+    .then((data) => {
+      console.log(data);
+      if (data.NameRole === "Manager") {
+        next();
+      } else {
+        return res.render("error");
+      }
+    })
+    .catch((err) => {
+      return res.send(err);
+    });
+}
+
+module.exports = { isAdmin, isUser, isManager };

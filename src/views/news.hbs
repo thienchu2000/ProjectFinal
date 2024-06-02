@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <h1 class="text-center">News Crypto</h1>
+  <div class="row mt-4">
+    {{#each data}}
+      <div class="col-md-4 mb-4">
+        <div class="card custom-card">
+          <img
+            src="{{Image}}"
+            class="card-img-top custom-card-img-top"
+            alt="{{NameNew}}"
+          />
+          <div class="card-body custom-card-body">
+            <h5 class="card-title custom-card-title">{{NameNew}}</h5>
+            <p class="card-text custom-card-text">{{Description}}</p>
+            <p>{{formatDate createdAt}}</p>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
