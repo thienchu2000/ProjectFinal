@@ -1,34 +1,35 @@
-<div class="container mt-5" style="height:900px">
-  <div
-    style="background-color: rgb(39, 35, 35); border-radius: 6px; border:black solid 2px ; width:270px; padding-left: 38px;"
-  >
-    <h1 class="mb-4" style="color: rgb(243, 240, 240);">Order Bots</h1>
-  </div>
-  <br />
-  <br />
-  <br />
-
-  <div class="row" style="margin-left: 130px ;">
-    {{#each query}}
-      <div class="col-md-6">
-        <div class="card mb-4" style="width: 400px">
-          <img
-            src="{{Image}}"
-            class="card-img-top img-thumbnail"
-            alt="{{NameProduct}}"
-            style="height: 250px;"
-          />
-          <div class="card-body">
-            <h5 class="card-title">{{NameProduct}}</h5>
-            <p class="card-text">Price: {{Price}}</p>
-            <p class="card-text">Description: {{Description}}</p>
-            <button
-              class="btn btn-outline-dark rounded-0 px-3 py-1 purchase-button"
-              data-product-id="{{_id}}"
-            >Order 🤖</button>
-          </div>
+<div
+  class="row"
+  style="margin-left: 173px; margin-top:100px; margin-bottom:150px"
+>
+  {{#each query}}
+    <div class="col-md-6">
+      <div class="card mb-4" style="width: 400px">
+        <img
+          src="{{Image}}"
+          class="card-img-top img-thumbnail"
+          alt="{{NameProduct}}"
+          style="height: 250px;"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{NameProduct}}</h5>
+          <p class="card-text">Price: {{Price}} MCTK</p>
+          <p class="card-text">Description: {{Description}}</p>
+          <button
+            class="btn btn-outline-dark rounded-0 px-3 py-1 purchase-button"
+            onclick="connectMetamask('{{_id}}','{{Price}}')"
+          >Order 🤖</button>
         </div>
       </div>
-    {{/each}}
+    </div>
+  {{/each}}
+</div>
+
+<div>
+  <div id="spinner-container" class="spinner-container">
+    <div class="spinner-border" role="status">
+
+      <span class="visually-hidden">Loading...</span>
+    </div>
   </div>
 </div>

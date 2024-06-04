@@ -132,6 +132,8 @@ button[type="submit"] {
   left: 0;
   width: 91.5%;
   height: 100%;
+  border: 2px solid rgb(22, 20, 20);
+  border-radius: 80px 0px 80px;
   background-color: rgba(0, 0, 0, 0);
   z-index: 1;
   transition: background-color 0.3s ease;
@@ -414,4 +416,35 @@ button[type="submit"] {
 
 .a {
   margin-top: 23px;
+}
+.spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: none;
+  color: rgb(11, 199, 11);
+}
+
+.spinner-border {
+  width: 2rem;
+  height: 2rem;
+}
+
+.show {
+  display: block;
+}
+
+.c {
+  display: none;
+  position: absolute;
+  margin-right: 80px;
+  width: 130px;
+  background-color: #f8f9fa;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+.nav-item.dropdown:hover .c {
+  display: block;
 }

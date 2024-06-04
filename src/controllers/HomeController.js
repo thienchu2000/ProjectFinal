@@ -66,7 +66,6 @@ class HomeController {
           getGas: getGas,
           Name: info.UserName,
           Image: info.Image,
-          back: "https://haycafe.vn/wp-content/uploads/2022/05/Background-xam-den.jpg",
         });
       }
     } catch (err) {

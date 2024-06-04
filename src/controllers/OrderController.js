@@ -8,18 +8,38 @@ const web3 = new Web3(httpProvider);
 const AbiToken = require("../contracts/ThienChuToken.json");
 const axios = require("axios");
 const { Core } = require("@quicknode/sdk");
+const connectToMetamask = require("../utils/connect");
+const QRCode = require("qrcode");
+const processReques = require("../utils/connect");
 
 class OrderController {
   async index(req, res, next) {
     const info = req.user;
+    var checkRole = info.Role.NameRole;
+    var admin;
+    var manager;
+
+    if (checkRole === "Admin") {
+      admin = true;
+    } else {
+      admin = false;
+    }
+    if (checkRole === "Manager") {
+      manager = true;
+    } else {
+      manager = false;
+    }
     try {
       const query = await Bots.find({});
       res.render("order", {
         User: true,
         info: info,
         Name: info.UserName,
+        Image: info.Image,
+        admin: admin,
+        manager: manager,
         query: query,
-        back: "https://static.vecteezy.com/system/resources/previews/023/995/943/large_2x/ethereum-coin-symbol-with-blue-light-background-network-connection-by-generative-ai-free-photo.jpg",
+        back: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG1r5-hNkSEsMkT024GhK6ZdpgzTEE2va7ltY8zbxjgsz1F28tYSm1_wmTsPxiyXAV3uQ&usqp=CAU",
       });
     } catch (Error) {
       return res.status(500).send({ message: "Error" });
@@ -27,56 +47,34 @@ class OrderController {
   }
   async payment(req, res, next) {
     const user = req.user;
-
-    const { productId, userAddress } = req.body;
+    const { productId, addressUser, txhash } = req.body;
     console.log(req.body);
 
     const SmartContractAddress = "0xBB1Ae18020520Eb943D26cAe21551d6C9Fb5de62";
-    const dattaTRansaction = web3.eth.getTransaction(
-      "0x9B555039084f8feCB75AeF928B7ccd2b15A84575"
-    );
-    console.log(dattaTRansaction);
-    // const trsnsacsionhash = await axios.
-    //     curl --request POST \
-    //     --url https://eth-mainnet.g.alchemy.com/v2/docs-demo \
-    //     --header 'accept: application/json' \
-    //     --header 'content-type: application/json' \
-    //     --data '
-    // {
-    //  "id": 1,
-    //  "jsonrpc": "2.0",
-    //  "method": "eth_getTransactionByHash",
-    //  "params": [
-    //    "0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b"
-    //  ]
-    // }
-    // '
 
-    // const request = {
-    //   jsonrpc: "2.0",
-    //   methods: "eth_getTransactionByHash",
-    //   params: [userAddress],
-    //   id: 1,
-    // };
-
-    // const response = await axios.post(transaction, request, {
-    //   headers: "Content-Type: application/json",
-    // });
-
-    // console.log(response);
-
-    // const contract = new web3.eth.Contract(AbiToken.abi, SmartContractAddress);
-
-    // var checkaddress = await contract.methods.totalSupply().call();
-    // var name = await contract.methods.name().call();
-    // var payments = await contract.methods.payments().call();
-    // var sym = await contract.methods.symbol().call();
-    // var amout;
-    // if (payments === undefined || payments === null) {
-    //   amout = "1";
-    // } else {
-    //   amout = payments;
-    // }
+    try {
+      const dattaTransaction = await processReques(txhash);
+      console.log(dattaTransaction);
+      if (dattaTransaction.status === 1n) {
+        const payment = new Payments({
+          User: user._id,
+          Bot: productId,
+        });
+        const idPay = await payment.save();
+        const orders = new Orders({
+          User: user._id,
+          Bot: productId,
+          Payment: idPay._id,
+        });
+        await orders.save();
+        return res.status(200).send("Successfully");
+      } else {
+        return res.status(404).send("Transaction failed");
+      }
+    } catch (error) {
+      console.error("Error checking transaction status:", error);
+      return res.status(500).send(error.message);
+    }
   }
 }
 

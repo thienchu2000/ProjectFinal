@@ -7,7 +7,7 @@ const Bots = new mongoose.Schema(
     Image: String,
     Description: String,
     Comment: String,
-    Price: String,
+    Price: Number,
   },
   { timestamps: true }
 );

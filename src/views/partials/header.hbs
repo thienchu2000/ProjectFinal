@@ -78,9 +78,9 @@
             style="border: 2px solid rgb(28, 26, 26);"
           >
             <a href="/admin/createUser" class="nav-link h">Create User</a>
+            <a href="/admin/findNews" class="nav-link h">Find News</a>
             <a href="/admin" class="nav-link h">User management</a>
 
-            <a href="/admin/findNews" class="nav-link h">Find News</a>
           </div>
         </li>
       {{/if}}
@@ -101,10 +101,6 @@
         </li>
       {{/if}}
       {{#if User}}
-        <li class="nav-link"><p
-            class="nav-item a"
-            style="color: rgb(25, 225, 225);"
-          >{{Name}}</p></li>
         <li class="nav-item dropdown" id="dropdown">
           <a class="nav-link">
             <img
@@ -112,17 +108,13 @@
               alt="..."
               style="height: 70px; width: 70px; border:2px solid rgb(171, 163, 163); border-radius:90000px; "
             /></a>
-          <div
-            class="nav-dropdown-custom"
-            style="border: 2px solid rgb(28, 26, 26);"
-          >
+          <div class="c" style="border: 2px solid rgb(28, 26, 26);">
+            <p class="nav-item a" style="color: rgb(25, 155, 225);">{{Name}}</p>
             <a href="/findUser" class="nav-link h">Information</a>
+            <a href="/logout" class="nav-link h">Logout</a>
+
           </div>
         </li>
-        <li class="nav-item"><a
-            href="/logout"
-            class="nav-link h a"
-          >LOGOUT</a></li>
       {{else}}
         <li class="nav-item dropdown">
           <a
@@ -132,7 +124,7 @@
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-          >LOGIN</a>
+          >Login</a>
           <div
             class="dropdown-menu dropdown-menu-end"
             aria-labelledby="loginDropdown"
@@ -167,7 +159,7 @@
         <li class="nav-item"><a
             href="/rg"
             class="nav-link h a"
-          >REGISTER</a></li>
+          >Register</a></li>
       {{/if}}
     </ul>
   </div>
