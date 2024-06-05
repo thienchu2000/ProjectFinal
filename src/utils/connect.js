@@ -13,7 +13,7 @@ async function processRequest(txhash) {
       } catch (error) {
         reject(error);
       }
-    }, 90000);
+    }, 50000);
   });
 }
 

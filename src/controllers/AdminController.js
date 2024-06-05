@@ -9,7 +9,7 @@ dotenv.config();
 const bcrypt = require("bcrypt");
 const NewsCrypto = require("../models/NewsCrypto");
 const axios = require("axios");
-
+const Bots = require("../models/Bots");
 class AdminController {
   async index(req, res, next) {
     try {
@@ -171,6 +171,37 @@ class AdminController {
         res.status(200).send("Success");
       })
       .catch((err) => res.status(500).send("Error"));
+  }
+  async getBot(req, res, next) {
+    try {
+      const data = await Bots.find({});
+      const check = req.user;
+      res.render("admin/createInforBot", {
+        data: data,
+        User: true,
+        Name: check.UserName,
+        _id: check._id,
+        admin: true,
+        Image: check.Image,
+        Role: check.Role,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.send("error");
+    }
+  }
+
+  createInforBot(req, res, next) {
+    const id = req.params.id;
+    const { Description, Price } = req.body;
+    Bots.findOneAndUpdate({ _id: id }, { ...req.body })
+      .then(() => {
+        res.status(200).send("Done");
+      })
+      .catch((err) => {
+        console.error(err);
+        return res.status(404).send("Error");
+      });
   }
 }
 

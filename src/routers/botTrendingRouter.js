@@ -10,6 +10,7 @@ router.get(
   checkPaymentTrending,
   BotTrendingController.topPump
 );
+router.get("/get", checkLogin, BotTrendingController.get);
 router.get("/", checkLogin, checkPaymentTrending, BotTrendingController.index);
 
 module.exports = router;

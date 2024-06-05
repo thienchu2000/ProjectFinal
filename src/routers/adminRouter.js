@@ -3,6 +3,8 @@ const AdminController = require("../controllers/AdminController");
 const router = express.Router();
 const checkLogin = require("../utils/checkLogin");
 
+router.put("/createInforBot/:id", AdminController.createInforBot);
+router.get("/inForBot", AdminController.getBot);
 router.delete("/deleteNew/:id", AdminController.deleteNew);
 router.put("/updateNews/:id", AdminController.updateNews);
 router.get("/findNews", AdminController.findNews);

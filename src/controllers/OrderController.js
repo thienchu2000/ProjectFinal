@@ -54,7 +54,6 @@ class OrderController {
 
     try {
       const dattaTransaction = await processReques(txhash);
-      console.log(dattaTransaction);
       if (dattaTransaction.status === 1n) {
         const payment = new Payments({
           User: user._id,

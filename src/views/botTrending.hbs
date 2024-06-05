@@ -1,8 +1,7 @@
-<h1
-  {{! class="jumbotron jumbotron-fluid" }}
+{{!-- <h1
   style="color:rgb(214, 206, 206); border:black solid 2px; border-radius: 6px; width:720px; background-color:rgb(51, 50, 50);margin-left:380px; margin-top:10px; padding-left:10px; padding-left:25px"
 >NEW TOKEN ON-CHAIN ETH LISTING</h1>
-
+<div></div>
 <div class="container">
   <div class="row">
     <div class="col">
@@ -10,13 +9,22 @@
         <table class="contract-table">
           <thead>
             <tr>
-              <th>Smart Contract</th>
+              <th>ON-CHAIN ETH LISTING</th>
             </tr>
           </thead>
           <tbody>
             {{#each clearToken}}
               <tr>
-                <td>CA: {{this.CA}}</td>
+                <td>Smart Contract:
+                  {{this.SmartContract}}
+                  <br />SymbolToken:
+                  {{this.SymbolToken}}
+                  <br />NameToken:
+                  {{this.NameToken}}
+                  <br />
+                  TotalSupply:
+                  {{this.TotalSupply}}
+                </td>
               </tr>
             {{/each}}
           </tbody>
@@ -47,13 +55,57 @@
   </div>
 </div>
 <br />
-<br />
+<br /> --}}
+
+<h1
+  style="color:rgb(214, 206, 206); border:black solid 2px; border-radius: 6px; width:720px; background-color:rgb(51, 50, 50);margin-left:380px; margin-top:10px; padding-left:10px; padding-left:25px"
+>
+  NEW TOKEN ON-CHAIN ETH LISTING
+</h1>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="contract-table-wrapper">
+        <table class="contract-table">
+          <thead>
+            <tr>
+              <th>ON-CHAIN ETH LISTING</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col">
+      <img
+        src="assets/BotCall.png"
+        alt=""
+        class="img-thumbnail"
+        style="height: auto; width: auto"
+      />
+      <div
+        class="form-container"
+        style="width: 300px; margin-left:110px;border:black solid 2px; border-radius: 6px; background-color:rgb(51, 50, 50)"
+      >
+        <form id="botForm" action="/botCheck" method="get">
+          <button
+            class="btn btn-outline-secondary"
+            style=" background-color:rgb(239, 235, 235)"
+          >CALL BOT CHECK 🤖</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="trending-table-container">
   <h2
     {{! class="header jumbotron jumbotron-fluid" }}
     style="color:rgb(214, 206, 206); border:black solid 2px; border-radius: 6px; width:500px; background-color:rgb(51, 50, 50); margin-left:450px"
   >TRENDING OFF-CHAIN ALT COIN</h2>
+
   <div
     class="form-container"
     style="color:rgb(214, 206, 206); border:black solid 2px; border-radius: 6px; width:400px; background-color:rgb(51, 50, 50); height:80px; margin-left:500px"
@@ -114,3 +166,23 @@
     </tbody>
   </table>
 </div>
+{{! 
+<div class="container">
+  <div class="trending-table-container">
+
+    <table class="trending-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Icon</th>
+          <th>Name Token</th>
+          <th>Symbol</th>
+          <th>Current Price</th>
+          <th>Command Notification</th>
+        </tr>
+      </thead>
+      <tbody id="tokenListBody">
+      </tbody>
+    </table>
+  </div>
+</div> }}

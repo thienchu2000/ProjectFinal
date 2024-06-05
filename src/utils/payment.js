@@ -8,9 +8,30 @@ async function checkPaymentSmart(req, res, next) {
       User: userId,
       Bot: "662e73b048a76f97cc260b7e",
     });
-
+    const check = req.user;
+    const checkRole = check.Role.NameRole;
+    var admin;
+    var manager;
+    if (checkRole === "Admin") {
+      admin = true;
+    } else {
+      admin = false;
+    }
+    if (checkRole === "Manager") {
+      manager = true;
+    } else {
+      manager = false;
+    }
     if (payment.length === 0) {
-      return res.redirect("/order");
+      return res.render("canPay", {
+        User: true,
+        Name: check.UserName,
+        manager: manager,
+        admin: admin,
+        _id: check._id,
+        Image: check.Image,
+        back: "https://i.pinimg.com/originals/46/94/e6/4694e67882f40cf2b34b00bd31e469b2.png",
+      });
     }
     if (payment) {
       var checkpayment = await payment.map((item) => {
@@ -41,6 +62,20 @@ async function checkPaymentSmart(req, res, next) {
 
 async function checkPaymentTrending(req, res, next) {
   const userId = req.user._id;
+  const check = req.user;
+  const checkRole = check.Role.NameRole;
+  var admin;
+  var manager;
+  if (checkRole === "Admin") {
+    admin = true;
+  } else {
+    admin = false;
+  }
+  if (checkRole === "Manager") {
+    manager = true;
+  } else {
+    manager = false;
+  }
 
   try {
     const payment = await Payments.find({
@@ -53,7 +88,15 @@ async function checkPaymentTrending(req, res, next) {
       payment === undefined ||
       (Array.isArray(payment) && payment.length === 0)
     ) {
-      return res.redirect("/order");
+      return res.render("canPay", {
+        User: true,
+        Name: check.UserName,
+        manager: manager,
+        admin: admin,
+        _id: check._id,
+        Image: check.Image,
+        back: "https://i.pinimg.com/originals/46/94/e6/4694e67882f40cf2b34b00bd31e469b2.png",
+      });
     }
     if (payment) {
       var checkpayment = await payment.map((item) => {

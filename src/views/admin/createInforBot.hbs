@@ -1,0 +1,40 @@
+<div class="container aaabot-container">
+  <h1 class="aaabot-heading">Create Bot Information</h1>
+  {{#each data}}
+    <p class="aaabot-product">{{NameProduct}}</p>
+    <div class="row">
+      <div class="col-md-6">
+        <label
+          for="aaabot-description-{{@index}}"
+          class="aaabot-label"
+        >Description:</label><br />
+        <textarea
+          id="aaabot-description-{{@index}}"
+          class="aaabot-textarea"
+          name="Description"
+          rows="4"
+          cols="50"
+        >{{Description}}</textarea><br />
+      </div>
+      <div class="col-md-6">
+        <label
+          for="aaabot-price-{{@index}}"
+          class="aaabot-label"
+        >Price:</label><br />
+        <input
+          type="number"
+          id="aaabot-price-{{@index}}"
+          class="aaabot-input"
+          name="Price"
+          value="{{Price}}"
+          style="width: 37%;"
+        />
+        MCTK<br /><br />
+        <button
+          class="aaabot-button"
+          onclick="updateBot('{{_id}}', '{{@index}}')"
+        >Submit</button>
+      </div>
+    </div>
+  {{/each}}
+</div>

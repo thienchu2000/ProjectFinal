@@ -162,18 +162,6 @@ class BotCheckController {
         "ether"
       );
       var getTotalSupply = web3.utils.toWei(coverTotalSupply, "ether");
-      // var transferAbi = await contract.methods.transfer().call();
-      // EE.on("transferAbi", (transferAbi) => {
-      //   console.log(transferAbi);
-      // });
-
-      // contract.events
-      //   .Transfer()
-      //   .on("data", (event) => {
-      //     console.log("Transfer event data:", event);
-      //   })
-      //   .on("error", console.error);
-
       if (getTotalSupply) {
         result.push({ TotalSupply: `${getTotalSupply} ${symbolAbi} ` });
       }
@@ -204,13 +192,13 @@ class BotCheckController {
       var SumTotal = 0;
       for (var i = 0; i < result.length; i++) {
         if (result[i].NoRenounce) {
-          SumTotal += 10;
+          SumTotal += 30;
         }
         if (result[i].Ownable) {
-          SumTotal += 10;
+          SumTotal += 15;
         }
         if (result[i].FunctionMin) {
-          SumTotal += 10;
+          SumTotal += 15;
         }
       }
       if (SumTotal) {
