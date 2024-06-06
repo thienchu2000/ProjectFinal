@@ -89,6 +89,17 @@
         class="form-container"
         style="width: 300px; margin-left:110px;border:black solid 2px; border-radius: 6px; background-color:rgb(51, 50, 50)"
       >
+        <form id="botForm" action="/botTrending/getOff" method="get">
+          <button
+            class="btn btn-outline-secondary"
+            style=" background-color:rgb(239, 235, 235)"
+          >COMMAND NOTIFICATIONS 🤖</button>
+        </form>
+      </div>
+      <div
+        class="form-container"
+        style="width: 300px; margin-left:110px;border:black solid 2px; border-radius: 6px; background-color:rgb(51, 50, 50)"
+      >
         <form id="botForm" action="/botCheck" method="get">
           <button
             class="btn btn-outline-secondary"
@@ -96,28 +107,30 @@
           >CALL BOT CHECK 🤖</button>
         </form>
       </div>
+
     </div>
   </div>
 </div>
 
-<div class="trending-table-container">
+{{!-- <div class="trending-table-container">
   <h2
     {{! class="header jumbotron jumbotron-fluid" }}
     style="color:rgb(214, 206, 206); border:black solid 2px; border-radius: 6px; width:500px; background-color:rgb(51, 50, 50); margin-left:450px"
-  >TRENDING OFF-CHAIN ALT COIN</h2>
+  >TRENDING OFF-CHAIN ALT COIN</h2> --}}
 
-  <div
+{{! <div
     class="form-container"
     style="color:rgb(214, 206, 206); border:black solid 2px; border-radius: 6px; width:400px; background-color:rgb(51, 50, 50); height:80px; margin-left:500px"
   >
-    <form id="botForm" action="/botTrending/topPump" method="get">
+    <form id="botForm" action="/botTrending/getOff" method="get">
       <button
         class="btn btn-outline-secondary"
         style=" background-color:rgb(239, 235, 235)"
       >CALL COMMAND NOTIFICATIONS 🤖</button>
     </form>
-  </div>
-  {{#if call}}
+  </div> }}
+
+{{!-- {{#if call}}
     <div
       class="form-container"
       style="color:rgb(214, 206, 206); border:black solid 2px; border-radius: 6px; width:400px; background-color:rgb(51, 50, 50); height:80px; margin-left:500px"
@@ -129,8 +142,8 @@
         >BACK NEW TOKEN ETH LISTING 🤖</button>
       </form>
     </div>
-  {{/if}}
-
+  {{/if}} --}}
+{{!-- 
   <table class="trending-table">
     <thead>
       <tr>
@@ -165,7 +178,8 @@
       {{/if}}
     </tbody>
   </table>
-</div>
+</div> --}}
+
 {{! 
 <div class="container">
   <div class="trending-table-container">

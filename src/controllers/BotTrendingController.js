@@ -283,7 +283,7 @@ class BotTrendingController {
 
       analyzeVolume(donecall, historicalVolumes);
 
-      res.status(200).render("botTrending", {
+      res.status(200).json({
         topPump: result,
         call: true,
         User: true,
@@ -299,6 +299,23 @@ class BotTrendingController {
       console.log(err);
       return res.send("404 Not Found");
     }
+  }
+  async getOff(req, res, next) {
+    const check = req.user;
+    const checkRole = check.Role.NameRole;
+    const admin = checkRole === "Admin";
+    const manager = checkRole === "Manager";
+    res.render("trendingOff", {
+      botcheck: true,
+      User: true,
+      Name: check.UserName,
+      manager: manager,
+      admin: admin,
+      _id: check._id,
+      Image: check.Image,
+      back: "https://images.contentstack.io/v3/assets/blt38dd155f8beb7337/blt8ccf223eda890b9e/6221f30d25232e3cccc45b91/Ethereum--1068x527.jpeg",
+      imgbot: "assets/BotCall.png",
+    });
   }
 }
 
