@@ -15,6 +15,8 @@ const { Web3 } = require("web3");
 const { emit } = require("process");
 const multer = require("multer");
 const QRCode = require("qrcode");
+const http = require("http");
+const WebSocket = require("ws");
 
 const handlebars = require("handlebars");
 const EventEmitter = require("events");
@@ -22,6 +24,8 @@ EventEmitter.defaultMaxListeners = 50;
 
 const app = express();
 const port = 3000;
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 const exphbs = create({
   helpers: require("./utils/helpers"),
   extname: ".hbs",
@@ -41,6 +45,7 @@ const web3 = new Web3(httpProvider);
 
 app.use(cookieParser());
 app.use(cors());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -50,6 +55,23 @@ app.use(express.static(__dirname + "/public"));
 app.engine("hbs", exphbs.engine);
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
+
+// Xử lý kết nối WebSocket
+
+wss.on("connection", (ws) => {
+  console.log("WebSocket connected");
+
+  ws.on("message", async (message) => {
+    console.log("Received message:", message);
+  });
+
+  ws.on("close", () => {
+    console.log("WebSocket disconnected");
+  });
+});
+wss.on("error", (err) => {
+  console.error("Lỗi WebSocket:", err);
+});
 
 app.listen(port, async () => {
   await database.connect("Mongodb connected");

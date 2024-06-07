@@ -10,87 +10,9 @@ const { Web3 } = require("web3");
 const httpProvider = new Web3.providers.HttpProvider(process.env.infura);
 const web3 = new Web3(httpProvider);
 const trendingTokens = require("../utils/trendingToken");
+const WebSocket = require("ws");
 
 class BotTrendingController {
-  // async index(req, res, next) {
-  //   const check = req.user;
-  //   const checkRole = check.Role.NameRole;
-  //   var admin;
-  //   var manager;
-  //   if (checkRole === "Admin") {
-  //     admin = true;
-  //   } else {
-  //     admin = false;
-  //   }
-  //   if (checkRole === "Manager") {
-  //     manager = true;
-  //   } else {
-  //     manager = false;
-  //   }
-  //   try {
-  //     const c = new Crawler({
-  //       maxConnections: 10,
-  //       callback: (error, resCrawler, done) => {
-  //         if (error) {
-  //           return res.send(error);
-  //         } else {
-  //           const html = resCrawler.body;
-  //           const $ = cheerio.load(html);
-  //           var data = $(
-  //             ".tgme_widget_message_wrap.js-widget_message_wrap"
-  //           ).text();
-  //           var Arr = data.split(/[,\s]+/);
-  //           let tokenInfo = [];
-  //           let tempCA = "";
-  //           for (let i = 0; i < Arr.length; i++) {
-  //             if (Arr[i].startsWith("0x")) {
-  //               tempCA = Arr[i];
-  //               if (tempCA) {
-  //                 tokenInfo.push({ CA: tempCA });
-  //               }
-  //             }
-  //           }
-  //           var clearToken = tokenInfo.map((item) => {
-  //             return {
-  //               CA: item.CA.split("Supply:")[0]
-  //                 .split("This")[0]
-  //                 .split("🔗")[0]
-  //                 .trim(),
-  //             };
-  //           });
-  //           var clearToken;
-  //           var doneToken = clearToken.filter((item) => item.CA.length === 42);
-  //           trendingTokens(doneToken)
-  //             .then((res) => {
-  //               clearToken = res;
-  //             })
-  //             .catch((err) => {
-  //               return console.error(err);
-  //             });
-  //           console.log(clearToken);
-  //           res.render("botTrending", {
-  //             clearToken: res,
-  //             botcheck: true,
-  //             User: true,
-  //             Name: check.UserName,
-  //             manager: manager,
-  //             admin: admin,
-  //             _id: check._id,
-  //             Image: check.Image,
-  //             back: "https://images.contentstack.io/v3/assets/blt38dd155f8beb7337/blt8ccf223eda890b9e/6221f30d25232e3cccc45b91/Ethereum--1068x527.jpeg",
-  //             imgbot: "assets/BotCall.png",
-  //           });
-  //         }
-  //         done();
-  //       },
-  //     });
-  //     c.queue("https://t.me/s/iTokenEthereum");
-  //   } catch (err) {
-  //     console.log(err);
-  //     return res.status(404).send("Not Found");
-  //   }
-  // }
-
   async index(req, res, next) {
     const check = req.user;
     const checkRole = check.Role.NameRole;
@@ -315,6 +237,32 @@ class BotTrendingController {
       Image: check.Image,
       back: "https://images.contentstack.io/v3/assets/blt38dd155f8beb7337/blt8ccf223eda890b9e/6221f30d25232e3cccc45b91/Ethereum--1068x527.jpeg",
       imgbot: "assets/BotCall.png",
+    });
+  }
+  handleWebSocket(ws) {
+    const wss = new WebSocket.Server({ port: 3000 });
+    ws.on("message", async (message) => {
+      const api =
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
+      try {
+        const response = await axios.get(api);
+        const doneCall = response.data.map((item) => ({
+          id: item.id,
+          symbol: item.symbol,
+          name: item.name,
+          image: item.image,
+          current_price: item.current_price,
+          market_cap_rank: item.market_cap_rank,
+          total_volume: item.total_volume,
+          last_updated: item.last_updated,
+          high_24h: item.high_24h,
+          low_24h: item.low_24h,
+        }));
+        ws.send(JSON.stringify(doneCall));
+      } catch (err) {
+        console.log(err);
+        ws.send("Error fetching data");
+      }
     });
   }
 }

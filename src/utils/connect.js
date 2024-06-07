@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const { Web3 } = require("web3");
 const httpProvider = new Web3.providers.HttpProvider(process.env.infuraTest);
 const web3 = new Web3(httpProvider);
@@ -13,7 +15,7 @@ async function processRequest(txhash) {
       } catch (error) {
         reject(error);
       }
-    }, 50000);
+    }, 60000);
   });
 }
 
