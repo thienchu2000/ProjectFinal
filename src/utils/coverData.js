@@ -1,6 +1,6 @@
 function coverData(data) {
   return data.map((data) => {
-    return data.toJSON();
+    return JSON.stringify(data);
   });
 }
 module.exports = coverData;

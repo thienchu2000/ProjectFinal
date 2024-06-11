@@ -14,10 +14,13 @@ var EE = new EventEmitter(),
 const { google } = require("googleapis");
 const { GoogleAuth } = require("google-auth-library");
 const nodemailer = require("nodemailer");
+const datacoin = require("../utils/datacoin");
+const coverData = require("../utils/coverData");
 
 class HomeController {
   async index(req, res, next) {
     try {
+      const io = res.io;
       const info = res.locals;
       var role = await Role.findOne({ _id: info.Role });
       const chainId = 1;
@@ -26,11 +29,9 @@ class HomeController {
       );
       const getGas = gas.data;
       const limit = Math.round(getGas.estimatedBaseFee);
-
+      datacoin(io);
       if (!role) {
-        res.render("home", {
-          back: "https://haycafe.vn/wp-content/uploads/2022/05/Background-xam-den.jpg",
-        });
+        res.render("home");
       }
       if (role.NameRole === "Admin") {
         res.render("home", {
@@ -42,7 +43,7 @@ class HomeController {
           Name: info.UserName,
           Image: info.Image,
           Back: "/assets/Logo.png",
-          back: "https://haycafe.vn/wp-content/uploads/2022/05/Background-xam-den.jpg",
+          // back: "https://haycafe.vn/wp-content/uploads/2022/05/Background-xam-den.jpg",
         });
       }
       if (role.NameRole === "Manager") {
@@ -55,7 +56,7 @@ class HomeController {
           Name: info.UserName,
           Image: info.Image,
           Back: "/assets/Logo.png",
-          back: "https://haycafe.vn/wp-content/uploads/2022/05/Background-xam-den.jpg",
+          // back: "https://haycafe.vn/wp-content/uploads/2022/05/Background-xam-den.jpg",
         });
       }
       if (role.NameRole === "User") {
@@ -74,15 +75,16 @@ class HomeController {
   }
   async logout(req, res, next) {
     res.clearCookie("access_token");
+    const io = res.io;
     const chainId = 1;
     const gas = await axios.get(
       `https://gas.api.infura.io/v3/${process.env.INFURA_API_KEY}/networks/${chainId}/suggestedGasFees`
     );
     const getGas = gas.data;
     const limit = Math.round(getGas.estimatedBaseFee);
-
+    datacoin(io);
     return res.render("home", {
-      back: "https://haycafe.vn/wp-content/uploads/2022/05/Background-xam-den.jpg",
+      // back: "https://haycafe.vn/wp-content/uploads/2022/05/Background-xam-den.jpg",
       limit: limit,
       getGas: getGas,
     });
@@ -153,6 +155,7 @@ class HomeController {
     }
   }
   async login(req, res, next) {
+    const io = res.io;
     const { Email, PassWord } = req.body;
 
     var admin;
@@ -182,7 +185,7 @@ class HomeController {
       if (!check) {
         return res.status(400).send("Account does not exist");
       }
-
+      datacoin(io);
       await bcrypt.compare(PassWord, check.PassWord, function (Error, Result) {
         if (!Result) {
           return res.status(400).send("Incorrect password");
@@ -210,7 +213,7 @@ class HomeController {
           manager: manager,
           admin: admin,
           Back: "/assets/Logo.png",
-          back: "https://haycafe.vn/wp-content/uploads/2022/05/Background-xam-den.jpg",
+          // back: "https://haycafe.vn/wp-content/uploads/2022/05/Background-xam-den.jpg",
         });
       });
     } catch (Error) {
@@ -234,9 +237,7 @@ class HomeController {
       manager = false;
     }
     if (!user) {
-      res.render("about", {
-        back: "https://static.vecteezy.com/system/resources/previews/023/995/943/large_2x/ethereum-coin-symbol-with-blue-light-background-network-connection-by-generative-ai-free-photo.jpg",
-      });
+      res.render("about", {});
     }
     if (user) {
       res.render("about", {
@@ -245,7 +246,6 @@ class HomeController {
         Image: user.Image,
         manager: manager,
         admin: admin,
-        back: "https://static.vecteezy.com/system/resources/previews/023/995/943/large_2x/ethereum-coin-symbol-with-blue-light-background-network-connection-by-generative-ai-free-photo.jpg",
       });
     }
   }
@@ -273,7 +273,6 @@ class HomeController {
         admin: admin,
         Name: check.UserName,
         Image: check.Image,
-        back: "https://static.vecteezy.com/system/resources/previews/023/995/943/large_2x/ethereum-coin-symbol-with-blue-light-background-network-connection-by-generative-ai-free-photo.jpg",
       });
     } catch (err) {
       return res.send("err");

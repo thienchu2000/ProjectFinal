@@ -7,9 +7,6 @@ const httpProvider = new Web3.providers.HttpProvider(process.env.infura);
 const web3 = new Web3(httpProvider);
 const Bots = require("../models/Bots");
 const DataSmartContract = require("../models/DataSmartContract");
-const EventEmitter = require("eventemitter3");
-var EE = new EventEmitter(),
-  context = { foo: "bar" };
 
 class BotCheckController {
   async index(req, res, next) {

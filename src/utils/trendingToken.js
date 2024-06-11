@@ -4,6 +4,8 @@ dotenv.config();
 const { Web3 } = require("web3");
 const httpProvider = new Web3.providers.HttpProvider(process.env.infura);
 const web3 = new Web3(httpProvider);
+const Crawler = require("crawler");
+const cheerio = require("cheerio");
 
 const AbiContract = [
   {
@@ -56,9 +58,74 @@ const AbiContract = [
   },
 ];
 
+async function connectCaler(io) {
+  try {
+    const c = new Crawler({
+      maxConnections: 10,
+      callback: async (error, resCrawler, done) => {
+        if (error) {
+          console.error(error);
+        } else {
+          const html = resCrawler.body;
+          const $ = cheerio.load(html);
+          const data = $(
+            ".tgme_widget_message_wrap.js-widget_message_wrap"
+          ).text();
+          const Arr = data.split(/[,\s]+/);
+          const tokenInfo = [];
+          let tempCA = "";
+
+          for (let i = 0; i < Arr.length; i++) {
+            if (Arr[i].startsWith("0x")) {
+              tempCA = Arr[i];
+              if (tempCA) {
+                tokenInfo.push({ CA: tempCA });
+              }
+            }
+          }
+
+          let clearToken = tokenInfo.map((item) => {
+            return {
+              CA: item.CA.split("Supply:")[0]
+                .split("This")[0]
+                .split("🔗")[0]
+                .trim(),
+            };
+          });
+
+          const SmartContracts = clearToken.filter(
+            (item) => item.CA.length === 42
+          );
+
+          if (Array.isArray(SmartContracts)) {
+            try {
+              const doneok = await trendingTokens(SmartContracts);
+              console.log(doneok);
+              io.emit("onchain", doneok);
+            } catch (err) {
+              console.error("Error processing tokens:", err);
+            }
+          } else {
+            console.error("doneToken is not an array");
+          }
+        }
+        done();
+      },
+    });
+
+    c.queue("https://t.me/s/iTokenEthereum");
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 async function trendingTokens(SmartContracts) {
-  const result = [];
   const keyEther = process.env.KEY_ETHER;
+  const result = [];
+
+  if (!Array.isArray(SmartContracts)) {
+    throw new TypeError("SmartContracts is not iterable");
+  }
 
   for (const contract of SmartContracts) {
     try {
@@ -67,7 +134,6 @@ async function trendingTokens(SmartContracts) {
       );
 
       const contractData = apiCheckEther.data.result[0];
-      const contractName = contractData.ContractName;
       const sourceCode = contractData.SourceCode;
 
       const contractInstance = new web3.eth.Contract(AbiContract, contract.CA);
@@ -116,4 +182,4 @@ async function trendingTokens(SmartContracts) {
   return result;
 }
 
-module.exports = trendingTokens;
+module.exports = { connectCaler, trendingTokens };

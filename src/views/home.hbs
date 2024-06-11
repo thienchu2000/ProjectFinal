@@ -1,16 +1,44 @@
 <div
   class="container"
-  style="background-image:url(https://coingape.com/wp-content/uploads/2024/02/Ethereum-ERC-404.jpeg); background-size:cover; background-repeat:no-repeat; height: 730px; margin-top:30px; width: 2000px;"
+  style="display: flex; align-items: center; justify-content: center; margin-bottom: 30px; margin-top: 80px ; margin-left:170px"
+>
+  <div style="flex: 1;">
+    <h1
+      style="font-size: 2.5rem; color: #333; text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);"
+    >Introduction to MCTK Token</h1>
+    <p style="font-size: 1.2rem; color: #555; text-align: center;">MCTK is a
+      token based on the ERC-20 standard of the Ethereum blockchain. It serves
+      as a representative of services when utilizing bots. It aids in liquidity
+      provision and plays a significant role in maintaining market stability.</p>
+  </div>
+  <div style="flex: 1;">
+    <img
+      src="https://miro.medium.com/v2/resize:fit:400/1*3HOdnPhEivRatZ6KYJ6_WA.jpeg"
+      alt="MCTK Token"
+      style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
+    />
+  </div>
+</div>
+<br />
+<br />
+
+<h1
+  style="font-size: 2.5rem; color: #333; text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);"
+>Services</h1>
+
+<div
+  class="container"
+  style="background-image:url(https://coingape.com/wp-content/uploads/2024/02/Ethereum-ERC-404.jpeg); background-size:cover; background-repeat:no-repeat; height: 700px; margin-top:30px; width: 2000px;"
 >
   <div class="container py-5">
-    <div class="row g-5 align-items-center">
-      <div class="col-lg-6" style="width:350px;">
+    <div class="row g-5 align-items-center" style="margin-top:50px ;">
+      <div class="col-lg-6" style="width:300px;">
         <div class="card border-primary">
           <img
             src="assets/BotCall.png"
             class="card-img-top"
             alt="Bot Trending Image"
-            style="height: 150px;"
+            style="height: 100px;"
           />
           <div class="card-body">
             <h5 class="card-title text-success">Bot Trending</h5>
@@ -26,7 +54,7 @@
             src="assets/BotCheck.png"
             class="card-img-top"
             alt="Bot Check SmartContract Image"
-            style="height: 170px;"
+            style="height: 100px;"
           />
           <div class="card-body">
             <h5 class="card-title text-success">Bot Check SmartContract</h5>
@@ -39,7 +67,7 @@
       </div>
       <div
         class="col-lg-6 animated fadeIn"
-        style="width: 650px; heigth: 500px; margin-left:320px"
+        style="width: 450px; heigth: 500px; margin-left:560px"
       ><a href="/about" class="image-link">
           <img
             class="img-fluid animated pulse infinite img-thumbnail"
@@ -49,5 +77,33 @@
           /></a>
       </div>
     </div>
+  </div>
+</div>
+<div style="margin-top: 50px;">
+  <h1
+    style="font-size: 2.5rem; color: #333;  margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);"
+  >Market Cap</h1>
+</div>
+<div class="container">
+  <div class="trending-table-container">
+
+    <table class="trending-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Icon</th>
+          <th>Name Token</th>
+          <th>Symbol</th>
+          <th>Current Price</th>
+          <th>Percentage 24h</th>
+          <th>Price Change 24h</th>
+          <th>Total Volume</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tokenListHome">
+
+      </tbody>
+    </table>
   </div>
 </div>
