@@ -4,7 +4,6 @@ socket.on("connect", () => {
 });
 
 socket.on("callback", (data) => {
-  console.log("Socket.IO callback", data);
   fetchOff(data);
 });
 

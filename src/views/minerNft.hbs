@@ -1,0 +1,135 @@
+<section id="wordLegends" style="padding: 50px 0;">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 text-center">
+        <h1 style="font-size: 3rem; font-weight: bold; color: #333;">Discover
+          the FIFA - card Word Legend Collection NFTs!</h1>
+        <p style="font-size: 1.2rem; line-height: 1.6; color: #666;">Explore our
+          collection of legendary FIFA Word Legends NFTs. Each NFT represents a
+          football icon from the FIFA series.</p>
+      </div>
+      <div class="col-lg-6 text-center">
+        <img
+          src="/logoWordLegend.jpeg"
+          alt="FIFA Legends"
+          class="img-fluid"
+          style="max-width: 100%; height: auto;"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="nftpending" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div class="spinnerr-container">
+      <div class="spinnerr"></div>
+    </div>
+    <p>Pending payment ... Please wait.</p>
+  </div>
+</div>
+
+<section id="nftList" class="py-5">
+  <div class="container">
+    <div id="nftItems" class="row justify-content-center">
+      {{#each metadata1}}
+        <div
+          class="col-lg-4 col-md-6 col-sm-12 card-container"
+          style="margin-bottom: 20px;"
+        >
+          <div
+            class="card"
+            style="border: 1px solid #161414; border-radius: 8px;"
+          >
+            <img
+              src="{{image}}"
+              class="card-img-top"
+              alt="{{name}}"
+              style="height: 150px; width:150px"
+            />
+            <div
+              class="card-body"
+              style="padding: 15px; height:250px width:180px"
+            >
+              <h5
+                class="card-title"
+                style="font-size: 1.2rem; font-weight: bold; color: #333;"
+              >{{name}}</h5>
+              <p
+                class="card-text"
+                style="font-size: 0.9rem; color: #666;"
+              >{{description}}</p>
+              <ul class="list-unstyled" style="padding: 0; list-style: none;">
+                {{#each attributes}}
+                  <li style="font-size: 0.8rem; margin-bottom: 5px;"><strong
+                    >{{this.trait_type}}:</strong>
+                    {{this.value}}</li>
+                {{/each}}
+              </ul>
+              <div
+                class="buy-nft"
+                style="margin-top: 10px; display: flex; align-items: center;"
+              >
+                <button
+                  style="padding: 5px 10px; background-color: #FFA500; border: none; color: white; border-radius: 4px; cursor: pointer;"
+                  onclick="buynft('{{contractAddress}}','{{tokenId}}')"
+                >Buy NFT</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      {{/each}}
+
+      {{#each metadata2}}
+        <div
+          class="col-lg-4 col-md-6 col-sm-12 card-container"
+          style="margin-bottom: 20px;"
+        >
+          <div
+            class="card"
+            style="border: 1px solid #161414; border-radius: 8px; ;"
+          >
+            <img
+              src="{{image}}"
+              class="card-img-top"
+              alt="{{name}}"
+              style="height: 150px; width:150px"
+            />
+            <div
+              class="card-body"
+              style="padding: 15px; height:250px width:180px"
+            >
+              <h5
+                class="card-title"
+                style="font-size: 1.2rem; font-weight: bold; color: #333;"
+              >{{name}}</h5>
+              <p
+                class="card-text"
+                style="font-size: 0.9rem; color: #666;"
+              >{{description}}</p>
+              <ul class="list-unstyled" style="padding: 0; list-style: none;">
+                {{#each attributes}}
+                  <li style="font-size: 0.8rem; margin-bottom: 5px;"><strong
+                    >{{this.trait_type}}:</strong>
+                    {{this.value}}</li>
+                {{/each}}
+              </ul>
+              <div
+                class="buy-nft"
+                style="margin-top: 10px; display: flex; align-items: center;"
+              >
+                <button
+                  style="padding: 5px 10px; background-color: #FFA500; border: none; color: white; border-radius: 4px; cursor: pointer;"
+                  onclick="buynft('{{contractAddress}},{{tokenId}}')"
+                >Buy NFT</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {{/each}}
+    </div>
+  </div>
+</section>

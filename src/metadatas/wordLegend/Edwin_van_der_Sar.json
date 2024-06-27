@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Edwin van der Sar",
+  "description": "A legendary card from FIFA , representing the iconic goalkeeper Edwin van der Sar.",
+  "image": "https://ipfs.io/ipfs/QmTWqZdK1RSPJfaBYgcGjT57uXNXq3YcaKHTCd3J1LhLmS",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Edwin van der Sar"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Goalkeeper"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Fulham"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Netherlands"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 88
+    },
+    {
+      "trait_type": "Diving",
+      "value": 90
+    },
+    {
+      "trait_type": "Handling",
+      "value": 89
+    },
+    {
+      "trait_type": "Kicking",
+      "value": 85
+    },
+    {
+      "trait_type": "Reflexes",
+      "value": 91
+    },
+    {
+      "trait_type": "Speed",
+      "value": 56
+    },
+    {
+      "trait_type": "Positioning",
+      "value": 92
+    }
+  ]
+}

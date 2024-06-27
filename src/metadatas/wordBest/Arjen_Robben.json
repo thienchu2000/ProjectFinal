@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Arjen Robben",
+  "description": "Word Best card from FIFA, representing the iconic winger Arjen Robben.",
+  "image": "https://ipfs.io/ipfs/QmPmffTte3PR48a6cMvPfuhosidELwpHfxyA5urDuaTpw7",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Arjen Robben"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Winger"
+    },
+    {
+      "trait_type": "Team",
+      "value": "PSV Eindhoven"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Netherlands"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 85
+    },
+    {
+      "trait_type": "Pace",
+      "value": 90
+    },
+    {
+      "trait_type": "Shooting",
+      "value": 80
+    },
+    {
+      "trait_type": "Passing",
+      "value": 75
+    },
+    {
+      "trait_type": "Dribbling",
+      "value": 88
+    },
+    {
+      "trait_type": "Defense",
+      "value": 50
+    },
+    {
+      "trait_type": "Physical",
+      "value": 72
+    }
+  ]
+}

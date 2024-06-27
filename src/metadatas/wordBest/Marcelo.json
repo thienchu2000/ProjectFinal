@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Marcelo",
+  "description": "Word Best card from FIFA, representing the iconic defender Marcelo.",
+  "image": "https://ipfs.io/ipfs/QmZKsB3H8g5M9aM1y1FwwnvLe94L4FHth9VYDTur2FsxFb",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Marcelo"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Left Back"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Fluminense"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Brazil"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 78
+    },
+    {
+      "trait_type": "Pace",
+      "value": 85
+    },
+    {
+      "trait_type": "Shooting",
+      "value": 70
+    },
+    {
+      "trait_type": "Passing",
+      "value": 75
+    },
+    {
+      "trait_type": "Dribbling",
+      "value": 80
+    },
+    {
+      "trait_type": "Defense",
+      "value": 75
+    },
+    {
+      "trait_type": "Physical",
+      "value": 77
+    }
+  ]
+}

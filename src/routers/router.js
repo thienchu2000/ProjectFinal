@@ -5,9 +5,11 @@ const newsRouter = require("./newsRouter");
 const adminRouter = require("./adminRouter");
 const orderRouter = require("./orderRouter");
 const managerRouter = require("./managerRouter");
+const nftRouter = require("./nftRouter");
 const checkLogin = require("../utils/checkLogin");
 
 function router(app) {
+  app.use("/nft", checkLogin, nftRouter);
   app.use("/manager", checkLogin, managerRouter);
   app.use("/order", checkLogin, orderRouter);
   app.use("/admin", checkLogin, adminRouter);

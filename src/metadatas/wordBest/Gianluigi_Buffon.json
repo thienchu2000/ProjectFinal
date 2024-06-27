@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Gianluigi Buffon",
+  "description": "Word Best card from FIFA, representing the iconic goalkeeper Gianluigi Buffon.",
+  "image": "https://ipfs.io/ipfs/QmcwopDSnTpXckULp76PCaAXkApQkr6sH4NwTZNrkGy4fu",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Gianluigi Buffon"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Goalkeeper"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Juventus"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Italy"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 92
+    },
+    {
+      "trait_type": "Diving",
+      "value": 93
+    },
+    {
+      "trait_type": "Handling",
+      "value": 90
+    },
+    {
+      "trait_type": "Kicking",
+      "value": 85
+    },
+    {
+      "trait_type": "Reflexes",
+      "value": 94
+    },
+    {
+      "trait_type": "Speed",
+      "value": 70
+    },
+    {
+      "trait_type": "Positioning",
+      "value": 91
+    }
+  ]
+}

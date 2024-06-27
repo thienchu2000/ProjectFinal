@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Lionel Messi",
+  "description": "Word Best card from FIFA, representing the iconic forward Lionel Messi.",
+  "image": "https://ipfs.io/ipfs/QmW5d5KT5QY7JuHbu1FoDon24HEHYqeL4PkArv3RRvuvb6",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Lionel Messi"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Forward"
+    },
+    {
+      "trait_type": "Team",
+      "value": "FC Barcelona"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Argentina"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 85
+    },
+    {
+      "trait_type": "Pace",
+      "value": 92
+    },
+    {
+      "trait_type": "Shooting",
+      "value": 85
+    },
+    {
+      "trait_type": "Passing",
+      "value": 80
+    },
+    {
+      "trait_type": "Dribbling",
+      "value": 94
+    },
+    {
+      "trait_type": "Defense",
+      "value": 40
+    },
+    {
+      "trait_type": "Physical",
+      "value": 72
+    }
+  ]
+}

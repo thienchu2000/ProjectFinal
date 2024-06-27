@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Franz Beckenbauer",
+  "description": "A legendary card from FIFA, representing the iconic defender Franz Beckenbauer.",
+  "image": "https://ipfs.io/ipfs/Qmd1zCSRxbHPzL6bqcpGvWStSZV33ZH2VZrwG3nYAW1Lve",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Franz Beckenbauer"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Defender"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Bayern Munich"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Germany"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 93
+    },
+    {
+      "trait_type": "Pace",
+      "value": 75
+    },
+    {
+      "trait_type": "Shooting",
+      "value": 70
+    },
+    {
+      "trait_type": "Passing",
+      "value": 85
+    },
+    {
+      "trait_type": "Dribbling",
+      "value": 80
+    },
+    {
+      "trait_type": "Defense",
+      "value": 95
+    },
+    {
+      "trait_type": "Physical",
+      "value": 88
+    }
+  ]
+}

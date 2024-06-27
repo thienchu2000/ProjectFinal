@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Jens Lehmann",
+  "description": "A legendary card from FIFA, representing the iconic goalkeeper Jens Lehmann.",
+  "image": "https://ipfs.io/ipfs/QmZZPcdnmFqoaHbpkgtfAubEPN9U9aCEBcDiwwyXAQpmqT",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Jens Lehmann"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Goalkeeper"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Borussia Dortmund"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Germany"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 86
+    },
+    {
+      "trait_type": "Diving",
+      "value": 88
+    },
+    {
+      "trait_type": "Handling",
+      "value": 86
+    },
+    {
+      "trait_type": "Kicking",
+      "value": 83
+    },
+    {
+      "trait_type": "Reflexes",
+      "value": 87
+    },
+    {
+      "trait_type": "Speed",
+      "value": 50
+    },
+    {
+      "trait_type": "Positioning",
+      "value": 85
+    }
+  ]
+}

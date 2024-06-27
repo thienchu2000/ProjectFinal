@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Dani Alves",
+  "description": "Word Best card from FIFA, representing the iconic defender Dani Alves.",
+  "image": "https://ipfs.io/ipfs/Qmaki9PB5p3GQtbvhEt7ZdrzMtpHETueNAbVfpL61PCyKu",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Dani Alves"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Defender"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Sevilla FC"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Brazil"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 84
+    },
+    {
+      "trait_type": "Pace",
+      "value": 88
+    },
+    {
+      "trait_type": "Shooting",
+      "value": 70
+    },
+    {
+      "trait_type": "Passing",
+      "value": 78
+    },
+    {
+      "trait_type": "Dribbling",
+      "value": 85
+    },
+    {
+      "trait_type": "Defense",
+      "value": 82
+    },
+    {
+      "trait_type": "Physical",
+      "value": 80
+    }
+  ]
+}

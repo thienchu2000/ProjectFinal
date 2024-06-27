@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Alessandro Nesta",
+  "description": "A legendary card from FIFA , representing the iconic defender Alessandro Nesta.",
+  "image": "https://ipfs.io/ipfs/QmYnYGw6qYEu7XnkZzUxobCnRcQoksZ8scfXBY41g5SqsG",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Alessandro Nesta"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Defender"
+    },
+    {
+      "trait_type": "Team",
+      "value": "AC Milan"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Italy"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 92
+    },
+    {
+      "trait_type": "Pace",
+      "value": 70
+    },
+    {
+      "trait_type": "Shooting",
+      "value": 40
+    },
+    {
+      "trait_type": "Passing",
+      "value": 60
+    },
+    {
+      "trait_type": "Dribbling",
+      "value": 55
+    },
+    {
+      "trait_type": "Defense",
+      "value": 94
+    },
+    {
+      "trait_type": "Physical",
+      "value": 85
+    }
+  ]
+}

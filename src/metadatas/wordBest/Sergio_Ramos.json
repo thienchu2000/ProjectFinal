@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Sergio Ramos",
+  "description": "Word Best card from FIFA, representing the iconic defender Sergio Ramos.",
+  "image": "https://ipfs.io/ipfs/QmTZYvsPvHe5qpfpGx2q39SNoZbZFkBwfBabp6R5Ed6iPe",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Sergio Ramos"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Center Back"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Sevilla FC"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Spain"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 80
+    },
+    {
+      "trait_type": "Pace",
+      "value": 78
+    },
+    {
+      "trait_type": "Shooting",
+      "value": 65
+    },
+    {
+      "trait_type": "Passing",
+      "value": 70
+    },
+    {
+      "trait_type": "Dribbling",
+      "value": 75
+    },
+    {
+      "trait_type": "Defense",
+      "value": 82
+    },
+    {
+      "trait_type": "Physical",
+      "value": 84
+    }
+  ]
+}

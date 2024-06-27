@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Rio Ferdinand",
+  "description": "A legendary card from FIFA, representing the iconic defender Rio Ferdinand.",
+  "image": "https://ipfs.io/ipfs/QmNqxfgJbUWuuUGQ4HBBpPsp87G3u7t4xQjYCfp61RLAZx",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Rio Ferdinand"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Defender"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Manchester United"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "England"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 88
+    },
+    {
+      "trait_type": "Pace",
+      "value": 80
+    },
+    {
+      "trait_type": "Shooting",
+      "value": 50
+    },
+    {
+      "trait_type": "Passing",
+      "value": 70
+    },
+    {
+      "trait_type": "Dribbling",
+      "value": 65
+    },
+    {
+      "trait_type": "Defense",
+      "value": 90
+    },
+    {
+      "trait_type": "Physical",
+      "value": 85
+    }
+  ]
+}

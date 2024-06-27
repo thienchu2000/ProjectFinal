@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Patrice Evra",
+  "description": "Word Best card from FIFA, representing the iconic defender Patrice Evra.",
+  "image": "https://ipfs.io/ipfs/QmaQ2g81ZLkbGsZzA8exESM5jp8FR64ZL25YXbN26oSayY",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Patrice Evra"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Left Back"
+    },
+    {
+      "trait_type": "Team",
+      "value": "AS Monaco"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "France"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 79
+    },
+    {
+      "trait_type": "Pace",
+      "value": 82
+    },
+    {
+      "trait_type": "Shooting",
+      "value": 65
+    },
+    {
+      "trait_type": "Passing",
+      "value": 75
+    },
+    {
+      "trait_type": "Dribbling",
+      "value": 78
+    },
+    {
+      "trait_type": "Defense",
+      "value": 80
+    },
+    {
+      "trait_type": "Physical",
+      "value": 82
+    }
+  ]
+}

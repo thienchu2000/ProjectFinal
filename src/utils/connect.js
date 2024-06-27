@@ -4,19 +4,56 @@ const { Web3 } = require("web3");
 const httpProvider = new Web3.providers.HttpProvider(process.env.infuraTest);
 const web3 = new Web3(httpProvider);
 
+// async function processRequest(txhash) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(async () => {
+//       try {
+//         const dattaTransaction = await web3.eth.getTransactionReceipt(
+//           `${txhash}`
+//         );
+//         return resolve(dattaTransaction);
+//       } catch (error) {
+//         reject(error);
+//       }
+//     }, 60000);
+//   });
+// }
+
+// module.exports = processRequest;
+
 async function processRequest(txhash) {
-  return new Promise((resolve, reject) => {
-    setTimeout(async () => {
-      try {
-        const dattaTransaction = await web3.eth.getTransactionReceipt(
-          `${txhash}`
-        );
-        return resolve(dattaTransaction);
-      } catch (error) {
-        reject(error);
+  const maxRetries = 120; // Retry up to 12 times
+  const retryInterval = 5000; // Retry every 5 seconds
+
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const receipt = await web3.eth.getTransactionReceipt(txhash);
+      if (receipt) {
+        if (receipt.status) {
+          const transferEvent = receipt.logs.find(
+            (log) =>
+              log.topics[0] ===
+              web3.utils.sha3("Transfer(address,address,uint256)")
+          );
+          if (transferEvent) {
+            console.log("ERC20 Transfer event found:", transferEvent);
+            return receipt;
+          } else {
+            console.error("Transfer event not found in the transaction logs");
+          }
+        } else {
+          console.error("Transaction failed");
+        }
+        break;
       }
-    }, 50000);
-  });
+    } catch (error) {
+      console.error("Error fetching transaction receipt:", error);
+    }
+    await new Promise((resolve) => setTimeout(resolve, retryInterval));
+  }
+  throw new Error(
+    "Transaction receipt not found or failed after multiple retries"
+  );
 }
 
 module.exports = processRequest;

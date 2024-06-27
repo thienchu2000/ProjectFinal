@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Fabio Cannavaro",
+  "description": "A legendary card from FIFA, representing the iconic defender Fabio Cannavaro.",
+  "image": "https://ipfs.io/ipfs/QmYF3o6Kvds9QQYJDb4VXUwyLe44mbeumXgzCskQoTjdiu",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Fabio Cannavaro"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Defender"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Parma"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Italy"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 90
+    },
+    {
+      "trait_type": "Pace",
+      "value": 78
+    },
+    {
+      "trait_type": "Shooting",
+      "value": 50
+    },
+    {
+      "trait_type": "Passing",
+      "value": 65
+    },
+    {
+      "trait_type": "Dribbling",
+      "value": 60
+    },
+    {
+      "trait_type": "Defense",
+      "value": 92
+    },
+    {
+      "trait_type": "Physical",
+      "value": 88
+    }
+  ]
+}

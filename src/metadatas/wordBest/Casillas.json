@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Iker Casillas",
+  "description": "Word Best card from FIFA, representing the iconic goalkeeper Iker Casillas.",
+  "image": "https://ipfs.io/ipfs/QmRFyg1szsUJh6Y1N7cD2GWVLQ8mgmwgtJvCUsJah1JAdq",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Iker Casillas"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Goalkeeper"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Real Madrid"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Spain"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 90
+    },
+    {
+      "trait_type": "Diving",
+      "value": 92
+    },
+    {
+      "trait_type": "Handling",
+      "value": 88
+    },
+    {
+      "trait_type": "Kicking",
+      "value": 85
+    },
+    {
+      "trait_type": "Reflexes",
+      "value": 93
+    },
+    {
+      "trait_type": "Speed",
+      "value": 75
+    },
+    {
+      "trait_type": "Positioning",
+      "value": 90
+    }
+  ]
+}

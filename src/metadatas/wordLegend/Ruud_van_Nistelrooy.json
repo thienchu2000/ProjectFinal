@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Ruud van Nistelrooy",
+  "description": "A legendary card from FIFA, representing the iconic forward Ruud van Nistelrooy.",
+  "image": "https://ipfs.io/ipfs/QmQNcQ8j1ZJ8QeU6coX3KvZZ44bENB71Fawff8mSL71vhV",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Ruud van Nistelrooy"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Forward"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Manchester United"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Netherlands"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 91
+    },
+    {
+      "trait_type": "Pace",
+      "value": 84
+    },
+    {
+      "trait_type": "Shooting",
+      "value": 93
+    },
+    {
+      "trait_type": "Passing",
+      "value": 70
+    },
+    {
+      "trait_type": "Dribbling",
+      "value": 82
+    },
+    {
+      "trait_type": "Defense",
+      "value": 40
+    },
+    {
+      "trait_type": "Physical",
+      "value": 85
+    }
+  ]
+}

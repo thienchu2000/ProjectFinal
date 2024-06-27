@@ -8591,12 +8591,12 @@
         }
       },
       "links": {},
-      "address": "0xBB1Ae18020520Eb943D26cAe21551d6C9Fb5de62",
-      "transactionHash": "0xbbccc9527b710334d83774892445fc23b0743245ae92175ce63d61544e11e69c"
+      "address": "0x0311E6B0dc347b1A3d8709138A4fAa4889bc1b60",
+      "transactionHash": "0x4422139f070e89e9ca7ecea661e574c70b83b9061223802c34dde3564c5b7d80"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-10T05:14:01.688Z",
+  "updatedAt": "2024-06-19T16:42:16.908Z",
   "networkType": "ethereum",
   "devdoc": {
     "errors": {

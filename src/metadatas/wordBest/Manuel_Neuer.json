@@ -1,0 +1,51 @@
+{
+  "name": "FIFA Card - Manuel Neuer",
+  "description": "Word Best card from FIFA, representing the iconic goalkeeper Manuel Neuer.",
+  "image": "https://ipfs.io/ipfs/QmQ43ExLnqwWa4KeY7LUsetu9ne7yHPmxLMVf7ru7xUGSP",
+  "attributes": [
+    {
+      "trait_type": "Player Name",
+      "value": "Manuel Neuer"
+    },
+    {
+      "trait_type": "Position",
+      "value": "Goalkeeper"
+    },
+    {
+      "trait_type": "Team",
+      "value": "Schalke 04"
+    },
+    {
+      "trait_type": "Nationality",
+      "value": "Germany"
+    },
+    {
+      "trait_type": "Overall Rating",
+      "value": 82
+    },
+    {
+      "trait_type": "Diving",
+      "value": 85
+    },
+    {
+      "trait_type": "Handling",
+      "value": 84
+    },
+    {
+      "trait_type": "Kicking",
+      "value": 75
+    },
+    {
+      "trait_type": "Reflexes",
+      "value": 88
+    },
+    {
+      "trait_type": "Speed",
+      "value": 70
+    },
+    {
+      "trait_type": "Positioning",
+      "value": 85
+    }
+  ]
+}
