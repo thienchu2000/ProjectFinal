@@ -5,6 +5,7 @@ const authentication = require("../utils/authentication");
 const checkLogin = require("../utils/checkLogin");
 const upload = require("../utils/multer");
 
+router.get("/orderr", checkLogin, HomeController.order);
 router.post("/changeImg", checkLogin, upload, HomeController.changeImg);
 router.post("/changeUser", checkLogin, HomeController.changeUser);
 router.get("/change", checkLogin, HomeController.change);

@@ -2,11 +2,14 @@
 pragma solidity ^0.8.25;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract WordLegendNFT_two is ERC721URIStorage {
+contract WordLegendNFT_two2 is ERC721URIStorage, Ownable {
     uint256 private _nextTokenId = 1;
 
-    constructor() ERC721("WordLegendNFT_two", "WL") {}
+    constructor(
+        address initialOwner
+    ) ERC721("WordLegend_two2", "WL") Ownable(initialOwner) {}
 
     function awardItem(
         address player,
@@ -14,6 +17,18 @@ contract WordLegendNFT_two is ERC721URIStorage {
     ) public returns (uint256) {
         uint256 tokenId = _nextTokenId;
         _mint(player, tokenId);
+        _setTokenURI(tokenId, tokenURI);
+        _nextTokenId++;
+
+        return tokenId;
+    }
+
+    function mintByOwner(
+        address to,
+        string memory tokenURI
+    ) public onlyOwner returns (uint256) {
+        uint256 tokenId = _nextTokenId;
+        _mint(to, tokenId);
         _setTokenURI(tokenId, tokenURI);
         _nextTokenId++;
 

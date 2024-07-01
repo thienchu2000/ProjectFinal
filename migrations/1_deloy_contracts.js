@@ -1,5 +1,5 @@
-const MiChuToken = artifacts.require("MiChuToken");
+const MiChuTokenA = artifacts.require("MiChuTokenA");
 
-module.exports = function (deployer) {
-  deployer.deploy(MiChuToken);
+module.exports = function (deployer, network, accounts) {
+  deployer.deploy(MiChuTokenA, accounts[0]);
 };

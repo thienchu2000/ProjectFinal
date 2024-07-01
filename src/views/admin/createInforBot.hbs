@@ -1,40 +1,76 @@
-<div class="container aaabot-container">
-  <h1 class="aaabot-heading">Create Bot Information</h1>
-  {{#each data}}
-    <p class="aaabot-product">{{NameProduct}}</p>
-    <div class="row">
-      <div class="col-md-6">
-        <label
-          for="aaabot-description-{{@index}}"
-          class="aaabot-label"
-        >Description:</label><br />
-        <textarea
-          id="aaabot-description-{{@index}}"
-          class="aaabot-textarea"
-          name="Description"
-          rows="4"
-          cols="50"
-        >{{Description}}</textarea><br />
-      </div>
-      <div class="col-md-6">
-        <label
-          for="aaabot-price-{{@index}}"
-          class="aaabot-label"
-        >Price:</label><br />
-        <input
-          type="number"
-          id="aaabot-price-{{@index}}"
-          class="aaabot-input"
-          name="Price"
-          value="{{Price}}"
-          style="width: 37%;"
-        />
-        MCTK<br /><br />
-        <button
-          class="aaabot-button"
-          onclick="updateBot('{{_id}}', '{{@index}}')"
-        >Submit</button>
-      </div>
+<div class="container" style="margin-top: 40px;">
+  <h1
+    style="text-align: center; font-family: Arial, sans-serif; color: #333; margin-bottom: 20px;"
+  >Control Panel</h1>
+  <div class="row">
+    <div class="col-sm">
+      <h1 class="aaabot-heading">Create Bot Information</h1>
+      {{#each data}}
+        <p class="aaabot-product">{{NameProduct}}</p>
+        <div class="row">
+          <div class="col-md-6">
+            <label
+              for="aaabot-description-{{@index}}"
+              class="aaabot-label"
+            >Description:</label><br />
+            <textarea
+              id="aaabot-description-{{@index}}"
+              class="aaabot-textarea"
+              name="Description"
+              rows="4"
+              cols="50"
+            >{{Description}}</textarea><br />
+          </div>
+          <div class="col-md-6">
+            <label
+              for="aaabot-price-{{@index}}"
+              class="aaabot-label"
+            >Price:</label><br />
+            <input
+              type="number"
+              id="aaabot-price-{{@index}}"
+              class="aaabot-input"
+              name="Price"
+              value="{{Price}}"
+              style="width: 37%;"
+            />
+            MCTK<br /><br />
+            <button
+              class="aaabot-button"
+              onclick="updateBot('{{_id}}', '{{@index}}')"
+            >Submit</button>
+          </div>
+        </div>
+      {{/each}}
     </div>
-  {{/each}}
+    <div class="col-sm">
+      <h1 class="aaabot-heading">Create Price NFTs</h1>
+      {{#each qy}}
+        <div class="nft-item">
+          <p class="aaanft-product">Smart Contract: {{SmartContact}}</p>
+          <p class="aaanft-product">Kind NFTs: {{NameProduct}}</p>
+          <div class="row">
+            <div class="col-md-6">
+              <label
+                for="aaanft-price-{{@index}}"
+                class="aaabot-label"
+              >Price:</label><br />
+              <input
+                type="number"
+                id="aaanft-price-{{@index}}"
+                class="aaanft-input"
+                name="Price"
+                value="{{Price}}"
+              />
+              <span class="currency">MCTK</span><br /><br />
+              <button
+                class="aaabot-button"
+                onclick="updateNFT('{{_id}}', '{{@index}}')"
+              >Submit</button>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
 </div>

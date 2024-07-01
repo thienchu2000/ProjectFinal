@@ -20,6 +20,7 @@ const { Server } = require("socket.io");
 const axios = require("axios");
 const { setResult, getResult } = require("./utils/ws");
 const { getRe } = require("./utils/ws1");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const handlebars = require("handlebars");
 const EventEmitter = require("events");
@@ -63,6 +64,17 @@ app.use(express.static(__dirname + "/public"));
 app.engine("hbs", exphbs.engine);
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
+
+app.use(
+  "/api",
+  createProxyMiddleware({
+    target: "https://api.1inch.dev/token/v1.2/search",
+    changeOrigin: true,
+    pathRewrite: {
+      "^/api": "",
+    },
+  })
+);
 
 // app.listen(port, async () => {
 //   await database.connect("Mongodb connected");

@@ -1,4 +1,4 @@
-const WordLegendNFT_two = artifacts.require("WordLegendNFT_two");
+const WordLegendNFT_two2 = artifacts.require("WordLegendNFT_two2");
 
 module.exports = async function (deployer, network, accounts) {
   const initialOwner = accounts[0];
@@ -24,10 +24,10 @@ module.exports = async function (deployer, network, accounts) {
     "https://ipfs.io/ipfs/QmVyHQhgypw9t4AXFmZQroZYKa4RvQ5fcMYMTETv6m5dj3",
   ];
 
-  await deployer.deploy(WordLegendNFT_two);
+  await deployer.deploy(WordLegendNFT_two2, initialOwner);
 
-  const WordLegendNFT_twoInstance = await WordLegendNFT_two.deployed();
+  const WordLegendNFT_two2Instance = await WordLegendNFT_two2.deployed();
   for (const cid of ipfsCIDs) {
-    await WordLegendNFT_twoInstance.awardItem(initialOwner, cid);
+    await WordLegendNFT_two2Instance.awardItem(initialOwner, cid);
   }
 };

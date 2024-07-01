@@ -65,6 +65,11 @@ function fetchOff(data) {
         <td>${item.db.total_volume}$</td>
         <td>${item.tinhieu}</td>
         <td> <canvas id="priceChart_${item.db.id}"></canvas></td>
+        <td>
+        <button class="btn btn-dark rounded-pill" onclick="swap('${
+          item.db.symbol
+        }')">Swap</button>
+      </td>
       `;
 
     tableBody.appendChild(row);

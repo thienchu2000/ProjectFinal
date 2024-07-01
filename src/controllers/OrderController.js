@@ -39,7 +39,7 @@ class OrderController {
         admin: admin,
         manager: manager,
         query: query,
-        back: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG1r5-hNkSEsMkT024GhK6ZdpgzTEE2va7ltY8zbxjgsz1F28tYSm1_wmTsPxiyXAV3uQ&usqp=CAU",
+        // back: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG1r5-hNkSEsMkT024GhK6ZdpgzTEE2va7ltY8zbxjgsz1F28tYSm1_wmTsPxiyXAV3uQ&usqp=CAU",
       });
     } catch (Error) {
       return res.status(500).send({ message: "Error" });

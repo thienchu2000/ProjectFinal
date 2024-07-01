@@ -1,4 +1,4 @@
-<div class="payment-container">
+{{! <div class="payment-container">
   <h1>Payment Reminder</h1>
   <p>To continue using our service, please make a payment before accessing the
     features.</p>
@@ -6,4 +6,15 @@
     <button>Make Payment</button>
   </form>
 
+</div> }}
+
+<div class="container">
+  <div class="payment-container mt-5">
+    <h1>Payment Reminder</h1>
+    <p>To continue using our service, please make a payment before accessing the
+      features.</p>
+    <form action="/order" method="get">
+      <button class="btn">Make Payment</button>
+    </form>
+  </div>
 </div>

@@ -1,14 +1,15 @@
-// SPDX-License-Identifier: MIT
+// // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.25;
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/math/Math.sol";
 
-contract MiChuToken is ERC20 {
-    mapping(address => uint256) public payments;
-
-    constructor() ERC20("MiChuToken", "MCTK") {
-        _mint(msg.sender, 10000000000000 * 10 ** 18);
+contract MiChuTokenA is ERC20, Ownable {
+    constructor(
+        address initialOwner
+    ) ERC20("MiChuTokenA", "MCTK") Ownable(initialOwner) {
+        _mint(initialOwner, 10000000000000 * 10 ** 18);
+        transferOwnership(initialOwner);
     }
 
     function totalSupply() public view override returns (uint256) {
@@ -20,11 +21,11 @@ contract MiChuToken is ERC20 {
     }
 
     function transfer(
-        address to,
-        uint256 value
+        address recipient,
+        uint256 amount
     ) public override returns (bool) {
-        payments[to] += value;
-        return ERC20.transfer(to, value);
+        _transfer(_msgSender(), recipient, amount);
+        return true;
     }
 
     function allowance(
@@ -36,17 +37,27 @@ contract MiChuToken is ERC20 {
 
     function approve(
         address spender,
-        uint256 value
+        uint256 amount
     ) public override returns (bool) {
-        return ERC20.approve(spender, value);
+        _approve(_msgSender(), spender, amount);
+        return true;
     }
 
     function transferFrom(
-        address from,
-        address to,
-        uint256 value
+        address sender,
+        address recipient,
+        uint256 amount
     ) public override returns (bool) {
-        payments[to] += value;
-        return ERC20.transferFrom(from, to, value);
+        _transfer(sender, recipient, amount);
+        _approve(
+            sender,
+            _msgSender(),
+            allowance(sender, _msgSender()) - amount
+        );
+        return true;
+    }
+
+    function mint(address account, uint256 amount) public onlyOwner {
+        _mint(account, amount);
     }
 }

@@ -31,7 +31,6 @@ class BotCheckController {
       manager: manager,
       admin: admin,
       Image: check.Image,
-      back: "https://static.vecteezy.com/system/resources/previews/023/995/943/large_2x/ethereum-coin-symbol-with-blue-light-background-network-connection-by-generative-ai-free-photo.jpg",
     });
   }
   async check(req, res, next) {
@@ -212,7 +211,6 @@ class BotCheckController {
         manager: manager,
         admin: admin,
         Image: check.Image,
-        back: "https://static.vecteezy.com/system/resources/previews/023/995/943/large_2x/ethereum-coin-symbol-with-blue-light-background-network-connection-by-generative-ai-free-photo.jpg",
         result: result,
       });
     } catch (err) {

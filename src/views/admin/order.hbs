@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <h1>Orders</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">UserName</th>
+        <th scope="col">Bot</th>
+        <th scope="col">NFTs</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each qy}}
+        <tr>
+          <td class="align-middle">
+            <img
+              src="/{{User.Image}}"
+              class="img-fluid rounded-circle"
+              style="height: 40px; width: 40px;"
+            />
+          </td>
+          <td>{{User.UserName}}</td>
+          <td>
+            {{#if Bot}}
+              NameBot:
+              {{Bot.NameProduct}}<br />
+              Price:
+              {{Bot.Price}}<br />
+              Created At:
+              {{formatDate createdAt}}
+            {{else}}
+              No Bot Order
+            {{/if}}
+          </td>
+          <td>
+            {{#if Nft}}
+              NFT:
+              {{Nft.NameProduct}}<br />
+              Price:
+              {{Nft.Price}}<br />
+              TokenId:
+              {{TokenId}}<br />
+              SmartContract:
+              {{SmartContract}}<br />
+              Created At:
+              {{formatDate createdAt}}
+            {{else}}
+              No NFT Order
+            {{/if}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

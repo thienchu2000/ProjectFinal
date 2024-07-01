@@ -4,26 +4,9 @@ const { Web3 } = require("web3");
 const httpProvider = new Web3.providers.HttpProvider(process.env.infuraTest);
 const web3 = new Web3(httpProvider);
 
-// async function processRequest(txhash) {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(async () => {
-//       try {
-//         const dattaTransaction = await web3.eth.getTransactionReceipt(
-//           `${txhash}`
-//         );
-//         return resolve(dattaTransaction);
-//       } catch (error) {
-//         reject(error);
-//       }
-//     }, 60000);
-//   });
-// }
-
-// module.exports = processRequest;
-
 async function processRequest(txhash) {
-  const maxRetries = 120; // Retry up to 12 times
-  const retryInterval = 5000; // Retry every 5 seconds
+  const maxRetries = 120;
+  const retryInterval = 5000;
 
   for (let i = 0; i < maxRetries; i++) {
     try {

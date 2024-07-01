@@ -15,7 +15,7 @@ module.exports = {
 
     sepolia: {
       provider: () =>
-        new HDWalletProvider(process.env.privateKey, process.env.alchemyTest),
+        new HDWalletProvider(process.env.kya, process.env.alchemyTest),
       network_id: 11155111,
       confirmations: 10,
       timeoutBlocks: 30000,

@@ -1,4 +1,4 @@
-<div
+{{!-- <div
   class="row"
   style="margin-left: 173px; margin-top:100px; margin-bottom:150px"
 >
@@ -30,6 +30,54 @@
     <div class="spinnerr-container">
       <div class="spinnerr"></div>
     </div>
-    <p>Pending payment ... Please wait.</p>
+    <p>Pending payment bot ... Please wait.</p>
+  </div>
+</div> --}}
+
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    {{#each query}}
+      <div class="col-md-6">
+        <div
+          class="card mb-4"
+          style="width: 400px; border: 2px solid black; margin: 0 auto;"
+        >
+          <img
+            src="{{Image}}"
+            class="card-img-top img-thumbnail"
+            alt="{{NameProduct}}"
+            style="max-width: 100%; height: auto;"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{NameProduct}}</h5>
+            <p class="card-text">Price: {{Price}} MCTK</p>
+            <p class="card-text">Description: {{Description}}</p>
+            <div class="d-flex justify-content-end">
+              <button
+                class="btn btn-outline-dark"
+                style="border-radius: 20px; background-color: black; color: white;"
+                onclick="connectMetamask('{{_id}}', '{{Price}}')"
+              >Order 🤖</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="nftpending" class="modal" style="display: none;">
+  <div class="modal-content" style="text-align: center; padding: 20px;">
+    <div
+      class="spinnerr-container"
+      style="display: flex; justify-content: center; align-items: center; height: 100px;"
+    >
+      <div
+        class="spinnerr"
+        style="border: 8px solid #f3f3f3; border-top: 8px solid black; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite;"
+      ></div>
+    </div>
+    <p>Pending payment bot ... Please wait.</p>
   </div>
 </div>

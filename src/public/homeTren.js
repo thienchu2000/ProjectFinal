@@ -62,6 +62,11 @@ function datacoin(data) {
           <td>${item.price_change_24h.toFixed(2)} $</td> 
           <td>${item.total_volume}$</td>
           <td> <canvas id="priceChart_${item.id}"></canvas></td>
+          <td>
+          <button class="btn btn-dark rounded-pill" onclick="swap('${
+            item.symbol
+          }')">Swap</button>
+        </td>
         `;
 
     tableBody.appendChild(row);

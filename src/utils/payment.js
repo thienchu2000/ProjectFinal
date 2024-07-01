@@ -30,7 +30,7 @@ async function checkPaymentSmart(req, res, next) {
         admin: admin,
         _id: check._id,
         Image: check.Image,
-        back: "https://i.pinimg.com/originals/46/94/e6/4694e67882f40cf2b34b00bd31e469b2.png",
+        // back: "https://i.pinimg.com/originals/46/94/e6/4694e67882f40cf2b34b00bd31e469b2.png",
       });
     }
     if (payment) {
@@ -95,7 +95,7 @@ async function checkPaymentTrending(req, res, next) {
         admin: admin,
         _id: check._id,
         Image: check.Image,
-        back: "https://i.pinimg.com/originals/46/94/e6/4694e67882f40cf2b34b00bd31e469b2.png",
+        // back: "https://i.pinimg.com/originals/46/94/e6/4694e67882f40cf2b34b00bd31e469b2.png",
       });
     }
     if (payment) {

@@ -16,6 +16,7 @@ const { GoogleAuth } = require("google-auth-library");
 const nodemailer = require("nodemailer");
 const datacoin = require("../utils/datacoin");
 const coverData = require("../utils/coverData");
+const Order = require("../models/Orders");
 
 class HomeController {
   async index(req, res, next) {
@@ -266,6 +267,7 @@ class HomeController {
         manager = false;
       }
       const data = await Users.findOne({ _id: check._id });
+
       res.render("information", {
         data: data,
         User: true,
@@ -358,6 +360,39 @@ class HomeController {
       .catch((err) => {
         return res.status(404).send(err);
       });
+  }
+  async order(req, res, next) {
+    try {
+      const check = req.user;
+      const checkRole = check.Role.NameRole;
+      var admin;
+      var manager;
+      if (checkRole === "Admin") {
+        admin = true;
+      } else {
+        admin = false;
+      }
+      if (checkRole === "Manager") {
+        manager = true;
+      } else {
+        manager = false;
+      }
+
+      const c = await Order.find({ User: check._id })
+        .populate("Bot")
+        .populate("Nft");
+
+      res.render("userOrder", {
+        Cr: c,
+        User: true,
+        manager: manager,
+        admin: admin,
+        Name: check.UserName,
+        Image: check.Image,
+      });
+    } catch (err) {
+      return res.send(err);
+    }
   }
 }
 

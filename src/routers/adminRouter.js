@@ -3,6 +3,11 @@ const AdminController = require("../controllers/AdminController");
 const router = express.Router();
 const checkLogin = require("../utils/checkLogin");
 
+router.get("/control", AdminController.control);
+router.post("/mintTk", AdminController.mintTk);
+router.post("/volumFake", AdminController.volumFake);
+router.get("/getOrder", AdminController.getOrder);
+router.put("/createNft/:id", AdminController.createNft);
 router.put("/createInforBot/:id", AdminController.createInforBot);
 router.get("/inForBot", AdminController.getBot);
 router.delete("/deleteNew/:id", AdminController.deleteNew);

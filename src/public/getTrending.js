@@ -61,6 +61,8 @@ async function fetchAndUpdate(data) {
                         Ownable: ${token.Ownable}<br />
                         FunctionMin: ${token.FunctionMin}<br />
                         SumTotalScammer: ${key}<br />
+                        <button class="btn btn-dark rounded-pill" onclick="swap('${token.SmartContract}','${token.SymbolToken}')">Swap</button>
+                      </td>
                     </td>`;
       tableBody.appendChild(row);
     });
