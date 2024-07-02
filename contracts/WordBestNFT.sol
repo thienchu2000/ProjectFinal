@@ -4,12 +4,12 @@ pragma solidity ^0.8.25;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract WordBestNFT_one1 is ERC721URIStorage, Ownable {
+contract WordBestNFT_two2 is ERC721URIStorage, Ownable {
     uint256 private _nextTokenId = 1;
 
     constructor(
         address initialOwner
-    ) ERC721("WordBestNFT_one1", "WB") Ownable(initialOwner) {}
+    ) ERC721("WordBestNFT_two2", "WB") Ownable(initialOwner) {}
 
     function awardItem(
         address player,

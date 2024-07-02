@@ -30,10 +30,6 @@ class NftController {
       manager = false;
     }
     try {
-      // 0xb4436D31E4Db1Ed2FC55262A93aF9D3b946fEE78
-      // 0x6e20ab554CC44DFB46161a2923650393696a2Fd9
-      // const contractAddressOne = "0x83Fdc7298F1C3b2dE23f56a770a6A895C4B4f0e9";
-      // const contractAddressTwo = "0x7005c4Ea2ed532aA82C02176d5E84eC9b7704fFb";
       const contractAddressOne = "0xb4436D31E4Db1Ed2FC55262A93aF9D3b946fEE78";
       const contractAddressTwo = "0x6e20ab554CC44DFB46161a2923650393696a2Fd9";
       const tokenId1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -50,7 +46,7 @@ class NftController {
           })
         );
       };
-      const qy = await Nfts.find({ NameProduct: "Word Legend" });
+      const qy = await Nfts.find({});
       const metadata1 = await getTokenURIs(
         contract1,
         tokenId1,
@@ -114,8 +110,8 @@ class NftController {
       manager = false;
     }
     try {
-      const contractAddressOne = "0x3C126dC085180801E1aD46790d8f3b3852A88f4a";
-      const contractAddressTwo = "0xBa5597c6c66DD233ED33f8F89C215d2D7Ca174d4";
+      const contractAddressOne = "0xecF6A5e7cC38f6044F8F9f0426aC6e0285d72f7A";
+      const contractAddressTwo = "0x7F825645Fd9bD9279CDd078D40920a32a6e1B8B7";
       const tokenId1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       const tokenId2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       const contract1 = new web3.eth.Contract(ABI1.abi, contractAddressOne);
@@ -131,7 +127,7 @@ class NftController {
         );
       };
 
-      const qy = await Nfts.find({ NameProduct: "Word Best" });
+      const qy = await Nfts.find({});
       const metadata1 = await getTokenURIs(
         contract1,
         tokenId1,

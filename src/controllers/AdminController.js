@@ -760,7 +760,7 @@ class AdminController {
         "https://ipfs.io/ipfs/QmVyHQhgypw9t4AXFmZQroZYKa4RvQ5fcMYMTETv6m5dj3",
       ];
     }
-    if (mintNft === "ox") {
+    if (mintNft === "0xecF6A5e7cC38f6044F8F9f0426aC6e0285d72f7A") {
       ipfsCIDs = [
         "https://ipfs.io/ipfs/QmWW7ELxC5yqbNWVYYum6d5dwmb39dis3u7oDayoLnraq2",
         "https://ipfs.io/ipfs/QmXi4wzYjGfqzi5AJWaD8sts2SejdBVT6o8a5MrR4D3Y3y",
@@ -771,10 +771,10 @@ class AdminController {
         "https://ipfs.io/ipfs/QmTMvTND9DoeweYbukHk7oibRw5tWRnqwXrfrtpPi5rioS",
         "https://ipfs.io/ipfs/QmVuevp7EuiEYrfDhwGA97ZvDbrFgYmP9pzFuY41Uo854R",
         "https://ipfs.io/ipfs/QmNpZb8VaUovFvaTup8cqBd5mbBL7Wr9NxiXabASAA76FV",
-        "https://ipfs.io/ipfs/QQmYa3eQf3dLFiHKEcCucWbWt8ECK6Y9uCERCmWWGZEhvaz",
+        "https://ipfs.io/ipfs/QmYa3eQf3dLFiHKEcCucWbWt8ECK6Y9uCERCmWWGZEhvaz",
       ];
     }
-    if (mintNft === "ox") {
+    if (mintNft === "0x7F825645Fd9bD9279CDd078D40920a32a6e1B8B7") {
       ipfsCIDs = [
         "https://ipfs.io/ipfs/QmWN3kAhbDwtjad7TxEJ3LvQg71cG73J1y6TDgGB9WT59H",
         "https://ipfs.io/ipfs/QmQcFBxm5L4chRMxpDA2y1sT5PQ4WaF1jiuAhhLy5rKXAc",
@@ -797,29 +797,28 @@ class AdminController {
     const accountOwner = web3.eth.accounts.privateKeyToAccount(privateKeyOwner);
     web3.eth.accounts.wallet.add(accountOwner);
 
-    const contract = new web3.eth.Contract(ABItoken.abi, contractAddress);
+    const contract = new web3.eth.Contract(ABINFT.abi, contractAddress);
 
     try {
-      const tokenURI = ipfsCIDs;
-      const tx = await contract.methods
-        .mintByOwner(ownerAddress, tokenURI)
-        .send({
+      for (const cid of ipfsCIDs) {
+        const tx = await contract.methods.mintByOwner(ownerAddress, cid).send({
           from: ownerAddress,
           gasPrice: gasPrice,
           gas: gasLimitHex,
         });
-      const signedTx = await web3.eth.accounts.signTransaction(
-        tx,
-        privateKeyOwner
-      );
-      const receipt = web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+        const signedTx = await web3.eth.accounts.signTransaction(
+          tx,
+          privateKeyOwner
+        );
+        const receipt = web3.eth.sendSignedTransaction(signedTx.rawTransaction);
 
-      console.log("done");
-      var result = [];
-      result.push(receipt.transactionHash);
-      res.status(200).json({
-        message: coverData(result),
-      });
+        console.log("done");
+        var result = [];
+        result.push(receipt.transactionHash);
+        res.status(200).json({
+          message: coverData(result),
+        });
+      }
     } catch (e) {
       return res.send("error ");
     }

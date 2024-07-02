@@ -1,7 +1,7 @@
-<div class="container" style="margin-top: 40px;">
+{{!-- <div class="container" style="margin-top: 40px;">
   <h1
     style="text-align: center; font-family: Arial, sans-serif; color: #333; margin-bottom: 20px;"
-  >Control Panel</h1>
+  > Create Price</h1>
   <div class="row">
     <div class="col-sm">
       <h1 class="aaabot-heading">Create Bot Information</h1>
@@ -72,5 +72,301 @@
         </div>
       {{/each}}
     </div>
+  </div>
+</div> --}}
+
+<div class="col-sm">
+  <h1
+    class="aaabot-heading"
+    style="text-align: center; font-family: Arial, sans-serif; color: #555; margin-bottom: 20px;"
+  >
+    Create Bot Information
+  </h1>
+  <table
+    class="table table-bordered"
+    style="width: 100%; border-collapse: collapse; margin-bottom: 20px;"
+  >
+    <thead>
+      <tr style="background-color: #f8f8f8; border: 1px solid #ddd;">
+        <th
+          style="padding: 10px; border: 1px solid #ddd; text-align: left;"
+        >NameProduct</th>
+        <th
+          style="padding: 10px; border: 1px solid #ddd; text-align: left;"
+        >Description</th>
+        <th
+          style="padding: 10px; border: 1px solid #ddd; text-align: left;"
+        >Price MCTK</th>
+        <th
+          style="padding: 10px; border: 1px solid #ddd; text-align: left;"
+        >Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data}}
+        <tr>
+          <td
+            class="aaabot-product"
+            style="padding: 10px; border: 1px solid #ddd;"
+          >{{NameProduct}}</td>
+          <td style="padding: 10px; border: 1px solid #ddd;">
+
+            <textarea
+              id="aaabot-description-{{@index}}"
+              class="aaabot-textarea"
+              name="Description"
+              rows="4"
+              cols="50"
+              style="width: 100%; padding: 8px; margin-top: 5px;"
+            >{{Description}}</textarea><br />
+          </td>
+          <td style="padding: 10px; border: 1px solid #ddd;">
+            <input
+              type="number"
+              id="aaabot-price-{{@index}}"
+              class="aaabot-input"
+              name="Price"
+              value="{{Price}}"
+              style="width: 60%; padding: 8px; margin-top: 5px;"
+            />
+
+          </td>
+          <td style="padding: 10px; border: 1px solid #ddd;">
+            <button
+              class="aaabot-button"
+              onclick="updateBot('{{_id}}', '{{@index}}')"
+            >Submit</button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+<div class="col-sm">
+  <h1
+    class="aaabot-heading"
+    style="text-align: center; font-family: Arial, sans-serif; color: #555; margin-bottom: 20px;"
+  >
+    Create Price NFTs
+  </h1>
+  <table
+    class="table table-bordered"
+    style="width: 100%; border-collapse: collapse; margin-bottom: 20px;"
+  >
+    <thead>
+      <tr style="background-color: #f8f8f8; border: 1px solid #ddd;">
+        <th
+          style="padding: 10px; border: 1px solid #ddd; text-align: left;"
+        >Smart Contract</th>
+        <th
+          style="padding: 10px; border: 1px solid #ddd; text-align: left;"
+        >Kind NFTs</th>
+        <th
+          style="padding: 10px; border: 1px solid #ddd; text-align: left;"
+        >Price MKTC</th>
+        <th
+          style="padding: 10px; border: 1px solid #ddd; text-align: left;"
+        >Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each qy}}
+        <tr>
+          <td
+            class="aaanft-product"
+            style="padding: 10px; border: 1px solid #ddd;"
+          > {{SmartContact}}</td>
+          <td
+            class="aaanft-product"
+            style="padding: 10px; border: 1px solid #ddd;"
+          >{{NameProduct}}</td>
+          <td style="padding: 10px; border: 1px solid #ddd;">
+            <input
+              type="number"
+              id="aaanft-price-{{@index}}"
+              class="aaanft-input"
+              name="Price"
+              value="{{Price}}"
+              style="width: 60%; padding: 8px; margin-top: 5px;"
+            />
+          </td>
+          <td style="padding: 10px; border: 1px solid #ddd;">
+            <button
+              class="aaabot-button"
+              onclick="updateNFT('{{_id}}', '{{@index}}')"
+            >Submit</button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="container mt-5">
+  <h1
+    class="aaabot-heading"
+    style="text-align: center; font-family: Arial, sans-serif; color: #555; margin-bottom: 20px;"
+  >
+    Control Pannel
+  </h1>
+  <div class="row justify-content-center">
+    <div class="col-md-6" style="width: 400px;">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Volume Control Token MCTK</h5>
+          <form>
+            <div class="form-group">
+              <label for="transactions">Number of transactions:</label>
+              <input
+                id="transactions"
+                name="transactions"
+                type="number"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="transactionTime">Transaction Time:</label>
+              <select
+                id="transactionTime"
+                name="transactionTime"
+                class="form-control"
+                required
+              >
+                <option value="1000">1 second</option>
+                <option value="5000">5 seconds</option>
+                <option value="10000">10 seconds</option>
+                <option value="30000">30 seconds</option>
+                <option value="60000">1 minute</option>
+                <option value="300000">5 minutes</option>
+                <option value="600000">10 minutes</option>
+                <option value="1800000">30 minutes</option>
+                <option value="3600000">60 minutes</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="wallet">Number of wallets:</label>
+              <select id="wallet" name="wallet" class="form-control" required>
+                <option value="1">1 wallet</option>
+                <option value="2">2 wallets</option>
+                <option value="3">3 wallets</option>
+                <option value="4">4 wallets</option>
+                <option value="5">5 wallets</option>
+                <option value="6">6 wallets</option>
+                <option value="7">7 wallets</option>
+                <option value="8">8 wallets</option>
+                <option value="9">9 wallets</option>
+                <option value="10">10 wallets</option>
+              </select>
+            </div>
+            <button
+              class="aaabot-button"
+              type="button"
+              onclick="volumeFake()"
+            >Run</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6" style="width: 400px;">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Mint Token MCTK</h5>
+          <form>
+            <div class="form-group">
+              <label for="MintAmount">Amount</label>
+              <input
+                id="MintAmount"
+                name="MintAmount"
+                type="number"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="MintWallet">Mint Wallets</label>
+              <select
+                id="MintWallet"
+                name="MintWallet"
+                class="form-control"
+                required
+              >
+                <option value="0x9B555039084f8feCB75AeF928B7ccd2b15A84575">Owner
+                  wallet</option>
+                <option
+                  value="0xb687ed03daaAf2870C9ADdaaa82276feBce87Eba"
+                >wallet 2</option>
+                <option
+                  value="0xd716140fd7C0259611760AD4a68191777C3317E5"
+                >wallet 3</option>
+              </select>
+            </div>
+            <button
+              class="aaabot-button"
+              type="button"
+              onclick="mintToken()"
+            >Mint Tokens</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6" style="max-width: 400px;">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Mint NFT</h5>
+          <form>
+            <div class="mb-3">
+              <label for="mintSmartContract" class="form-label">Smart Contract</label>
+              <select class="form-select" id="mintNft" required>
+                <option
+                  value="0xb4436D31E4Db1Ed2FC55262A93aF9D3b946fEE78"
+                >WordLegendNFT_one1</option>
+                <option
+                  value="0x6e20ab554CC44DFB46161a2923650393696a2Fd9"
+                >WordLegendNFT_two2</option>
+                <option
+                  value="0xecF6A5e7cC38f6044F8F9f0426aC6e0285d72f7A"
+                >WordBestNFT_one1</option>
+                <option
+                  value="0x7F825645Fd9bD9279CDd078D40920a32a6e1B8B7"
+                >WordBestNFT_two2</option>
+              </select>
+            </div>
+            <button class="aaabot-button">Mint NFT</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="result"
+    class="mt-4 p-3 bg-light border rounded"
+    style="width: 640px;"
+  >
+  </div>
+</div>
+
+<div id="nftpending" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div class="spinnerr-container">
+      <div class="spinnerr"></div>
+    </div>
+    <p> Run volume control intervention ... Please wait.</p>
+    <button
+      id="pauseButton"
+      class="btn btn-danger"
+      style="width: 100px; margin-left: 180px"
+      onclick="unpause()"
+    >Stop</button>
+  </div>
+</div>
+
+<div id="Mint" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div class="spinnerr-container">
+      <div class="spinnerr"></div>
+    </div>
+    <p> Mint Token ... Please wait.</p>
   </div>
 </div>

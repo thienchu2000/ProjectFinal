@@ -9488,7 +9488,7 @@
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-07-01T19:32:50.794Z",
+  "updatedAt": "2024-07-01T23:18:57.092Z",
   "devdoc": {
     "errors": {
       "ERC20InsufficientAllowance(address,uint256,uint256)": [
