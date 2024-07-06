@@ -18,6 +18,7 @@ const web3 = new Web3(httpProvider);
 const ABItoken = require("../contracts/MiChuTokenA.json");
 const sleep = require("../utils/slepp");
 const ABINFT = require("../contracts/WordLegendNFT_one1.json");
+const ABITOKEN = require("../contracts/MiChuETH.json");
 
 class AdminController {
   async index(req, res, next) {
@@ -183,8 +184,28 @@ class AdminController {
   }
   async getBot(req, res, next) {
     try {
+      const contractAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
+      const contract = new web3.eth.Contract(ABITOKEN.abi, contractAddress);
+      const name = await contract.methods.name().call();
+      const symbol = await contract.methods.symbol().call();
+      const buyTax = await contract.methods.buyTax().call();
+      const sellTax = await contract.methods.sellTax().call();
+      const sellLocked = await contract.methods._sellLocked().call();
+      const owner = await contract.methods.owner().call();
+      const totalSupply = await contract.methods.totalSupply().call();
+      const formattedTotalSupply = web3.utils.fromWei(
+        totalSupply.toString(),
+        "ether"
+      );
+      var done;
+      if (sellLocked === false) {
+        done = "unlocked";
+      } else {
+        done = "locked";
+      }
       const data = await Bots.find({});
       const qy = await Nfts.find({});
+
       const check = req.user;
       res.render("admin/createInforBot", {
         qy: qy,
@@ -195,10 +216,17 @@ class AdminController {
         admin: true,
         Image: check.Image,
         Role: check.Role,
+        buyTax,
+        sellTax,
+        sellLocked: done,
+        owner,
+        formattedTotalSupply,
+        name,
+        symbol,
       });
     } catch (err) {
-      console.log(err);
-      return res.send("error");
+      console.error("Error fetching bot information:", err);
+      res.status(500).send("Error fetching bot information");
     }
   }
 
@@ -250,13 +278,20 @@ class AdminController {
     }
   }
   async volumFake(req, res, next) {
-    const { transactions, transactionTime, wallet, unpause } = req.body;
-    console.log("unpause", unpause);
+    const {
+      transactions,
+      transactionTime,
+      wallet,
+      unpause,
+      pricemin,
+      pricemax,
+    } = req.body;
+    console.log("unpause", typeof pricemax, typeof pricemin);
 
     var result = [];
     var wallets;
     const privateKeyOwner = process.env.privateKeyhex.trim();
-    const contractAddress = "0x8A3b0D476E9075e7f63D42d3bD85b8319E17086B";
+    const contractAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
     const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
     const gasPrice = await web3.eth.getGasPrice();
     const gasLimitHex = "0x493e0";
@@ -265,8 +300,7 @@ class AdminController {
       wallets = [
         {
           address: "0x0Eba7d628c6107D552c40D41A2857648021C5Dee",
-          privateKey:
-            "0xea6f33ccb258333bf00793f9e8fa2ce4572d3905252e4e495f74365ffb9801b4",
+          privateKey: process.env.pri1,
         },
       ];
     }
@@ -274,13 +308,11 @@ class AdminController {
       wallets = [
         {
           address: "0x0Eba7d628c6107D552c40D41A2857648021C5Dee",
-          privateKey:
-            "0xea6f33ccb258333bf00793f9e8fa2ce4572d3905252e4e495f74365ffb9801b4",
+          privateKey: process.env.pri1,
         },
         {
           address: "0xd716140fd7C0259611760AD4a68191777C3317E5",
-          privateKey:
-            "0x8a8611037ee58b5614456f14b9c4c3e2def76808d5f2bd000b12a5c78a72d1f8",
+          privateKey: process.env.pri2,
         },
       ];
     }
@@ -288,18 +320,15 @@ class AdminController {
       wallets = [
         {
           address: "0x0Eba7d628c6107D552c40D41A2857648021C5Dee",
-          privateKey:
-            "0xea6f33ccb258333bf00793f9e8fa2ce4572d3905252e4e495f74365ffb9801b4",
+          privateKey: process.env.pri1,
         },
         {
           address: "0xd716140fd7C0259611760AD4a68191777C3317E5",
-          privateKey:
-            "0x8a8611037ee58b5614456f14b9c4c3e2def76808d5f2bd000b12a5c78a72d1f8",
+          privateKey: process.env.pri2,
         },
         {
           address: "0x6A33F786215e02f82Dd08A149A593Bc4b984469B",
-          privateKey:
-            "0x57d5aa404fde5254eebfe7c0fefcd26d8460915318883b0c896335c52e984285",
+          privateKey: process.env.pri3,
         },
       ];
     }
@@ -307,23 +336,19 @@ class AdminController {
       wallets = [
         {
           address: "0x0Eba7d628c6107D552c40D41A2857648021C5Dee",
-          privateKey:
-            "0xea6f33ccb258333bf00793f9e8fa2ce4572d3905252e4e495f74365ffb9801b4",
+          privateKey: process.env.pri1,
         },
         {
           address: "0xd716140fd7C0259611760AD4a68191777C3317E5",
-          privateKey:
-            "0x8a8611037ee58b5614456f14b9c4c3e2def76808d5f2bd000b12a5c78a72d1f8",
+          privateKey: process.env.pri2,
         },
         {
           address: "0x6A33F786215e02f82Dd08A149A593Bc4b984469B",
-          privateKey:
-            "0x57d5aa404fde5254eebfe7c0fefcd26d8460915318883b0c896335c52e984285",
+          privateKey: process.env.pri3,
         },
         {
           address: "0xa2eA667bF3DC84d72506C602f64B109Db52794e3",
-          privateKey:
-            "0x7d488a7ce33e2d73d43856f66ea2b5ec0f985cf9af84927680601bb6742bf285",
+          privateKey: process.env.pri4,
         },
       ];
     }
@@ -331,28 +356,23 @@ class AdminController {
       wallets = [
         {
           address: "0x0Eba7d628c6107D552c40D41A2857648021C5Dee",
-          privateKey:
-            "0xea6f33ccb258333bf00793f9e8fa2ce4572d3905252e4e495f74365ffb9801b4",
+          privateKey: process.env.pri1,
         },
         {
           address: "0xd716140fd7C0259611760AD4a68191777C3317E5",
-          privateKey:
-            "0x8a8611037ee58b5614456f14b9c4c3e2def76808d5f2bd000b12a5c78a72d1f8",
+          privateKey: process.env.pri2,
         },
         {
           address: "0x6A33F786215e02f82Dd08A149A593Bc4b984469B",
-          privateKey:
-            "0x57d5aa404fde5254eebfe7c0fefcd26d8460915318883b0c896335c52e984285",
+          privateKey: process.env.pri3,
         },
         {
           address: "0xa2eA667bF3DC84d72506C602f64B109Db52794e3",
-          privateKey:
-            "0x7d488a7ce33e2d73d43856f66ea2b5ec0f985cf9af84927680601bb6742bf285",
+          privateKey: process.env.pri4,
         },
         {
           address: "0x932a228bfa771970689F73f58898549e7bbE7951",
-          privateKey:
-            "0xc3d1d42ff4491a2fde98393a594742cd8f0a5ac8ff5c7dfbb7765854ff365553",
+          privateKey: process.env.pri5,
         },
       ];
     }
@@ -360,33 +380,27 @@ class AdminController {
       wallets = [
         {
           address: "0x0Eba7d628c6107D552c40D41A2857648021C5Dee",
-          privateKey:
-            "0xea6f33ccb258333bf00793f9e8fa2ce4572d3905252e4e495f74365ffb9801b4",
+          privateKey: process.env.pri1,
         },
         {
           address: "0xd716140fd7C0259611760AD4a68191777C3317E5",
-          privateKey:
-            "0x8a8611037ee58b5614456f14b9c4c3e2def76808d5f2bd000b12a5c78a72d1f8",
+          privateKey: process.env.pri2,
         },
         {
           address: "0x6A33F786215e02f82Dd08A149A593Bc4b984469B",
-          privateKey:
-            "0x57d5aa404fde5254eebfe7c0fefcd26d8460915318883b0c896335c52e984285",
+          privateKey: process.env.pri3,
         },
         {
           address: "0xa2eA667bF3DC84d72506C602f64B109Db52794e3",
-          privateKey:
-            "0x7d488a7ce33e2d73d43856f66ea2b5ec0f985cf9af84927680601bb6742bf285",
+          privateKey: process.env.pri4,
         },
         {
           address: "0x932a228bfa771970689F73f58898549e7bbE7951",
-          privateKey:
-            "0xc3d1d42ff4491a2fde98393a594742cd8f0a5ac8ff5c7dfbb7765854ff365553",
+          privateKey: process.env.pri5,
         },
         {
           address: "0xf5C1FFCc92918a6f7799Ea17D71682Ba381f2972",
-          privateKey:
-            "0x3729cfad8964821eaffb44bc971a143c511c73513556fc647d421babecb14a92",
+          privateKey: process.env.pri6,
         },
       ];
     }
@@ -394,38 +408,31 @@ class AdminController {
       wallets = [
         {
           address: "0x0Eba7d628c6107D552c40D41A2857648021C5Dee",
-          privateKey:
-            "0xea6f33ccb258333bf00793f9e8fa2ce4572d3905252e4e495f74365ffb9801b4",
+          privateKey: process.env.pri1,
         },
         {
           address: "0xd716140fd7C0259611760AD4a68191777C3317E5",
-          privateKey:
-            "0x8a8611037ee58b5614456f14b9c4c3e2def76808d5f2bd000b12a5c78a72d1f8",
+          privateKey: process.env.pri2,
         },
         {
           address: "0x6A33F786215e02f82Dd08A149A593Bc4b984469B",
-          privateKey:
-            "0x57d5aa404fde5254eebfe7c0fefcd26d8460915318883b0c896335c52e984285",
+          privateKey: process.env.pri3,
         },
         {
           address: "0xa2eA667bF3DC84d72506C602f64B109Db52794e3",
-          privateKey:
-            "0x7d488a7ce33e2d73d43856f66ea2b5ec0f985cf9af84927680601bb6742bf285",
+          privateKey: process.env.pri4,
         },
         {
           address: "0x932a228bfa771970689F73f58898549e7bbE7951",
-          privateKey:
-            "0xc3d1d42ff4491a2fde98393a594742cd8f0a5ac8ff5c7dfbb7765854ff365553",
+          privateKey: process.env.pri5,
         },
         {
           address: "0xf5C1FFCc92918a6f7799Ea17D71682Ba381f2972",
-          privateKey:
-            "0x3729cfad8964821eaffb44bc971a143c511c73513556fc647d421babecb14a92",
+          privateKey: process.env.pri6,
         },
         {
           address: "0x87b71A690c1C2079AB701953bf4829fAA0CDAf76",
-          privateKey:
-            "0xf7e5d0531aa9f02bfac275d66f0f2073da39b6b82c0d77fcfcb7bb6b6c087d85",
+          privateKey: process.env.pri7,
         },
       ];
     }
@@ -433,43 +440,35 @@ class AdminController {
       wallets = [
         {
           address: "0x0Eba7d628c6107D552c40D41A2857648021C5Dee",
-          privateKey:
-            "0xea6f33ccb258333bf00793f9e8fa2ce4572d3905252e4e495f74365ffb9801b4",
+          privateKey: process.env.pri1,
         },
         {
           address: "0xd716140fd7C0259611760AD4a68191777C3317E5",
-          privateKey:
-            "0x8a8611037ee58b5614456f14b9c4c3e2def76808d5f2bd000b12a5c78a72d1f8",
+          privateKey: process.env.pri2,
         },
         {
           address: "0x6A33F786215e02f82Dd08A149A593Bc4b984469B",
-          privateKey:
-            "0x57d5aa404fde5254eebfe7c0fefcd26d8460915318883b0c896335c52e984285",
+          privateKey: process.env.pri3,
         },
         {
           address: "0xa2eA667bF3DC84d72506C602f64B109Db52794e3",
-          privateKey:
-            "0x7d488a7ce33e2d73d43856f66ea2b5ec0f985cf9af84927680601bb6742bf285",
+          privateKey: process.env.pri4,
         },
         {
           address: "0x932a228bfa771970689F73f58898549e7bbE7951",
-          privateKey:
-            "0xc3d1d42ff4491a2fde98393a594742cd8f0a5ac8ff5c7dfbb7765854ff365553",
+          privateKey: process.env.pri5,
         },
         {
           address: "0xf5C1FFCc92918a6f7799Ea17D71682Ba381f2972",
-          privateKey:
-            "0x3729cfad8964821eaffb44bc971a143c511c73513556fc647d421babecb14a92",
+          privateKey: process.env.pri6,
         },
         {
           address: "0x87b71A690c1C2079AB701953bf4829fAA0CDAf76",
-          privateKey:
-            "0xf7e5d0531aa9f02bfac275d66f0f2073da39b6b82c0d77fcfcb7bb6b6c087d85",
+          privateKey: process.env.pri7,
         },
         {
           address: "0xD4Aa1843914C2F7704f8DA8ac9b0AA47680834c3",
-          privateKey:
-            "0x7b71bf57382c00a443fc74d2c6877e4ed02736e3b445c31bcc75dd2f5bc11476",
+          privateKey: process.env.pri8,
         },
       ];
     }
@@ -477,48 +476,39 @@ class AdminController {
       wallets = [
         {
           address: "0x0Eba7d628c6107D552c40D41A2857648021C5Dee",
-          privateKey:
-            "0xea6f33ccb258333bf00793f9e8fa2ce4572d3905252e4e495f74365ffb9801b4",
+          privateKey: process.env.pri1,
         },
         {
           address: "0xd716140fd7C0259611760AD4a68191777C3317E5",
-          privateKey:
-            "0x8a8611037ee58b5614456f14b9c4c3e2def76808d5f2bd000b12a5c78a72d1f8",
+          privateKey: process.env.pri2,
         },
         {
           address: "0x6A33F786215e02f82Dd08A149A593Bc4b984469B",
-          privateKey:
-            "0x57d5aa404fde5254eebfe7c0fefcd26d8460915318883b0c896335c52e984285",
+          privateKey: process.env.pri3,
         },
         {
           address: "0xa2eA667bF3DC84d72506C602f64B109Db52794e3",
-          privateKey:
-            "0x7d488a7ce33e2d73d43856f66ea2b5ec0f985cf9af84927680601bb6742bf285",
+          privateKey: process.env.pri4,
         },
         {
           address: "0x932a228bfa771970689F73f58898549e7bbE7951",
-          privateKey:
-            "0xc3d1d42ff4491a2fde98393a594742cd8f0a5ac8ff5c7dfbb7765854ff365553",
+          privateKey: process.env.pri5,
         },
         {
           address: "0xf5C1FFCc92918a6f7799Ea17D71682Ba381f2972",
-          privateKey:
-            "0x3729cfad8964821eaffb44bc971a143c511c73513556fc647d421babecb14a92",
+          privateKey: process.env.pri6,
         },
         {
           address: "0x87b71A690c1C2079AB701953bf4829fAA0CDAf76",
-          privateKey:
-            "0xf7e5d0531aa9f02bfac275d66f0f2073da39b6b82c0d77fcfcb7bb6b6c087d85",
+          privateKey: process.env.pri7,
         },
         {
           address: "0xD4Aa1843914C2F7704f8DA8ac9b0AA47680834c3",
-          privateKey:
-            "0x7b71bf57382c00a443fc74d2c6877e4ed02736e3b445c31bcc75dd2f5bc11476",
+          privateKey: process.env.pri8,
         },
         {
           address: "0x8088Ff6cf5502a10Bf908a4Db4b9C9d78210d42A",
-          privateKey:
-            "0x305ff11c3e15433db193f53fa65b28d995764fb75019332cf405d6841bcabb76",
+          privateKey: process.env.pri9,
         },
       ];
     }
@@ -526,53 +516,43 @@ class AdminController {
       wallets = [
         {
           address: "0x0Eba7d628c6107D552c40D41A2857648021C5Dee",
-          privateKey:
-            "0xea6f33ccb258333bf00793f9e8fa2ce4572d3905252e4e495f74365ffb9801b4",
+          privateKey: process.env.pri1,
         },
         {
           address: "0xd716140fd7C0259611760AD4a68191777C3317E5",
-          privateKey:
-            "0x8a8611037ee58b5614456f14b9c4c3e2def76808d5f2bd000b12a5c78a72d1f8",
+          privateKey: process.env.pri2,
         },
         {
           address: "0x6A33F786215e02f82Dd08A149A593Bc4b984469B",
-          privateKey:
-            "0x57d5aa404fde5254eebfe7c0fefcd26d8460915318883b0c896335c52e984285",
+          privateKey: process.env.pri3,
         },
         {
           address: "0xa2eA667bF3DC84d72506C602f64B109Db52794e3",
-          privateKey:
-            "0x7d488a7ce33e2d73d43856f66ea2b5ec0f985cf9af84927680601bb6742bf285",
+          privateKey: process.env.pri4,
         },
         {
           address: "0x932a228bfa771970689F73f58898549e7bbE7951",
-          privateKey:
-            "0xc3d1d42ff4491a2fde98393a594742cd8f0a5ac8ff5c7dfbb7765854ff365553",
+          privateKey: process.env.pri5,
         },
         {
           address: "0xf5C1FFCc92918a6f7799Ea17D71682Ba381f2972",
-          privateKey:
-            "0x3729cfad8964821eaffb44bc971a143c511c73513556fc647d421babecb14a92",
+          privateKey: process.env.pri6,
         },
         {
           address: "0x87b71A690c1C2079AB701953bf4829fAA0CDAf76",
-          privateKey:
-            "0xf7e5d0531aa9f02bfac275d66f0f2073da39b6b82c0d77fcfcb7bb6b6c087d85",
+          privateKey: process.env.pri7,
         },
         {
           address: "0xD4Aa1843914C2F7704f8DA8ac9b0AA47680834c3",
-          privateKey:
-            "0x7b71bf57382c00a443fc74d2c6877e4ed02736e3b445c31bcc75dd2f5bc11476",
+          privateKey: process.env.pri8,
         },
         {
           address: "0x8088Ff6cf5502a10Bf908a4Db4b9C9d78210d42A",
-          privateKey:
-            "0x305ff11c3e15433db193f53fa65b28d995764fb75019332cf405d6841bcabb76",
+          privateKey: process.env.pri9,
         },
         {
           address: "0x95072f248BbE3fc5f2f690e620Fea6dfe7665a5D",
-          privateKey:
-            "0x9199542b99c0bed6f1fc222418242e12ebb5b8ac3b3644c83d8031a3fb5cfc93",
+          privateKey: process.env.pri10,
         },
       ];
     }
@@ -597,8 +577,11 @@ class AdminController {
             const account = web3.eth.accounts.privateKeyToAccount(privateKey);
             web3.eth.accounts.wallet.add(account);
           }
-          const contract = new web3.eth.Contract(ABItoken.abi, contractAddress);
-          const amount = (Math.random() * (500 - 10) + 10).toFixed(0);
+          const contract = new web3.eth.Contract(ABITOKEN.abi, contractAddress);
+          const amount = (
+            Math.random() * (pricemax - pricemin) +
+            pricemin
+          ).toFixed(0);
           console.log("Price", amount);
           const updatedGasPriceHex = web3.utils.toHex(parseInt(gasPrice) + i);
           const txDataSell = {
@@ -673,7 +656,7 @@ class AdminController {
     const { MintAmount, MintWallet } = req.body;
     const privateKeyOwner = process.env.privateKeyhex.trim();
     const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
-    const contractAddress = "0x8A3b0D476E9075e7f63D42d3bD85b8319E17086B";
+    const contractAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
     const gasPrice = await web3.eth.getGasPrice();
     const gasLimitHex = "0x493e0";
 
@@ -788,7 +771,6 @@ class AdminController {
         "https://ipfs.io/ipfs/QmUrhJw5r1fuy8frsKM3o7278XhC1ttjeME3C1eSnSdNq5",
       ];
     }
-
     const privateKeyOwner = process.env.privateKeyhex.trim();
     const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
     const SmartContact = mintNft;
@@ -821,6 +803,217 @@ class AdminController {
       }
     } catch (e) {
       return res.send("error ");
+    }
+  }
+  async settax(req, res, next) {
+    try {
+      const { taxBuy, taxSell } = req.body;
+      const privateKeyOwner = process.env.privateKeyhex.trim();
+      const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
+      const accountOwner =
+        web3.eth.accounts.privateKeyToAccount(privateKeyOwner);
+      web3.eth.accounts.wallet.add(accountOwner);
+
+      const gasPrice = await web3.eth.getGasPrice();
+      const gasLimitHex = "0x493e0";
+      const gasPriceHex = web3.utils.toHex(gasPrice);
+
+      const contractAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
+      const contract = new web3.eth.Contract(ABITOKEN.abi, contractAddress);
+
+      const txOptions = {
+        gasPrice: gasPriceHex,
+        gas: gasLimitHex,
+        from: ownerAddress,
+      };
+      const resultBuyTax = await contract.methods
+        .setBuyTax(taxBuy)
+        .send(txOptions);
+
+      const resultSellTax = await contract.methods
+        .setSellTax(taxSell)
+        .send(txOptions);
+
+      res.status(200).json({
+        message: coverData([
+          resultBuyTax.transactionHash,
+          resultSellTax.transactionHash,
+        ]),
+      });
+    } catch (error) {
+      console.error("Error setting tax:", error);
+      res.status(500).json({ message: "Failed to update tax settings" });
+    }
+  }
+  async unlockSell(req, res, next) {
+    try {
+      const privateKeyOwner = process.env.privateKeyhex.trim();
+      const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
+      const accountOwner =
+        web3.eth.accounts.privateKeyToAccount(privateKeyOwner);
+      web3.eth.accounts.wallet.add(accountOwner);
+
+      const gasPrice = await web3.eth.getGasPrice();
+      const gasLimitHex = "0x493e0";
+      const gasPriceHex = web3.utils.toHex(gasPrice);
+
+      const contractAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
+      const contract = new web3.eth.Contract(ABITOKEN.abi, contractAddress);
+
+      const txOptions = {
+        gasPrice: gasPriceHex,
+        gas: gasLimitHex,
+        from: ownerAddress,
+      };
+
+      const result = await contract.methods.unlockSell().send(txOptions);
+
+      res.status(200).json({
+        message: coverData([result.transactionHash]),
+      });
+    } catch (error) {
+      console.error("Error unlocking sell:", error);
+      res.status(500).json({ message: "Failed to unlock sell" });
+    }
+  }
+
+  async lockSell(req, res, next) {
+    try {
+      const privateKeyOwner = process.env.privateKeyhex.trim();
+      const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
+      const accountOwner =
+        web3.eth.accounts.privateKeyToAccount(privateKeyOwner);
+      web3.eth.accounts.wallet.add(accountOwner);
+
+      const gasPrice = await web3.eth.getGasPrice();
+      const gasLimitHex = "0x493e0";
+      const gasPriceHex = web3.utils.toHex(gasPrice);
+
+      const contractAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
+      const contract = new web3.eth.Contract(ABITOKEN.abi, contractAddress);
+
+      const txOptions = {
+        gasPrice: gasPriceHex,
+        gas: gasLimitHex,
+        from: ownerAddress,
+      };
+
+      const result = await contract.methods.lockSell().send(txOptions);
+
+      res.status(200).json({
+        message: coverData([result.transactionHash]),
+      });
+    } catch (error) {
+      console.error("Error locking sell:", error);
+      res.status(500).json({ message: "Failed to lock sell" });
+    }
+  }
+  async renounceOwnership(req, res, next) {
+    try {
+      const privateKeyOwner = process.env.privateKeyhex.trim();
+      const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
+      const accountOwner =
+        web3.eth.accounts.privateKeyToAccount(privateKeyOwner);
+      web3.eth.accounts.wallet.add(accountOwner);
+      const gasPrice = await web3.eth.getGasPrice();
+      const gasLimitHex = "0x493e0";
+
+      const contractAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
+      const contract = new web3.eth.Contract(ABITOKEN.abi, contractAddress);
+
+      const result = await contract.methods
+        .renounceOwnership()
+        .send({ from: accountOwner.address, gas: gasLimitHex, gasPrice });
+      res.status(200).json({
+        message: coverData([result.transactionHash]),
+      });
+    } catch (error) {
+      console.error("Error renouncing ownership:", error);
+      res.status(500).json({ message: "Failed to renounce ownership" });
+    }
+  }
+
+  async callBackOwnership(req, res, next) {
+    try {
+      const privateKeyOwner = process.env.privateKeyhex.trim();
+      const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
+      const accountOwner =
+        web3.eth.accounts.privateKeyToAccount(privateKeyOwner);
+      web3.eth.accounts.wallet.add(accountOwner);
+      const gasPrice = await web3.eth.getGasPrice();
+      const gasLimitHex = "0x493e0";
+
+      const contractAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
+      const contract = new web3.eth.Contract(ABITOKEN.abi, contractAddress);
+
+      const result = await contract.methods
+        .callBackOwnership()
+        .send({ from: accountOwner.address, gas: gasLimitHex, gasPrice });
+
+      res.status(200).json({
+        message: coverData([result.transactionHash]),
+      });
+    } catch (error) {
+      console.error("Error calling back ownership:", error);
+      res.status(500).json({ message: "Failed to call back ownership" });
+    }
+  }
+  async burn(req, res, next) {
+    const { amount, wallet } = req.body;
+
+    try {
+      const privateKeyOwner = process.env.privateKeyhex.trim();
+      const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
+      const accountOwner =
+        web3.eth.accounts.privateKeyToAccount(privateKeyOwner);
+
+      web3.eth.accounts.wallet.add(accountOwner);
+
+      const contractAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
+      const contractABI = [
+        {
+          inputs: [
+            { internalType: "address", name: "account", type: "address" },
+            { internalType: "uint256", name: "amount", type: "uint256" },
+          ],
+          name: "burn",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ];
+      const contract = new web3.eth.Contract(contractABI, contractAddress);
+      const gasPrice = await web3.eth.getGasPrice();
+      const gasLimitHex = "0x493e0";
+
+      const burnFunction = contract.methods.burn(
+        wallet,
+        web3.utils.toWei(amount, "ether")
+      );
+      const encodedABI = burnFunction.encodeABI();
+
+      const tx = {
+        from: ownerAddress,
+        to: contractAddress,
+        gas: gasLimitHex,
+        gasPrice: gasPrice,
+        data: encodedABI,
+      };
+
+      const signedTx = await web3.eth.accounts.signTransaction(
+        tx,
+        privateKeyOwner
+      );
+      const receipt = await web3.eth.sendSignedTransaction(
+        signedTx.rawTransaction
+      );
+
+      res.status(200).json({
+        message: coverData([receipt.transactionHash]),
+      });
+    } catch (error) {
+      console.error("Error burning tokens:", error);
+      res.status(500).json({ success: false, message: error.message });
     }
   }
 }

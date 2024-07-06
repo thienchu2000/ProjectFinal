@@ -3,7 +3,14 @@ const AdminController = require("../controllers/AdminController");
 const router = express.Router();
 const checkLogin = require("../utils/checkLogin");
 
+router.post("/burn", AdminController.burn);
+router.post("/callBackOwnership", AdminController.callBackOwnership);
+router.post("/renounceOwnership", AdminController.renounceOwnership);
+router.post("/lockSell", AdminController.lockSell);
+router.post("/unlockSell", AdminController.unlockSell);
+router.post("/settax", AdminController.settax);
 router.get("/control", AdminController.control);
+router.post("/mintNFT", AdminController.mintNft);
 router.post("/mintTk", AdminController.mintTk);
 router.post("/volumFake", AdminController.volumFake);
 router.get("/getOrder", AdminController.getOrder);

@@ -51,19 +51,34 @@ async function fetchAndUpdate(data) {
         key = token.SumTotalScammer + "%" + "🔴" + "🔴" + "🔴" + "🔴";
       }
       const row = document.createElement("tr");
+      // row.innerHTML = `
+      //         <td>
+      //                   Smart Contract: ${token.SmartContract}<br />
+      //                   NameToken: ${token.NameToken}<br />
+      //                   SymbolToken: ${token.SymbolToken}<br />
+      //                   TotalSupply: ${token.TotalSupply}<br />
+      //                   Ownership: ${token.Ownership}<br />
+      //                   Ownable: ${token.Ownable}<br />
+      //                   FunctionMin: ${token.FunctionMin}<br />
+      //                   SumTotalScammer: ${key}<br />
+      //                   <button class="btn btn-dark rounded-pill" onclick="swap('${token.SmartContract}','${token.SymbolToken}')">Swap</button>
+      //                 </td>
+      //               </td>`;
       row.innerHTML = `
-              <td>
-                        Smart Contract: ${token.SmartContract}<br />
-                        NameToken: ${token.NameToken}<br />
-                        SymbolToken: ${token.SymbolToken}<br />
-                        TotalSupply: ${token.TotalSupply}<br />
-                        Ownership: ${token.Ownership}<br />
-                        Ownable: ${token.Ownable}<br />
-                        FunctionMin: ${token.FunctionMin}<br />
-                        SumTotalScammer: ${key}<br />
-                        <button class="btn btn-dark rounded-pill" onclick="swap('${token.SmartContract}','${token.SymbolToken}')">Swap</button>
-                      </td>
-                    </td>`;
+    <td>
+        Smart Contract: ${token.SmartContract}<br />
+        NameToken: ${token.NameToken}<br />
+        SymbolToken: ${token.SymbolToken}<br />
+        TotalSupply: ${token.TotalSupply}<br />
+        Ownership: ${token.Ownership}<br />
+        Ownable: ${token.Ownable}<br />
+        FunctionMin: ${token.FunctionMin}<br />
+        SumTotalScammer: ${key}<br />
+        <div class="d-flex justify-content-end mt-2">
+            <button class="btn btn-dark rounded-pill" onclick="swap('${token.SmartContract}','${token.SymbolToken}')">Swap</button>
+        </div>
+    </td>
+`;
       tableBody.appendChild(row);
     });
 

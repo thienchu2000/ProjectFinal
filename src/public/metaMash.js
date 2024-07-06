@@ -9,7 +9,7 @@ function hidePendingModal() {
 }
 
 async function connectMetamask(id, Price) {
-  const tokenAddress = "0x8A3b0D476E9075e7f63D42d3bD85b8319E17086B";
+  const tokenAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
   const addressOwner = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
   const gasPriceHex = "0x30";
   const gasLimitHex = "0x493e0";

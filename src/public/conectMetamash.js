@@ -6,13 +6,26 @@ document.addEventListener("DOMContentLoaded", async function () {
     connectButton.setAttribute("disabled", true);
     return;
   }
-
+  var symbol = "MCTK";
+  var SmartContact = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
   connectButton.addEventListener("click", async () => {
     try {
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
       });
       const address = accounts[0];
+      await window.ethereum.request({
+        method: "wallet_watchAsset",
+        params: {
+          type: "ERC20",
+          options: {
+            address: SmartContact,
+            symbol: symbol,
+            decimals: 18,
+          },
+        },
+      });
+
       alert(`Connected with address: ${address}`);
     } catch (error) {
       console.error("Failed to connect wallet:", error);
