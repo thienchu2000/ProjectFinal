@@ -23,8 +23,6 @@ function displayResults(results) {
     const transactionElement = document.createElement("div");
     transactionElement.innerHTML = `
       <p>Transaction ${index + 1}:</p>
-      <p>Sell Hash: ${parsedResult.Sell}</p>
-      <p>Transfer Back Hash: ${parsedResult.TransferBack}</p>
       <p> <a href="https://sepolia.etherscan.io/tx/${
         parsedResult.Sell
       }">Check Transaction Sell</a></p>
@@ -142,16 +140,18 @@ function mintToken() {
       hidePendingModall();
     });
 }
-function mintNft() {
+function mintNft1() {
+  const SmartContact = "0xb4436D31E4Db1Ed2FC55262A93aF9D3b946fEE78";
+  console.log(SmartContact);
   const mintNft = document.getElementById("mintNft").value;
   showPendingModall();
   axios
     .post("/admin/mintNft", {
       mintNft,
+      SmartContact,
     })
     .then((response) => {
-      display(response.data.message);
-      alert("successful");
+      alert("successful" + response.data.message);
       hidePendingModall();
     })
     .catch((err) => {
@@ -173,10 +173,8 @@ async function settTax() {
       })
       .then((response) => {
         hidePendingModall();
-
         window.location.reload();
-        displayy(response.data.message);
-        alert("Successful");
+        return alert("Successful");
       })
       .catch((err) => {
         console.error("Error setting tax:", err);
@@ -269,4 +267,81 @@ async function burnToken() {
       "Error calling back ownership. Please check the console for details."
     );
   }
+}
+
+async function dump() {
+  showPendingModall();
+  try {
+    const response = await axios.post("/admin/dump");
+    window.location.reload();
+    hidePendingModall();
+    displayy(response.data.message);
+  } catch (error) {
+    console.error("Error calling back ownership:", error);
+    alert(
+      "Error calling back ownership. Please check the console for details."
+    );
+  }
+}
+function mintNft2() {
+  const SmartContact = "0x6e20ab554CC44DFB46161a2923650393696a2Fd9";
+  console.log(SmartContact);
+  const mintNft = document.getElementById("mintNft").value;
+  showPendingModall();
+  axios
+    .post("/admin/mintNft", {
+      mintNft,
+      SmartContact,
+    })
+    .then((response) => {
+      alert("successful" + response.data.message);
+      hidePendingModall();
+    })
+    .catch((err) => {
+      console.error("Error creating fake volume:", err);
+      alert("Error creating fake volume");
+      hidePendingModall();
+    });
+}
+
+function mintNft3() {
+  const SmartContact = "0xecF6A5e7cC38f6044F8F9f0426aC6e0285d72f7A";
+  console.log(SmartContact);
+  const mintNft = document.getElementById("mintNft").value;
+  showPendingModall();
+  axios
+    .post("/admin/mintNft", {
+      mintNft,
+      SmartContact,
+    })
+    .then((response) => {
+      alert("successful" + response.data.message);
+      hidePendingModall();
+    })
+    .catch((err) => {
+      console.error("Error creating fake volume:", err);
+      alert("Error creating fake volume");
+      hidePendingModall();
+    });
+}
+
+function mintNft4() {
+  const SmartContact = "0x7F825645Fd9bD9279CDd078D40920a32a6e1B8B7";
+  console.log(SmartContact);
+  const mintNft = document.getElementById("mintNft").value;
+  showPendingModall();
+  axios
+    .post("/admin/mintNft", {
+      mintNft,
+      SmartContact,
+    })
+    .then((response) => {
+      alert("successful" + response.data.message);
+      hidePendingModall();
+    })
+    .catch((err) => {
+      console.error("Error creating fake volume:", err);
+      alert("Error creating fake volume");
+      hidePendingModall();
+    });
 }

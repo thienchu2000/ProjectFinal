@@ -54,6 +54,7 @@ async function setResult(io) {
     return item.BigMetaData;
   });
   const result = [];
+
   function analyzeVolume(currentVolume, historicalVolume) {
     if (historicalVolume === 0) {
       return "Invalid historical volume data";

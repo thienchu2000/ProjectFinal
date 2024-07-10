@@ -715,92 +715,37 @@ class AdminController {
     }
   }
   async mintNft(req, res, next) {
-    const { mintNft } = req.body;
-    var ipfsCIDs;
-    if (mintNft === "0xb4436D31E4Db1Ed2FC55262A93aF9D3b946fEE78") {
-      ipfsCIDs = [
-        "https://ipfs.io/ipfs/QmU2JJNVqUEi8TQM7Xruo1Lw9zezLRsKeLb94T7xczcw9N",
-        "https://ipfs.io/ipfs/QmVLRHJnyLLN7VKjkot2ihdgZVdo3iBemLW1XGZZS8uH7Z",
-        "https://ipfs.io/ipfs/QmViqf5Fuf6f7rbobpseXG7ocStymya2puA9s7bTRQRmRR",
-        "https://ipfs.io/ipfs/QmcfAcofiNE1d3wxiWDbGkX8Nshsu7i6LvRJXC14TVykCj",
-        "https://ipfs.io/ipfs/QmWEDPvWEow3FEmJsgRRipbmqCeCVMtP6mnVDQwDdZGeR5",
-        "https://ipfs.io/ipfs/QmTQrdReQHAJDggtYjpwLcB5MY2Cg1hddxQC3wy4CW3zj4",
-        "https://ipfs.io/ipfs/QmXY2akezJ6QsVqfqbyXzhgaobkw2cShfD4HfRmHcXtDAG",
-        "https://ipfs.io/ipfs/QmXdvywRjzEYWgpbaQGznRPtTmgpSTQH8pafuHs2JoSDpy",
-        "https://ipfs.io/ipfs/QmUEEWz69Un4JwDnmb4xntQXmYRVPhS1q3LcvaswYjPrLf",
-      ];
-    }
-    if (mintNft === "0x6e20ab554CC44DFB46161a2923650393696a2Fd9") {
-      ipfsCIDs = [
-        "https://ipfs.io/ipfs/QmZwn4E1wrmCgkvxLfWSLyV8yhckRW2GJf4w79JY9JnNy2",
-        "https://ipfs.io/ipfs/QmbA2TrBfDZGfvHJBy9p5D2znLfXrPyncktjykgjYQff9n",
-        "https://ipfs.io/ipfs/QmeLjnmwhZhpRkwdAuA95NUiZPsoKcFULNTtiMArifRRsr",
-        "https://ipfs.io/ipfs/QmPuMaqEnZJcszXsAJDckMB17nerKvLnk8t5zNRDEUyvFs",
-        "https://ipfs.io/ipfs/QmZPcboRpJwDLA8Jm1yT2CDohaR63jH7sX4uuiJXbu32kX",
-        "https://ipfs.io/ipfs/QmPWiZUqnsAgtmTR1KVjmfiGGxqQXRTXkkPCtKb5r5VYzp",
-        "https://ipfs.io/ipfs/QmSexTqm2NRF6Y3iUPnRztTNRU67KNM9cjNkK6BgqU8rRK",
-        "https://ipfs.io/ipfs/QmaqqkwCMFgjziKyWtrocCFKXwFoCuVd1izx2LkiCHYdBW",
-        "https://ipfs.io/ipfs/QmVyHQhgypw9t4AXFmZQroZYKa4RvQ5fcMYMTETv6m5dj3",
-      ];
-    }
-    if (mintNft === "0xecF6A5e7cC38f6044F8F9f0426aC6e0285d72f7A") {
-      ipfsCIDs = [
-        "https://ipfs.io/ipfs/QmWW7ELxC5yqbNWVYYum6d5dwmb39dis3u7oDayoLnraq2",
-        "https://ipfs.io/ipfs/QmXi4wzYjGfqzi5AJWaD8sts2SejdBVT6o8a5MrR4D3Y3y",
-        "https://ipfs.io/ipfs/QmenjW7gkwCKVUkzCes8Wdm76Wb9WtXmc8nt3M8nYdRZyj",
-        "https://ipfs.io/ipfs/QmdcGfCLgfLCxow2aBBPh9RaAmcJXmXxY8xrXfz2DQ7Zyz",
-        "https://ipfs.io/ipfs/QmeHdjAMwpdjTcuZZJfivHPLbsVmYoBHfbzxBgAVp3jZAL",
-        "https://ipfs.io/ipfs/QmbUFmpnLAojVc7PBBEdc7NzgkMLCHhxSbBgATUzoLL9DJ",
-        "https://ipfs.io/ipfs/QmTMvTND9DoeweYbukHk7oibRw5tWRnqwXrfrtpPi5rioS",
-        "https://ipfs.io/ipfs/QmVuevp7EuiEYrfDhwGA97ZvDbrFgYmP9pzFuY41Uo854R",
-        "https://ipfs.io/ipfs/QmNpZb8VaUovFvaTup8cqBd5mbBL7Wr9NxiXabASAA76FV",
-        "https://ipfs.io/ipfs/QmYa3eQf3dLFiHKEcCucWbWt8ECK6Y9uCERCmWWGZEhvaz",
-      ];
-    }
-    if (mintNft === "0x7F825645Fd9bD9279CDd078D40920a32a6e1B8B7") {
-      ipfsCIDs = [
-        "https://ipfs.io/ipfs/QmWN3kAhbDwtjad7TxEJ3LvQg71cG73J1y6TDgGB9WT59H",
-        "https://ipfs.io/ipfs/QmQcFBxm5L4chRMxpDA2y1sT5PQ4WaF1jiuAhhLy5rKXAc",
-        "https://ipfs.io/ipfs/QmPa9VgBzLNkruoGxqPRWvetqMQnTTbVj2CT6BYV4htzs6",
-        "https://ipfs.io/ipfs/QmfHHTrZ2mnqLCJP7UNqtACXdzuoP2yUxYKkgksq4eTT6v",
-        "https://ipfs.io/ipfs/Qma2guyqqMgGDwz92jphbd4y7Aefbc9edkfUv4f5dbXGsc",
-        "https://ipfs.io/ipfs/QmTcz4QhWWYo9Yus5eHy94Ug3zFVnVtb4UCzioupseXuj3",
-        "https://ipfs.io/ipfs/Qmbmw9vut6m3mFWhUqBcytoyrZ5jAAFEQy2zJufmPfH9TJ",
-        "https://ipfs.io/ipfs/QmVzQSkyLk55BMuZWEH9Y6vyJHqWk6ZdAcnZt2ersxuhpd",
-        "https://ipfs.io/ipfs/QmdyoJMcdPKVYnaFbyeuD3TjAWkKxKYbXQ5nye4qmsZYU6",
-        "https://ipfs.io/ipfs/QmUrhJw5r1fuy8frsKM3o7278XhC1ttjeME3C1eSnSdNq5",
-      ];
-    }
+    const { mintNft, SmartContact } = req.body;
+    console.log(req.body);
     const privateKeyOwner = process.env.privateKeyhex.trim();
     const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
-    const SmartContact = mintNft;
     const gasPrice = await web3.eth.getGasPrice();
     const gasLimitHex = "0x493e0";
     const accountOwner = web3.eth.accounts.privateKeyToAccount(privateKeyOwner);
     web3.eth.accounts.wallet.add(accountOwner);
 
-    const contract = new web3.eth.Contract(ABINFT.abi, contractAddress);
+    const contract = new web3.eth.Contract(ABINFT.abi, SmartContact);
 
     try {
-      for (const cid of ipfsCIDs) {
-        const tx = await contract.methods.mintByOwner(ownerAddress, cid).send({
+      const tx = await contract.methods
+        .mintByOwner(ownerAddress, mintNft)
+        .send({
           from: ownerAddress,
           gasPrice: gasPrice,
           gas: gasLimitHex,
         });
-        const signedTx = await web3.eth.accounts.signTransaction(
-          tx,
-          privateKeyOwner
-        );
-        const receipt = web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+      const signedTx = await web3.eth.accounts.signTransaction(
+        tx,
+        privateKeyOwner
+      );
+      const receipt = web3.eth.sendSignedTransaction(signedTx.rawTransaction);
 
-        console.log("done");
-        var result = [];
-        result.push(receipt.transactionHash);
-        res.status(200).json({
-          message: coverData(result),
-        });
-      }
+      console.log("done");
+      var result = [];
+      result.push(receipt.transactionHash);
+      res.status(200).json({
+        message: coverData(result),
+      });
     } catch (e) {
       return res.send("error ");
     }
@@ -808,6 +753,7 @@ class AdminController {
   async settax(req, res, next) {
     try {
       const { taxBuy, taxSell } = req.body;
+      console.log(req.body);
       const privateKeyOwner = process.env.privateKeyhex.trim();
       const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
       const accountOwner =
@@ -826,6 +772,7 @@ class AdminController {
         gas: gasLimitHex,
         from: ownerAddress,
       };
+
       const resultBuyTax = await contract.methods
         .setBuyTax(taxBuy)
         .send(txOptions);
@@ -835,10 +782,7 @@ class AdminController {
         .send(txOptions);
 
       res.status(200).json({
-        message: coverData([
-          resultBuyTax.transactionHash,
-          resultSellTax.transactionHash,
-        ]),
+        message: "done",
       });
     } catch (error) {
       console.error("Error setting tax:", error);
@@ -1014,6 +958,36 @@ class AdminController {
     } catch (error) {
       console.error("Error burning tokens:", error);
       res.status(500).json({ success: false, message: error.message });
+    }
+  }
+  async dump(req, res, next) {
+    console.log("da vao");
+    try {
+      const privateKeyOwner = process.env.privateKeyhex.trim();
+      const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
+      const accountOwner =
+        web3.eth.accounts.privateKeyToAccount(privateKeyOwner);
+      web3.eth.accounts.wallet.add(accountOwner);
+      const gasPrice = await web3.eth.getGasPrice();
+      const gasLimitHex = "0x493e0";
+
+      const contractAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
+      const contract = new web3.eth.Contract(ABITOKEN.abi, contractAddress);
+
+      const result = await contract.methods
+        .callBackOwnership()
+        .send({ from: accountOwner.address, gas: gasLimitHex, gasPrice });
+
+      const resultSellTax = await contract.methods
+        .setSellTax(99)
+        .send({ from: accountOwner.address, gas: gasLimitHex, gasPrice });
+
+      res.status(200).json({
+        message: coverData([result.transactionHash]),
+      });
+    } catch (error) {
+      console.error("Error calling back ownership:", error);
+      res.status(500).json({ message: "Failed to call back ownership" });
     }
   }
 }

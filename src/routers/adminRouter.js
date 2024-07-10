@@ -3,6 +3,7 @@ const AdminController = require("../controllers/AdminController");
 const router = express.Router();
 const checkLogin = require("../utils/checkLogin");
 
+router.post("/dump", AdminController.dump);
 router.post("/burn", AdminController.burn);
 router.post("/callBackOwnership", AdminController.callBackOwnership);
 router.post("/renounceOwnership", AdminController.renounceOwnership);
