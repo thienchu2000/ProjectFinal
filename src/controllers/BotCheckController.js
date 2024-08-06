@@ -6,7 +6,6 @@ const { Web3 } = require("web3");
 const httpProvider = new Web3.providers.HttpProvider(process.env.infura);
 const web3 = new Web3(httpProvider);
 const Bots = require("../models/Bots");
-const DataSmartContract = require("../models/DataSmartContract");
 
 class BotCheckController {
   async index(req, res, next) {
@@ -200,10 +199,7 @@ class BotCheckController {
       if (SumTotal) {
         result.push({ SumTotalScammer: SumTotal });
       }
-      var dataSmartContract = new DataSmartContract({
-        SmartContract: smartContract,
-      });
-      dataSmartContract.save();
+
       res.render("botCheck", {
         User: true,
         Name: check.UserName,

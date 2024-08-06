@@ -4,7 +4,6 @@ socket.on("connect", () => {
 });
 
 socket.on("datacoin", (data) => {
-  console.log("Datacoin", data);
   datacoin(data);
 });
 socket.on("disconnect", () => {

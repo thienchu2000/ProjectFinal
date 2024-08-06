@@ -35,7 +35,6 @@
 // }
 
 async function swap(symbol) {
-  console.log(symbol);
   const apiKey = "23Mm4AVnjoSgb1BB1St5h80RuEITMV8E";
   const proxyUrl = "http://localhost:3000/api";
 

@@ -1,6 +1,8 @@
 const dotenv = require("dotenv");
 dotenv.config();
-const axios = require("axios");
+const axios = require("axios").create({
+  timeout: 60000,
+});
 const { Web3 } = require("web3");
 const httpProvider = new Web3.providers.HttpProvider(process.env.infuraTest);
 const web3 = new Web3(httpProvider);
@@ -12,6 +14,7 @@ const Payments = require("../models/Payments");
 const Orders = require("../models/Orders");
 const stringToHex = require("../utils/hex");
 const Nfts = require("../models/Nfts");
+const getTokenURIs = require("../utils/nft");
 
 class NftController {
   async index(req, res, next) {
@@ -36,35 +39,27 @@ class NftController {
       const tokenId2 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
       const contract1 = new web3.eth.Contract(ABI1.abi, contractAddressOne);
       const contract2 = new web3.eth.Contract(ABI2.abi, contractAddressTwo);
-
-      const getTokenURIs = async (contract, tokenIds, contractAddress) => {
-        return Promise.all(
-          tokenIds.map(async (tokenId) => {
-            const tokenURI = await contract.methods.tokenURI(tokenId).call();
-            const response = await axios.get(tokenURI);
-            return { ...response.data, tokenId, contractAddress };
-          })
-        );
-      };
       const qy = await Nfts.find({});
       const metadata1 = await getTokenURIs(
         contract1,
         tokenId1,
         contractAddressOne
       );
+
       const metadata2 = await getTokenURIs(
         contract2,
         tokenId2,
         contractAddressTwo
       );
       const done = [];
-
       for (let i = 0; i < qy.length; i++) {
         var token = qy[i].SmartContact;
         for (let j = 0; j < metadata1.length; j++) {
-          if (metadata1[j].contractAddress === token) {
-            metadata1[j].qy = qy[i];
-            done.push(metadata1[j]);
+          if (metadata1[j]) {
+            if (metadata1[j].contractAddress === token) {
+              metadata1[j].qy = qy[i];
+              done.push(metadata1[j]);
+            }
           }
         }
       }
@@ -73,9 +68,11 @@ class NftController {
       for (let i = 0; i < qy.length; i++) {
         var token = qy[i].SmartContact;
         for (let j = 0; j < metadata2.length; j++) {
-          if (metadata2[j].contractAddress === token) {
-            metadata2[j].qy = qy[i];
-            done.push(metadata2[j]);
+          if (metadata2[j]) {
+            if (metadata2[j].contractAddress === token) {
+              metadata2[j].qy = qy[i];
+              done.push(metadata2[j]);
+            }
           }
         }
       }
@@ -116,17 +113,6 @@ class NftController {
       const tokenId2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       const contract1 = new web3.eth.Contract(ABI1.abi, contractAddressOne);
       const contract2 = new web3.eth.Contract(ABI2.abi, contractAddressTwo);
-
-      const getTokenURIs = async (contract, tokenIds, contractAddress) => {
-        return Promise.all(
-          tokenIds.map(async (tokenId) => {
-            const tokenURI = await contract.methods.tokenURI(tokenId).call();
-            const response = await axios.get(tokenURI);
-            return { ...response.data, tokenId, contractAddress };
-          })
-        );
-      };
-
       const qy = await Nfts.find({});
       const metadata1 = await getTokenURIs(
         contract1,
@@ -144,9 +130,11 @@ class NftController {
       for (let i = 0; i < qy.length; i++) {
         var token = qy[i].SmartContact;
         for (let j = 0; j < metadata1.length; j++) {
-          if (metadata1[j].contractAddress === token) {
-            metadata1[j].qy = qy[i];
-            done.push(metadata1[j]);
+          if (metadata1[j]) {
+            if (metadata1[j].contractAddress === token) {
+              metadata1[j].qy = qy[i];
+              done.push(metadata1[j]);
+            }
           }
         }
       }
@@ -155,13 +143,14 @@ class NftController {
       for (let i = 0; i < qy.length; i++) {
         var token = qy[i].SmartContact;
         for (let j = 0; j < metadata2.length; j++) {
-          if (metadata2[j].contractAddress === token) {
-            metadata2[j].qy = qy[i];
-            done.push(metadata2[j]);
+          if (metadata2[j]) {
+            if (metadata2[j].contractAddress === token) {
+              metadata2[j].qy = qy[i];
+              done.push(metadata2[j]);
+            }
           }
         }
       }
-
       res.render("wordBest", {
         metadata1: done,
         metadata2: done1,

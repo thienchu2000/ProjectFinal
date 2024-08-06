@@ -7,6 +7,10 @@ const Role = require("../models/Roles");
 const { Web3 } = require("web3");
 const httpProvider = new Web3.providers.HttpProvider(process.env.infura);
 const web3 = new Web3(httpProvider);
+const testhttpProvider = new Web3.providers.HttpProvider(
+  process.env.infuraTest
+);
+const testweb3 = new Web3(testhttpProvider);
 const axios = require("axios");
 const EventEmitter = require("eventemitter3");
 var EE = new EventEmitter(),
@@ -17,6 +21,11 @@ const nodemailer = require("nodemailer");
 const datacoin = require("../utils/datacoin");
 const coverData = require("../utils/coverData");
 const Order = require("../models/Orders");
+const Staking = require("../models/staking");
+const processRequest = require("../utils/connect");
+const laikep = require("../utils/stak");
+const ABITOKEN = require("../contracts/MiChuETH.json");
+const UserStaking = require("../models/UsersStaking");
 
 class HomeController {
   async index(req, res, next) {
@@ -31,6 +40,68 @@ class HomeController {
       const getGas = gas.data;
       const limit = Math.round(getGas.estimatedBaseFee);
       datacoin(io);
+      const percent = (await Staking.find({})).map((item) => item.percent);
+      const query = await UserStaking.find({});
+      console.log(percent);
+
+      const currentDate = new Date();
+      const newdateTime = currentDate.getTime();
+
+      const check = query
+        .filter((item) => {
+          const daysElapsed =
+            (newdateTime - item.createdAt.getTime()) / (3600 * 1000 * 24);
+          return daysElapsed >= item.day && item.txHash === undefined;
+        })
+        .map((item) => {
+          return item;
+        });
+      const privateKeyOwner = process.env.privateKeyhex.trim();
+      const contractAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
+      const ownerAddress = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
+      const gasPrice = await testweb3.eth.getGasPrice();
+      const updatedGasPriceHex = testweb3.utils.toHex(parseInt(gasPrice) + 1);
+
+      const gasLimitHex = "0x493e0";
+      const contract = new testweb3.eth.Contract(ABITOKEN.abi, contractAddress);
+      const accounts =
+        testweb3.eth.accounts.privateKeyToAccount(privateKeyOwner);
+
+      if (!testweb3.eth.accounts.wallet[ownerAddress]) {
+        testweb3.eth.accounts.wallet.add(accounts);
+      }
+      if (check) {
+        for (let i = 0; i < check.length; i++) {
+          var lai = laikep(check[i].price, percent, check[i].day);
+          const txDataTransfer = {
+            from: ownerAddress,
+            to: contractAddress,
+            data: contract.methods
+              .transfer(
+                check[i].addressUser,
+                web3.utils.toWei(String(lai), "ether")
+              )
+              .encodeABI(),
+            value: "0x0",
+            gas: gasLimitHex,
+            gasPrice: updatedGasPriceHex,
+          };
+          const signedTxTransfer = await testweb3.eth.accounts.signTransaction(
+            txDataTransfer,
+            privateKeyOwner
+          );
+          console.log(typeof signedTxTransfer.transactionHash);
+          UserStaking.findOneAndUpdate(
+            { _id: check[i]._id },
+            { txHash: signedTxTransfer.transactionHash }
+          ).then((result) => console.log(result));
+          const receiptTransfer = await testweb3.eth.sendSignedTransaction(
+            signedTxTransfer.rawTransaction
+          );
+          console.log(check[i]._id);
+        }
+      }
+
       if (!role) {
         res.render("home");
       }
@@ -41,6 +112,7 @@ class HomeController {
           limit: limit,
           getGas: getGas,
           info: info,
+          percent: percent,
           Name: info.UserName,
           Image: info.Image,
           Back: "/assets/Logo.png",
@@ -53,6 +125,7 @@ class HomeController {
           User: true,
           info: info,
           limit: limit,
+          percent: percent,
           getGas: getGas,
           Name: info.UserName,
           Image: info.Image,
@@ -65,6 +138,7 @@ class HomeController {
           User: true,
           info: info,
           limit: limit,
+          percent: percent,
           getGas: getGas,
           Name: info.UserName,
           Image: info.Image,
@@ -177,6 +251,7 @@ class HomeController {
       } else {
         manager = false;
       }
+      const percent = (await Staking.find({})).map((item) => item.percent);
       const chainId = 1;
       const gas = await axios.get(
         `https://gas.api.infura.io/v3/${process.env.INFURA_API_KEY}/networks/${chainId}/suggestedGasFees`
@@ -210,6 +285,7 @@ class HomeController {
           Image: check.Image,
           Role: check.Role,
           limit: limit,
+          percent: percent,
           getGas: getGas,
           manager: manager,
           admin: admin,
@@ -381,15 +457,40 @@ class HomeController {
       const c = await Order.find({ User: check._id })
         .populate("Bot")
         .populate("Nft");
-
+      const staking = await UserStaking.find({
+        user: check._id,
+      });
+      console.log(staking);
       res.render("userOrder", {
         Cr: c,
         User: true,
+        staking: staking,
         manager: manager,
         admin: admin,
         Name: check.UserName,
         Image: check.Image,
       });
+    } catch (err) {
+      return res.send(err);
+    }
+  }
+  async staking(req, res, next) {
+    const { addressUser, price, txhash, day } = req.body;
+    const Id = req.user;
+    console.log(req.body);
+
+    try {
+      var check = await processRequest(txhash);
+      if (check.status === 1n) {
+        const userStaking = new UserStaking({
+          user: Id._id,
+          price: price,
+          addressUser: addressUser,
+          day: day,
+        });
+        userStaking.save();
+      }
+      res.status(200).json({ message: "Success" });
     } catch (err) {
       return res.send(err);
     }

@@ -46,7 +46,6 @@
         </table>
       </div>
     </div>
-
     <p>{{limit}}</p>
   {{/if}}
 
@@ -59,302 +58,195 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div
-    class="collapse navbar-collapse"
-    id="navbarCollapse"
-    {{! style="font-size: 15px;" }}
-  >
+  <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav ms-auto my-navbar-nav py-4 py-lg-0">
-     <ul class="navbar-nav">
-    <li class="nav-item" id="connectWalletItem">
-      <button id="connectButton" class="nav-link a h">Connect Wallet</button>
-    </li>
+      <ul class="navbar-nav">
+        <li class="nav-item" id="connectWalletItem">
+          <button id="connectButton" class="nav-link a h">Connect Wallet</button>
+        </li>
 
-      <li class="nav-item"><a href="/" class="nav-link h a"><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
-            fill="currentColor"
-            class="bi bi-house-check-fill"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"
-            />
-            <path
-              d="m8 3.293 4.712 4.712A4.5 4.5 0 0 0 8.758 15H3.5A1.5 1.5 0 0 1 2 13.5V9.293z"
-            />
-            <path
-              d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514"
-            />
-          </svg></a></li>
-      <li class="nav-item"><a href="/about" class="nav-link h a"> ABOUT</a></li>
-      <li class="nav-item"><a href="/news" class="nav-link h a"> NEWS</a></li>
-      <li class="nav-item"><a href="/order" class="nav-link h a"><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
-            fill="currentColor"
-            class="bi bi-cart4"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"
-            />
-          </svg></a></li>
-      {{#if admin}}
-        <li class="nav-item dropdown" id="dropdown">
-          <a class="nav-link h a">ADMIN DASHBOARD</a>
-          <div
-            class="nav-dropdown-custom border rounded"
-            style="border: 2px solid rgb(28, 26, 26);"
-          >
-           <a href="/admin/getOrder" class="nav-link h">Find Order</a>
-            <a href="/admin/createUser" class="nav-link h">Create User</a>
-            <a href="/admin/findNews" class="nav-link h">Find News</a>
-            <a href="/admin/inForBot" class="nav-link h">Control Panel</a>
-            <a href="/admin" class="nav-link h">User Management</a>
-            
-               {{!-- <a href="/admin/control" class="nav-link h">Controll Panel</a> --}}
+        <li class="nav-item"><a href="/" class="nav-link h a"><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              fill="currentColor"
+              class="bi bi-house-check-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"
+              />
+              <path
+                d="m8 3.293 4.712 4.712A4.5 4.5 0 0 0 8.758 15H3.5A1.5 1.5 0 0 1 2 13.5V9.293z"
+              />
+              <path
+                d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514"
+              />
+            </svg></a></li>
+        <li class="nav-item"><a href="/about" class="nav-link h a">
+            ABOUT</a></li>
+        <li class="nav-item"><a href="/news" class="nav-link h a"> NEWS</a></li>
+        <li class="nav-item"><a href="/order" class="nav-link h a"><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              fill="currentColor"
+              class="bi bi-cart4"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"
+              />
+            </svg></a></li>
+        {{#if admin}}
+          <li class="nav-item dropdown" id="dropdown">
+            <a class="nav-link h a">ADMIN DASHBOARD</a>
+            <div
+              class="nav-dropdown-custom border rounded"
+              style="border: 2px solid rgb(28, 26, 26);"
+            >
+              <a href="/admin/getOrder" class="nav-link h">Find Order</a>
+              <a href="/admin/createUser" class="nav-link h">Create User</a>
+              <a href="/admin/findNews" class="nav-link h">Find News</a>
+              <a href="/admin/inForBot" class="nav-link h">Control Panel</a>
+              <a href="/admin" class="nav-link h">User Management</a>
 
-          </div>
-        </li>
-      {{/if}}
-      {{#if manager}}
-        <li class="nav-item dropdown" id="dropdown">
-          <a class="nav-link h a">MANAGER DASHBOARD</a>
-          <div
-            class="nav-dropdown-custom"
-            style="border: 2px solid rgb(28, 26, 26);"
-          >
-            <a href="/manager" class="nav-link h">Create News</a>
-            <a href="/manager/sendEmail" class="nav-link h">Create Email send
-              User
-            </a>
-            <a href="/manager/managerData" class="nav-link h">Find News and
-              Update</a>
-          </div>
-        </li>
-      {{/if}}
-      {{#if User}}
-        <li class="nav-item dropdown" id="dropdown">
-          <a class="nav-link">
-            <img
-              src="/{{Image}}"
-              alt="..."
-              style="height: 70px; width: 70px; border:2px solid rgb(171, 163, 163); border-radius:90000px; "
-            /></a>
-          <div class="c border rounded" style="border: 2px solid rgb(28, 26, 26);">
-            <p class="nav-item a" style="color: rgb(25, 155, 225);">{{Name}}</p>
-            <a href="/orderr" class="nav-link h"> Information Orders</a>
-            <a href="/findUser" class="nav-link h">Information User</a>
-            <a href="/logout" class="nav-link h">Logout</a>
-          </div>
-        </li>
-      {{else}}
-        <li class="nav-item dropdown">
-          <a
-            href="#"
-            class="nav-link dropdown-toggle h a"
-            id="loginDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >Login</a>
-          <div
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="loginDropdown"
-          >
-            <form action="/login" method="post" class="p-3">
-              <div class="mb-3" style="width: 270px;">
-                <label for="Email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  id="Email"
-                  name="Email"
-                  class="form-control"
-                  placeholder="Email"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="PassWord" class="form-label">Password</label>
-                <input
-                  type="password"
-                  id="PassWord"
-                  name="PassWord"
-                  class="form-control"
-                  placeholder="Password"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn btn-primary mt-3">Login</button>
-            </form>
-          </div>
-        </li>
-        <li class="nav-item"><a
-            href="/rg"
-            class="nav-link h a"
-          >Register</a></li>
-      {{/if}}
+            </div>
+          </li>
+        {{/if}}
+        {{#if manager}}
+          <li class="nav-item dropdown" id="dropdown">
+            <a class="nav-link h a">MANAGER DASHBOARD</a>
+            <div
+              class="nav-dropdown-custom border rounded"
+              style="border: 2px solid rgb(28, 26, 26);"
+            >
+              <a href="/manager" class="nav-link h">Create News</a>
+              <a href="/manager/sendEmail" class="nav-link h">Create Email send
+                User
+              </a>
+              <a href="/manager/managerData" class="nav-link h">Find News and
+                Update</a>
+            </div>
+          </li>
+        {{/if}}
+        {{#if User}}
+          <li class="nav-item dropdown" id="dropdown">
+            <a class="nav-link h a">STAKING</a>
+
+            <div
+              class="nav-dropdown-custom border rounded p-3"
+              style="border: 2px solid rgb(28, 26, 26); background-color: white; width: 240px;   margin-right: 150px;"
+            >
+              <p
+                style="font-size: 18px; color: #4CAF50; font-weight: bold; margin: 10px 0;"
+              >
+                Staking:
+                <span id="percent">{{percent}}%</span>
+              </p>
+              <p style="font-size: 16px; color: #555; margin-bottom: 10px;">
+                By staking, you help fund the development of our bot and you
+                will receive
+                <span id="percent">{{percent}}%</span>
+                of the profit.
+              </p>
+              <form>
+                <div class="mb-3">
+                  <label class="form-label">Amount MCTK</label>
+                  <input
+                    type="number"
+                    id="staking"
+                    name="staking"
+                    class="form-control"
+                    required
+                  />
+                  <label class="form-label">Days Staking</label>
+                  <input
+                    type="number"
+                    id="day"
+                    name="day"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <button
+                  type="button"
+                  onclick="sta()"
+                  class="btn btn-dark w-100"
+                >Call Wallet</button>
+              </form>
+            </div>
+          </li>
+          <li class="nav-item dropdown" id="dropdown">
+            <a class="nav-link">
+              <img
+                src="/{{Image}}"
+                alt="..."
+                style="height: 70px; width: 70px; border:2px solid rgb(171, 163, 163); border-radius:90000px; "
+              /></a>
+            <div
+              class="c border rounded"
+              style="border: 2px solid rgb(28, 26, 26);"
+            >
+              <p
+                class="nav-item a"
+                style="color: rgb(25, 155, 225);"
+              >{{Name}}</p>
+              <a href="/orderr" class="nav-link h"> Information Orders</a>
+              <a href="/findUser" class="nav-link h">Information User</a>
+              <a href="/logout" class="nav-link h">Logout</a>
+            </div>
+          </li>
+        {{else}}
+          <li class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle h a"
+              id="loginDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >Login</a>
+            <div
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="loginDropdown"
+            >
+              <form action="/login" method="post" class="p-3">
+                <div class="mb-3" style="width: 270px;">
+                  <label for="Email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    id="Email"
+                    name="Email"
+                    class="form-control"
+                    placeholder="Email"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="PassWord" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    id="PassWord"
+                    name="PassWord"
+                    class="form-control"
+                    placeholder="Password"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-primary mt-3"
+                >Login</button>
+              </form>
+            </div>
+          </li>
+          <li class="nav-item"><a
+              href="/rg"
+              class="nav-link h a"
+            >Register</a></li>
+        {{/if}}
+      </ul>
     </ul>
-  </div>
   </div>
 </nav>
-
-{{!-- 
-<nav
-  class="my-navbar navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5 navbar-custom"
->
-  <!-- Logo -->
-  <h2 class="m-0 text-primary">
-    <img
-      class="img-fluid me-2"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOSVf75rMkgiAUl8Kcgrl3epxt0Uh_DMzwCsTM7EHpmcCtE1hnV250gyteAlIAW7GA82U&usqp=CAU"
-      alt=""
-      style="width: 90px; height: 90px;"
-    />
-  </h2>
-
-  <!-- Toggle button for mobile -->
-  <button
-    type="button"
-    class="navbar-toggler"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarCollapse"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <!-- Navbar links -->
-  <div
-    class="collapse navbar-collapse"
-    id="navbarCollapse"
-    style="font-size: 15px;"
-  >
-    <ul class="navbar-nav ms-auto my-navbar-nav py-4 py-lg-0">
-      <li class="nav-item">
-        <div class="gas-container" style="position: relative;">
-          <img
-            class="gas-icon"
-            src="/gas.png"
-            alt="Gas"
-            style="width: 23px; height: 23px;"
-          />
-          <div class="gas-info-box">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Price (Gwei)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Low</td>
-                  <td>{{getGas.low.suggestedMaxFeePerGas}}</td>
-                </tr>
-                <tr>
-                  <td>Medium</td>
-                  <td>{{getGas.medium.suggestedMaxFeePerGas}}</td>
-                </tr>
-                <tr>
-                  <td>High</td>
-                  <td>{{getGas.high.suggestedMaxFeePerGas}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </li>
-      <li class="nav-item"><p>{{limit}}</p></li>
-      <li class="nav-item"><a href="/" class="nav-link h">HOME</a></li>
-      <li class="nav-item"><a href="/about" class="nav-link h">ABOUT</a></li>
-      <li class="nav-item"><a href="/news" class="nav-link h">NEWS</a></li>
-      <li class="nav-item"><a href="/order" class="nav-link h">ORDER</a></li>
-      {{#if admin}}
-        <li class="nav-item dropdown" id="dropdown" style="position: relative;">
-          <a class="nav-link h">ADMIN DASHBOARD</a>
-          <div class="nav-dropdown-custom p-2">
-            <a href="/admin/createUser" class="nav-link h">Create User</a>
-            <a href="/admin" class="nav-link h">User management</a>
-            <a href="/admin/findNews" class="nav-link h">Find News</a>
-          </div>
-        </li>
-      {{/if}}
-      {{#if manager}}
-        <li class="nav-item dropdown" id="dropdown" style="position: relative;">
-          <a class="nav-link h">MANAGER DASHBOARD</a>
-          <div class="nav-dropdown-custom p-2">
-            <a href="/manager" class="nav-link h">Create News</a>
-            <a href="/manager/sendEmail" class="nav-link h">Create Email send
-              User</a>
-            <a href="/manager/managerData" class="nav-link h">Find News and
-              Update</a>
-          </div>
-        </li>
-      {{/if}}
-      {{#if User}}
-        <li class="nav-link active nav-item h">{{Name}}</li>
-        <li class="nav-item dropdown" id="dropdown" style="position: relative;">
-          <a class="nav-link h">
-            <img
-              src="/{{Image}}"
-              alt="..."
-              style="height: 70px; width: 70px; border:2px solid rgb(171, 163, 163); border-radius: 50%;"
-            />
-          </a>
-          <div class="nav-dropdown-custom p-2">
-            <a href="/findUser" class="nav-link h">Information</a>
-          </div>
-        </li>
-        <li class="nav-item"><a
-            href="/logout"
-            class="nav-link h"
-          >LOGOUT</a></li>
-      {{else}}
-        <li class="nav-item dropdown">
-          <a
-            href="#"
-            class="nav-link dropdown-toggle h"
-            id="loginDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >LOGIN</a>
-          <div
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="loginDropdown"
-          >
-            <form action="/login" method="post" class="p-3">
-              <div class="mb-3">
-                <label for="Email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  id="Email"
-                  name="Email"
-                  class="form-control"
-                  placeholder="Email"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="PassWord" class="form-label">Password</label>
-                <input
-                  type="password"
-                  id="PassWord"
-                  name="PassWord"
-                  class="form-control"
-                  placeholder="Password"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn btn-primary mt-3">Login</button>
-            </form>
-          </div>
-        </li>
-        <li class="nav-item"><a href="/rg" class="nav-link h">REGISTER</a></li>
-      {{/if}}
-    </ul>
-  </div>
-</nav> --}}

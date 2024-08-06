@@ -43,3 +43,34 @@
     </tbody>
   </table>
 </div>
+
+<div class="container mt-5">
+  <h2 class="mb-4">Staking </h2>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+
+        <th scope="col">Amount Staked</th>
+        <th scope="col">Time Staking</th>
+        <th scope="col">Check Transacsion txHash</th>
+        <th scope="col">Staking Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each staking}}
+        <tr>
+          <td>{{price}} MKTC</td>
+          <td>{{day}} Day</td>
+          {{#if txHash}}
+            <td><a href="https://sepolia.etherscan.io/tx/{{txHash}}">Check
+                Percent
+              </a></td>
+          {{else}}
+            <td><p>wait enough time to receive Token</p></td>
+          {{/if}}
+          <td>{{formatDate createdAt}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

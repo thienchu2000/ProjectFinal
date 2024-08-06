@@ -19,6 +19,8 @@ const ABItoken = require("../contracts/MiChuTokenA.json");
 const sleep = require("../utils/slepp");
 const ABINFT = require("../contracts/WordLegendNFT_one1.json");
 const ABITOKEN = require("../contracts/MiChuETH.json");
+const UserStaking = require("../models/UsersStaking");
+const Staking = require("../models/staking");
 
 class AdminController {
   async index(req, res, next) {
@@ -205,11 +207,12 @@ class AdminController {
       }
       const data = await Bots.find({});
       const qy = await Nfts.find({});
-
+      const staking = await Staking.find({});
       const check = req.user;
       res.render("admin/createInforBot", {
         qy: qy,
         data: data,
+        staking: staking,
         User: true,
         Name: check.UserName,
         _id: check._id,
@@ -263,9 +266,12 @@ class AdminController {
         .populate("Bot")
         .populate("Nft")
         .populate("User");
+
+      const staking = await UserStaking.find({}).populate("user");
       res.render("admin/order", {
         qy: qy,
         User: true,
+        staking: staking,
         Name: check.UserName,
         _id: check._id,
         admin: true,
@@ -989,6 +995,15 @@ class AdminController {
       console.error("Error calling back ownership:", error);
       res.status(500).json({ message: "Failed to call back ownership" });
     }
+  }
+  async staking(req, res, next) {
+    const { percent } = req.body;
+    var id = req.params.id;
+    Staking.findByIdAndUpdate({ _id: id }, { ...req.body })
+      .then(() => {
+        res.status(200).send("Success");
+      })
+      .catch((err) => res.status(500).send("Error"));
   }
 }
 

@@ -345,3 +345,17 @@ function mintNft4() {
       hidePendingModall();
     });
 }
+
+function ski(id) {
+  var percent = document.getElementById("sk").value;
+
+  axios
+    .put(`/admin/staking/${id}`, { percent })
+    .then((data) => {
+      console.log(data);
+      return window.location.reload();
+    })
+    .catch((error) => {
+      return alert("failed ");
+    });
+}
