@@ -209,11 +209,13 @@ class AdminController {
       const qy = await Nfts.find({});
       const staking = await Staking.find({});
       const check = req.user;
+      const percent = (await Staking.find({})).map((item) => item.percent);
       res.render("admin/createInforBot", {
         qy: qy,
         data: data,
         staking: staking,
         User: true,
+        percent: percent,
         Name: check.UserName,
         _id: check._id,
         admin: true,

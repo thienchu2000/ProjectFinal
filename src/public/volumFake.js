@@ -348,11 +348,13 @@ function mintNft4() {
 
 function ski(id) {
   var percent = document.getElementById("sk").value;
-
+  showPendingModal();
   axios
     .put(`/admin/staking/${id}`, { percent })
     .then((data) => {
       console.log(data);
+      hidePendingModal();
+      alert("Successfully");
       return window.location.reload();
     })
     .catch((error) => {

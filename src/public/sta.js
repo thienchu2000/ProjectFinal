@@ -1,3 +1,11 @@
+function showPendingModal() {
+  document.getElementById("nftpending").style.display = "block";
+}
+
+function hidePendingModal() {
+  document.getElementById("nftpending").style.display = "none";
+}
+
 async function sta() {
   const tokenAddress = "0xF00aa648C743a0dfF310c62EaCe3dF9757A14Ef8";
   const addressOwner = "0x9B555039084f8feCB75AeF928B7ccd2b15A84575";
@@ -72,7 +80,7 @@ async function sta() {
       }
       console.log("Transaction receipt:", receipt);
     });
-
+    showPendingModal();
     try {
       const response = await axios.post("/staking", {
         addressUser: accounts[0],
@@ -83,17 +91,21 @@ async function sta() {
 
       if (response.status === 200) {
         alert("Staking successful!");
+        hidePendingModal();
       } else {
         alert("Staking failed. Please try again later.");
+        hidePendingModal();
       }
     } catch (error) {
       console.error("Error sending token ", error);
       alert("Error sending token : " + error.message);
+      hidePendingModal();
     } finally {
     }
   } catch (error) {
     console.error("Error sending token ", error);
     alert("Error sending token  " + error.message);
+    hidePendingModal();
     throw error;
   }
 }

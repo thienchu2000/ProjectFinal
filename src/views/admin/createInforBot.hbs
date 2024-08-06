@@ -588,24 +588,31 @@
           <div class="text-center">
             <form>
               {{#each staking}}
-                <input
-                  type="text"
-                  placeholder="{{percent}} %"
-                  class="form-control form-control-sm"
-                  style="width: 30%;"
-                  id="sk"
-                  name="sk"
-                  required
-                />
-                <br />
+                <div class="form-group d-flex align-items-center">
+                  <label
+                    for="percent"
+                    class="col-sm-4 col-form-label"
+                  >Percent</label>
+                  <input
+                    type="text"
+                    value="{{percent}}"
+                    class="form-control form-control-sm"
+                    style="width: 25%;"
+                    id="sk"
+                    name="sk"
+                    required
+                  />
+                  <span style="margin-left: 5px;">%</span>
+                </div>
                 <button
                   type="button"
-                  class="aaabot-button btn btn-danger"
+                  class="aaabot-button btn btn-success"
                   onclick="ski('{{_id}}')"
+                  style="margin-top: 10px;"
                 >Set Percent</button>
+                <br />
               {{/each}}
             </form>
-
           </div>
         </div>
       </div>
