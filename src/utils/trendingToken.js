@@ -127,6 +127,57 @@ async function trendingTokens(SmartContracts) {
     throw new TypeError("SmartContracts is not iterable");
   }
 
+  // for (const contract of SmartContracts) {
+  //   try {
+  //     const apiCheckEther = await axios.get(
+  //       `https://api.etherscan.io/api?module=contract&action=getsourcecode&address=${contract.CA}&apikey=${keyEther}`
+  //     );
+
+  //     const contractData = apiCheckEther.data.result[0];
+  //     const sourceCode = contractData.SourceCode;
+  //     const contractInstance = new web3.eth.Contract(AbiContract, contract.CA);
+  //     const name = await contractInstance.methods.name().call();
+  //     const symbol = await contractInstance.methods.symbol().call();
+  //     const owner = await contractInstance.methods.owner().call();
+  //     const totalSupply = await contractInstance.methods.totalSupply().call();
+  //     const formattedTotalSupply = web3.utils.fromWei(
+  //       totalSupply.toString(),
+  //       "ether"
+  //     );
+
+  //     const contractInfo = {
+  //       SmartContract: contract.CA,
+  //       NameToken: name,
+  //       SymbolToken: symbol,
+  //       TotalSupply: `${formattedTotalSupply} ${symbol}`,
+  //       Ownership:
+  //         owner === "0x0000000000000000000000000000000000000000"
+  //           ? "Renounce Ownership"
+  //           : "Ownership has not been relinquished",
+  //       Ownable: sourceCode.includes("Ownable")
+  //         ? "has a special close-up function"
+  //         : "don't see function Ownable",
+  //       FunctionMin: sourceCode.includes("_mint")
+  //         ? "Min Token have dump"
+  //         : "Can't function Min token",
+  //     };
+
+  //     let sumTotal = 0;
+  //     if (contractInfo.Ownership === "Ownership has not been relinquished")
+  //       sumTotal += 30;
+  //     if (contractInfo.Ownable === "has a special close-up function")
+  //       sumTotal += 15;
+  //     if (contractInfo.FunctionMin === "Min Token have dump") sumTotal += 15;
+
+  //     contractInfo.SumTotalScammer = sumTotal;
+
+  //     result.push(contractInfo);
+  //     console.log(contractInfo);
+  //   } catch (e) {
+  //     console.error(`Error processing contract ${contract.CA}:`, e.message);
+  //   }
+  // }
+
   for (const contract of SmartContracts) {
     try {
       const apiCheckEther = await axios.get(
@@ -134,14 +185,27 @@ async function trendingTokens(SmartContracts) {
       );
 
       const contractData = apiCheckEther.data.result[0];
-      const sourceCode = contractData.SourceCode;
+      const sourceCode = contractData.SourceCode || "";
 
       const contractInstance = new web3.eth.Contract(AbiContract, contract.CA);
 
-      const name = await contractInstance.methods.name().call();
-      const symbol = await contractInstance.methods.symbol().call();
-      const owner = await contractInstance.methods.owner().call();
-      const totalSupply = await contractInstance.methods.totalSupply().call();
+      let name = "Unknown",
+        symbol = "Unknown",
+        owner = "Unknown",
+        totalSupply = "0";
+
+      try {
+        name = await contractInstance.methods.name().call();
+        symbol = await contractInstance.methods.symbol().call();
+        owner = await contractInstance.methods.owner().call();
+        totalSupply = await contractInstance.methods.totalSupply().call();
+      } catch (err) {
+        console.error(
+          `Error calling contract methods for ${contract.CA}:`,
+          err.message
+        );
+      }
+
       const formattedTotalSupply = web3.utils.fromWei(
         totalSupply.toString(),
         "ether"

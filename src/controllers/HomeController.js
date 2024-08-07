@@ -42,7 +42,6 @@ class HomeController {
       datacoin(io);
       const percent = (await Staking.find({})).map((item) => item.percent);
       const query = await UserStaking.find({});
-      console.log(percent);
 
       const currentDate = new Date();
       const newdateTime = currentDate.getTime();
@@ -457,10 +456,18 @@ class HomeController {
       const c = await Order.find({ User: check._id })
         .populate("Bot")
         .populate("Nft");
-      const staking = await UserStaking.find({
+      const stakingg = await UserStaking.find({
         user: check._id,
       });
-      console.log(staking);
+      const percent = (await Staking.find({})).map((item) => item.percent);
+
+      var staking = [];
+      for (let i = 0; i < stakingg.length; i++) {
+        staking.push({
+          lai: laikep(stakingg[i].price, percent, stakingg[i].day),
+          data: stakingg[i],
+        });
+      }
       res.render("userOrder", {
         Cr: c,
         User: true,

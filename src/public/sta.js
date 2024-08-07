@@ -1,9 +1,9 @@
 function showPendingModal() {
-  document.getElementById("nftpending").style.display = "block";
+  document.getElementById("sta").style.display = "block";
 }
 
 function hidePendingModal() {
-  document.getElementById("nftpending").style.display = "none";
+  document.getElementById("sta").style.display = "none";
 }
 
 async function sta() {
@@ -71,15 +71,15 @@ async function sta() {
 
     console.log(`Transaction hash: ${hash}`);
 
-    web3.eth.getTransactionReceipt(hash, (err, receipt) => {
-      if (err) {
-        console.error("Error fetching transaction receipt:", err);
-        alert("Transaction failed. Please try again later.");
-        hideSpinner();
-        return;
-      }
-      console.log("Transaction receipt:", receipt);
-    });
+    // web3.eth.getTransactionReceipt(hash, (err, receipt) => {
+    //   if (err) {
+    //     console.error("Error fetching transaction receipt:", err);
+    //     alert("Transaction failed. Please try again later.");
+    //     hideSpinner();
+    //     return;
+    //   }
+    //   console.log("Transaction receipt:", receipt);
+    // });
     showPendingModal();
     try {
       const response = await axios.post("/staking", {

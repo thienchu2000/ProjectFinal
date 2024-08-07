@@ -33,6 +33,20 @@ function displayResults(results) {
     resultContainer.appendChild(transactionElement);
   });
 }
+
+function displayResultss(results) {
+  const resultContainer = document.getElementById("result");
+  resultContainer.innerHTML = "";
+
+  results.forEach((result) => {
+    const transactionElement = document.createElement("div");
+    transactionElement.innerHTML = `
+      <p>TokenId: ${result.TokenId}</p>
+      <p><a href="https://sepolia.etherscan.io/tx/${result.transactionHash}">Check TransactionHash</a></p>
+    `;
+    resultContainer.appendChild(transactionElement);
+  });
+}
 function display(results) {
   const resultContainer = document.getElementById("result");
   resultContainer.innerHTML = "";
@@ -151,7 +165,8 @@ function mintNft1() {
       SmartContact,
     })
     .then((response) => {
-      alert("successful" + response.data.message);
+      displayResultss(response.data.result);
+      alert("Mint NFT successful");
       hidePendingModall();
     })
     .catch((err) => {
@@ -294,7 +309,8 @@ function mintNft2() {
       SmartContact,
     })
     .then((response) => {
-      alert("successful" + response.data.message);
+      displayResultss(response.data.result);
+      alert("Mint NFT successful");
       hidePendingModall();
     })
     .catch((err) => {
@@ -315,8 +331,9 @@ function mintNft3() {
       SmartContact,
     })
     .then((response) => {
-      alert("successful" + response.data.message);
+      alert("Mint NFT successful");
       hidePendingModall();
+      return displayResultss(response.data.result);
     })
     .catch((err) => {
       console.error("Error creating fake volume:", err);
@@ -336,7 +353,8 @@ function mintNft4() {
       SmartContact,
     })
     .then((response) => {
-      alert("successful" + response.data.message);
+      displayResultss(response.data.result);
+      alert("Mint NFT successful");
       hidePendingModall();
     })
     .catch((err) => {

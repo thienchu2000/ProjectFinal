@@ -61,7 +61,8 @@
       <tr>
         <th scope="col"></th>
         <th scope="col">Username</th>
-        <th scope="col">Amount Staked</th>
+        <th scope="col">Amount Staking</th>
+        <th scope="col">Profit After Staking</th>
         <th scope="col">Time Staking</th>
         <th scope="col">Transaction txHash</th>
         <th scope="col">Staking Date</th>
@@ -72,22 +73,23 @@
         <tr>
           <td class="align-middle">
             <img
-              src="/{{user.Image}}"
+              src="/{{data.user.Image}}"
               class="img-fluid rounded-circle"
               style="height: 40px; width: 40px;"
             />
           </td>
-          <td>{{user.UserName}}</td>
-          <td>{{price}} MKTC</td>
-          <td>{{day}} Day</td>
-          {{#if txHash}}
-            <td><a href="https://sepolia.etherscan.io/tx/{{txHash}}">Check
+          <td>{{data.user.UserName}}</td>
+          <td>{{data.price}} MKTC</td>
+          <td>{{lai}} MKTC</td>
+          <td>{{data.day}} Day</td>
+          {{#if data.txHash}}
+            <td><a href="https://sepolia.etherscan.io/tx/{{data.txHash}}">Check
                 Percent
               </a></td>
           {{else}}
             <td><p>wait enough time to receive Token</p></td>
           {{/if}}
-          <td>{{formatDate createdAt}}</td>
+          <td>{{formatDate data.createdAt}}</td>
         </tr>
       {{/each}}
     </tbody>

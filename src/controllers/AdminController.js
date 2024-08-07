@@ -21,6 +21,7 @@ const ABINFT = require("../contracts/WordLegendNFT_one1.json");
 const ABITOKEN = require("../contracts/MiChuETH.json");
 const UserStaking = require("../models/UsersStaking");
 const Staking = require("../models/staking");
+const laikep = require("../utils/stak");
 
 class AdminController {
   async index(req, res, next) {
@@ -269,7 +270,16 @@ class AdminController {
         .populate("Nft")
         .populate("User");
 
-      const staking = await UserStaking.find({}).populate("user");
+      const stakingg = await UserStaking.find({}).populate("user");
+      const percent = (await Staking.find({})).map((item) => item.percent);
+      var staking = [];
+      for (let i = 0; i < stakingg.length; i++) {
+        staking.push({
+          lai: laikep(stakingg[i].price, percent, stakingg[i].day),
+          data: stakingg[i],
+        });
+      }
+      console.log(staking);
       res.render("admin/order", {
         qy: qy,
         User: true,
@@ -738,24 +748,26 @@ class AdminController {
       const tx = await contract.methods
         .mintByOwner(ownerAddress, mintNft)
         .send({
-          from: ownerAddress,
+          from: accountOwner.address,
           gasPrice: gasPrice,
           gas: gasLimitHex,
         });
-      const signedTx = await web3.eth.accounts.signTransaction(
-        tx,
-        privateKeyOwner
-      );
-      const receipt = web3.eth.sendSignedTransaction(signedTx.rawTransaction);
-
-      console.log("done");
       var result = [];
-      result.push(receipt.transactionHash);
-      res.status(200).json({
-        message: coverData(result),
+      result.push({
+        TokenId: tx.events.Transfer.returnValues.tokenId,
+        transactionHash: tx.transactionHash,
       });
+
+      const formattedResult = result.map((item) => ({
+        TokenId: item.TokenId.toString(),
+        transactionHash: item.transactionHash,
+      }));
+
+      console.log("result", formattedResult);
+
+      res.status(200).json({ result: formattedResult });
     } catch (e) {
-      return res.send("error ");
+      return res.send("error" + e);
     }
   }
   async settax(req, res, next) {
