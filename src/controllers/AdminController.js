@@ -279,7 +279,7 @@ class AdminController {
           data: stakingg[i],
         });
       }
-      console.log(staking);
+
       res.render("admin/order", {
         qy: qy,
         User: true,
@@ -761,6 +761,7 @@ class AdminController {
       const formattedResult = result.map((item) => ({
         TokenId: item.TokenId.toString(),
         transactionHash: item.transactionHash,
+        smartContact: SmartContact,
       }));
 
       console.log("result", formattedResult);

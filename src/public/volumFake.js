@@ -1,9 +1,9 @@
-function showPendingModal() {
-  document.getElementById("nftpending").style.display = "block";
+function showPendingModalll() {
+  document.getElementById("pending").style.display = "block";
 }
 
-function hidePendingModal() {
-  document.getElementById("nftpending").style.display = "none";
+function hidePendingModalll() {
+  document.getElementById("pending").style.display = "none";
 }
 
 function showPendingModall() {
@@ -41,6 +41,7 @@ function displayResultss(results) {
   results.forEach((result) => {
     const transactionElement = document.createElement("div");
     transactionElement.innerHTML = `
+    <p  style="font-size:13px">Smartcontract: ${result.smartContact}</p>
       <p>TokenId: ${result.TokenId}</p>
       <p><a href="https://sepolia.etherscan.io/tx/${result.transactionHash}">Check TransactionHash</a></p>
     `;
@@ -91,7 +92,7 @@ function volumeFake() {
     return alert("Please select a valid transaction time");
   }
 
-  showPendingModal();
+  showPendingModalll();
 
   axios
     .post("/admin/volumFake", {
@@ -105,12 +106,12 @@ function volumeFake() {
     .then((response) => {
       displayResults(response.data.result);
       alert("volume creation successful");
-      hidePendingModal();
+      hidePendingModalll();
     })
     .catch((err) => {
       console.error("Error creating fake volume:", err);
       alert("Error creating fake volume");
-      hidePendingModal();
+      hidePendingModalll();
     });
 }
 

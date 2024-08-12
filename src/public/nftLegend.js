@@ -8,11 +8,11 @@ async function checkNftOwnership(contract, ownerAddress, tokenId) {
   }
 }
 
-function showPendingModal() {
+function showPendingMo() {
   document.getElementById("nftpending").style.display = "block";
 }
 
-function hidePendingModal() {
+function hidePendingMo() {
   document.getElementById("nftpending").style.display = "none";
 }
 
@@ -74,7 +74,7 @@ async function buynft(contractAddress, tokenId, ri, id) {
       gasPrice: web3.utils.toHex(gasPrice),
     };
 
-    showPendingModal();
+    showPendingMo();
 
     const hash = await ethereum.request({
       method: "eth_sendTransaction",
@@ -147,12 +147,12 @@ async function buynft(contractAddress, tokenId, ri, id) {
       console.error("Error sending token payment:", error);
       alert("Error sending token payment: " + error.message);
     } finally {
-      hidePendingModal();
+      hidePendingMo();
     }
   } catch (error) {
     console.error("Error sending token payment:", error);
     alert("Error sending token payment: " + error.message);
-    hidePendingModal();
+    hidePendingMo;
     throw error;
   }
 }

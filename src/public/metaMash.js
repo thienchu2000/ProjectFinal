@@ -1,11 +1,11 @@
 const spinner = document.getElementById("loading-spinner");
 
-function showPendingModal() {
-  document.getElementById("nftpending").style.display = "block";
+function showPendingModallll() {
+  document.getElementById("botpay").style.display = "block";
 }
 
-function hidePendingModal() {
-  document.getElementById("nftpending").style.display = "none";
+function hidePendingModallll() {
+  document.getElementById("botpay").style.display = "none";
 }
 
 async function connectMetamask(id, Price) {
@@ -15,13 +15,13 @@ async function connectMetamask(id, Price) {
   const gasLimitHex = "0x493e0";
 
   try {
-    showPendingModal();
+    showPendingModallll();
 
     if (typeof window.ethereum === "undefined") {
       alert(
         "MetaMask is not installed. Please install MetaMask to use this feature."
       );
-      hidePendingModal();
+      hidePendingModallll();
       return;
     }
 
@@ -101,12 +101,12 @@ async function connectMetamask(id, Price) {
       console.error("Error sending token payment:", error);
       alert("Error sending token payment: " + error.message);
     } finally {
-      hidePendingModal();
+      hidePendingModallll();
     }
   } catch (error) {
     console.error("Error sending token payment:", error);
     alert("Error sending token payment: " + error.message);
-    hidePendingModal();
+    hidePendingModallll();
     throw error;
   }
 }

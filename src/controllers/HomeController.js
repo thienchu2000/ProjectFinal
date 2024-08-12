@@ -42,10 +42,8 @@ class HomeController {
       datacoin(io);
       const percent = (await Staking.find({})).map((item) => item.percent);
       const query = await UserStaking.find({});
-
       const currentDate = new Date();
       const newdateTime = currentDate.getTime();
-
       const check = query
         .filter((item) => {
           const daysElapsed =
@@ -144,6 +142,7 @@ class HomeController {
         });
       }
     } catch (err) {
+      console.error(err);
       return res.send(err);
     }
   }

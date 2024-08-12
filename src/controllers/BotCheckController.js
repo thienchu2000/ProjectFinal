@@ -35,11 +35,13 @@ class BotCheckController {
   async check(req, res, next) {
     const { smartContract } = req.body;
     var result = [];
-    if (smartContract.length < 42 || smartContract.length > 42) {
+    var coverSM = smartContract.trim();
+    if (coverSM.length < 42 || coverSM.length > 42) {
       return res.status(401).send("Smart contracts must be 42 characters long");
     }
-    if (smartContract) {
-      result.push({ SmartContract: smartContract });
+
+    if (coverSM) {
+      result.push({ SmartContract: coverSM });
     }
     var keyEther = process.env.keyEther;
     const check = req.user;
@@ -58,7 +60,7 @@ class BotCheckController {
     }
     try {
       let apiCheckEther = await axios.get(
-        `https://api.etherscan.io/api?module=contract&action=getsourcecode&address=${smartContract}&apikey=${keyEther}`
+        `https://api.etherscan.io/api?module=contract&action=getsourcecode&address=${coverSM}&apikey=${keyEther}`
       );
       var doneCall = apiCheckEther.data;
       var checkSourceCode = doneCall.result.map((item) => {
@@ -141,7 +143,7 @@ class BotCheckController {
         // },
       ];
 
-      var contract = new web3.eth.Contract(AbiContract, smartContract);
+      var contract = new web3.eth.Contract(AbiContract, coverSM);
       var nameAbi = await contract.methods.name().call();
       if (nameAbi) {
         result.push({ NameToken: nameAbi });

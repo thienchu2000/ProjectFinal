@@ -99,7 +99,6 @@ async function setResult(io) {
   var time = new Date();
   console.log(time);
   analyzeVolume(donecall, historicalVolumes);
-
   io.on("connect", () => {
     io.emit("callback", result);
   });
