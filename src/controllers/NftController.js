@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const axios = require("axios").create({
-  timeout: 60000,
+  timeout: 10000,
 });
 const { Web3 } = require("web3");
 const httpProvider = new Web3.providers.HttpProvider(process.env.infuraTest);

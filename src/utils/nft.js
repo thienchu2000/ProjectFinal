@@ -1,5 +1,5 @@
 const axios = require("axios").create({
-  timeout: 20000,
+  timeout: 10000,
 });
 const getTokenURIs = async (contract, tokenIds, contractAddress) => {
   return Promise.all(
