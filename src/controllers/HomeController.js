@@ -501,6 +501,15 @@ class HomeController {
       return res.send(err);
     }
   }
+  async google(req, res, next) {
+    const profile = req.user;
+    res.cookie("access_token", profile.token);
+    try {
+      res.redirect("/");
+    } catch (error) {
+      console.error("Error during Google login callback:", error);
+    }
+  }
 }
 
 module.exports = new HomeController();

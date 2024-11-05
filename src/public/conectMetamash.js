@@ -25,7 +25,11 @@ document.addEventListener("DOMContentLoaded", async function () {
           },
         },
       });
-
+      // const balance = await window.ethereum.request({
+      //   method: "eth_getBalance",
+      //   params: [address],
+      // });
+      // console.log(balance);
       alert(`Connected with address: ${address}`);
     } catch (error) {
       console.error("Failed to connect wallet:", error);

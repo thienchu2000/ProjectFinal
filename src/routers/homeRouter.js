@@ -4,7 +4,19 @@ const router = express.Router();
 const authentication = require("../utils/authentication");
 const checkLogin = require("../utils/checkLogin");
 const upload = require("../utils/multer");
+const passport = require("passport");
+const handleProfile = require("../utils/passport");
+const passportMiddleware = require("../utils/passport");
 
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/", session: false }),
+  HomeController.google
+);
+router.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 router.post("/staking", checkLogin, HomeController.staking);
 router.get("/orderr", checkLogin, HomeController.order);
 router.post("/changeImg", checkLogin, upload, HomeController.changeImg);

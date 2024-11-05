@@ -21,6 +21,7 @@ const axios = require("axios");
 const { setResult, getResult } = require("./utils/ws");
 const { getRe } = require("./utils/ws1");
 const { createProxyMiddleware } = require("http-proxy-middleware");
+const passport = require("passport");
 
 const handlebars = require("handlebars");
 const EventEmitter = require("events");
@@ -57,6 +58,7 @@ app.use((req, res, next) => {
   res.io = io;
   next();
 });
+app.use(passport.initialize());
 
 router(app);
 

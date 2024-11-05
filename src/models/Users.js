@@ -6,6 +6,11 @@ const Users = new mongoose.Schema(
       ref: "Roles",
       default: "6656e3036f48cf6caf27e5b8",
     },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
     UserName: String,
     LastName: String,
     FirstName: String,
