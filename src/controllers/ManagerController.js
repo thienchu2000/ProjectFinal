@@ -86,11 +86,11 @@ class ManagerController {
       const email = findEmail.map((item) => item.Email);
       const OAuth2Client = google.auth.OAuth2;
       const myOAuth2Client = new OAuth2Client(
-        process.env.GOOGLE_MAILER_CLIENT_ID,
-        process.env.GOOGLE_MAILER_CLIENT_SECRET
+        process.env.GOOGLE_MAILER_CLIENT_ID1,
+        process.env.GOOGLE_MAILER_CLIENT_SECRET1
       );
       myOAuth2Client.setCredentials({
-        refresh_token: process.env.GOOGLE_MAILER_REFRESH_TOKEN,
+        refresh_token: process.env.GOOGLE_MAILER_REFRESH_TOKEN1,
       });
       const myAccessTokenObject = await myOAuth2Client.getAccessToken();
       const myAccessToken = myAccessTokenObject.token;
@@ -98,10 +98,10 @@ class ManagerController {
         service: "gmail",
         auth: {
           type: "OAuth2",
-          user: process.env.ADMIN_EMAIL_ADDRESS,
-          clientId: process.env.GOOGLE_MAILER_CLIENT_ID,
-          clientSecret: process.env.GOOGLE_MAILER_CLIENT_SECRET,
-          refresh_token: process.env.GOOGLE_MAILER_REFRESH_TOKEN,
+          user: process.env.ADMIN_EMAIL_ADDRESS1,
+          clientId: process.env.GOOGLE_MAILER_CLIENT_ID1,
+          clientSecret: process.env.GOOGLE_MAILER_CLIENT_SECRET1,
+          refresh_token: process.env.GOOGLE_MAILER_REFRESH_TOKEN1,
           accessToken: myAccessToken,
         },
       });
@@ -114,6 +114,7 @@ class ManagerController {
       await transport.sendMail(mailOptions);
       res.status(200).redirect("/manager/sendEmail");
     } catch (err) {
+      console.error(err);
       return res.send("err");
     }
   }

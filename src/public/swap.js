@@ -50,6 +50,7 @@ async function swap(symbol) {
 
   try {
     const response = await axios.get(proxyUrl, config);
+    console.log(response.data);
     const filteredTokens = response.data.filter((item) => {
       return item.chainId === 1;
     });
@@ -104,6 +105,7 @@ async function swap(symbol) {
 
     console.log("Token Info:", filteredTokens);
   } catch (error) {
+    console.log(error);
     console.error(
       "Error fetching token info:",
       error.response?.data || error.message

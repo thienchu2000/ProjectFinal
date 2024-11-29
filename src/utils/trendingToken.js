@@ -100,7 +100,7 @@ async function connectCaler(io) {
           if (Array.isArray(SmartContracts)) {
             try {
               const doneok = await trendingTokens(SmartContracts);
-              console.log(doneok);
+
               io.emit("onchain", doneok);
             } catch (err) {
               console.error("Error processing tokens:", err);
@@ -242,7 +242,7 @@ async function trendingTokens(SmartContracts) {
       console.error(`Error processing contract ${contract.CA}:`, e.message);
     }
   }
-
+  console.log(result);
   return result;
 }
 

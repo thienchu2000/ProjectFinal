@@ -76,6 +76,7 @@ class NftController {
           }
         }
       }
+      console.log("day la data", done);
       res.render("minerNft", {
         metadata1: done,
         metadata2: done1,
@@ -126,7 +127,7 @@ class NftController {
         contractAddressTwo
       );
       const done = [];
-
+      console.log(metadata1, metadata2);
       for (let i = 0; i < qy.length; i++) {
         var token = qy[i].SmartContact;
         for (let j = 0; j < metadata1.length; j++) {
